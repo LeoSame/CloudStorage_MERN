@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFiles } from '../../actions/file';
+import { getFiles, uploadFile } from '../../actions/file';
 import FileList from './file.list/FileList';
 import './disk.css';
 import Popup from './Popup';
@@ -24,6 +24,11 @@ const Disk = () => {
     dispatch(setCurrentDir(backDirId));
   }
 
+  function fileUploadHandler(event) {
+    const files = [...event.target.files];
+    files.forEach(file => dispatch(uploadFile(file, currentDir)));
+  }
+
   return (
     <div className='disk'>
       <div className='disk__btns'>
@@ -40,6 +45,18 @@ const Disk = () => {
         >
           Создать папку
         </button>
+        <div className='disk__upload'>
+          <label htmlFor='disk__upload-input' className='disk__upload-label'>
+            Загрузить файл
+          </label>
+          <input
+            multiple={true}
+            onChange={event => fileUploadHandler(event)}
+            type='file'
+            id='disk__upload-input'
+            className='disk__upload-input'
+          />
+        </div>
       </div>
       <FileList />
       <Popup />
