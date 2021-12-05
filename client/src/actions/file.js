@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { addFile, setFiles } from '../reducers/fileReducer';
+import { addFile, deleteFileAction, setFiles } from '../reducers/fileReducer';
 
 export const getFiles = dirId => {
   return async dispatch => {
@@ -56,7 +56,7 @@ export const uploadFile = (file, dirId) => {
       });
       dispatch(addFile(response.data));
     } catch (e) {
-      console.log(e.response.data.message);
+      console.log(e?.response?.data?.message);
     }
   };
 };
@@ -81,4 +81,21 @@ export const downloadFile = async file => {
   } catch (e) {
     console.log(e.response.data.message);
   }
+};
+
+export const deleteFile = file => {
+  return async dispatch => {
+    try {
+      console.log(file);
+      const response = await axios.delete(`http://localhost:5000/api/files?id=${file._id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      dispatch(deleteFileAction(file._id));
+      alert(response.data.message);
+    } catch (e) {
+      alert(e?.response?.data?.message);
+    }
+  };
 };
