@@ -6,11 +6,13 @@ import './disk.css';
 import Popup from './Popup';
 import { setCurrentDir, setPopupDisplay } from '../../reducers/fileReducer';
 import Uploader from './uploader/Uploader';
+import Loader from '../../utils/loader/Loader';
 
 const Disk = () => {
   const dispatch = useDispatch();
   const currentDir = useSelector(state => state.files.currentDir);
   const dirStack = useSelector(state => state.files.dirStack);
+  const isLoader = useSelector(state => state.app.loader);
   const [dragEnter, setDragEnter] = useState(false);
   const [sort, setSort] = useState('type');
 
@@ -50,6 +52,10 @@ const Disk = () => {
     let files = [...event.dataTransfer.files];
     files.forEach(file => dispatch(uploadFile(file, currentDir)));
     setDragEnter(false);
+  }
+
+  if (isLoader === true) {
+    return <Loader />;
   }
 
   return !dragEnter ? (

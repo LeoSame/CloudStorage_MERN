@@ -128,6 +128,20 @@ class FileController {
       return res.status(400).json({ message: 'Dir is not empty' });
     }
   }
+
+  async searchFile(req, res) {
+    try {
+      const searchName = req.query.search.toLowerCase();
+      let files = await File.find({ user: req.user.id });
+      files = files.filter(file => {
+        return file.name.toLowerCase().includes(searchName);
+      });
+      return res.json(files);
+    } catch (e) {
+      console.log(e);
+      return res.status(400).json({ message: 'Serarch error' });
+    }
+  }
 }
 
 module.exports = new FileController();

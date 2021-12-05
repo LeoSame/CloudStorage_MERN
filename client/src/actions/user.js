@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { hideLoader, showLoader } from '../reducers/appReducer';
 import { setUser } from '../reducers/userReducer';
 
 export const registration = async (email, password) => {
@@ -31,6 +32,7 @@ export const login = (email, password) => {
 export const auth = () => {
   return async dispatch => {
     try {
+      dispatch(showLoader());
       const response = await axios.get(`http://localhost:5000/api/auth/auth`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
@@ -40,6 +42,8 @@ export const auth = () => {
     } catch (e) {
       console.log(e.response.data.message);
       localStorage.removeItem('token');
+    } finally {
+      dispatch(hideLoader());
     }
   };
 };

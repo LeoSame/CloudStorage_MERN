@@ -29,3 +29,7 @@
     transform: translateY(0);
   }
 }
+.file-not-found {
+  height: calc(100vh - 50px - 39px);
+  font-size: 1.5rem;
+}
