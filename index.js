@@ -20,7 +20,7 @@ app.use(express.static(path.resolve(__dirname, 'client', 'build')));
 app.use('/api/auth', authRouter);
 app.use('/api/files', fileRouter);
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
