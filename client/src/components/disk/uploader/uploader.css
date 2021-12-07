@@ -2,7 +2,7 @@
   height: 300px;
   width: 300px;
   position: fixed;
-  background-color: #566885;
+  background-color: #31373e;
   bottom: 0;
   right: 0;
   padding: 20px;
@@ -15,14 +15,14 @@
   justify-content: space-between;
 }
 .uploader__title {
-  color: #e9e6e6;
+  color: #ffffff;
   font-size: 1.2rem;
 }
 .uploader__close {
   padding: 3px;
 }
 .upload-file {
-  background-color: #e9e6e6;
+  background-color: #ffffff;
   border-radius: 8px;
   margin: 5px 0;
   padding: 5px 10px;
@@ -34,7 +34,7 @@
 .upload-file__progress-bar {
   height: 1rem;
   border-radius: 8px;
-  background-color: #566885;
+  background-color: #31373e;
   display: flex;
   margin: 3px 0;
 }
@@ -43,7 +43,7 @@
   border-radius: 8px;
 }
 .upload-file__percent {
-  color: #e9e6e6;
+  color: #ffffff;
   left: 50%;
   position: absolute;
 }

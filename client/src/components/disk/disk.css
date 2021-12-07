@@ -11,7 +11,7 @@
   display: none;
 }
 .disk__upload-label {
-  border: 2px dashed #566885;
+  border: 2px dashed #31373e;
   padding: 5px 10px;
   cursor: pointer;
   margin-left: 10px;
@@ -40,7 +40,7 @@
   width: 100%;
   height: calc(100vh - 50px - 40px);
   margin: 20px;
-  border: dashed #566885 2px;
+  border: dashed #31373e 2px;
   display: flex;
   justify-content: center;
   align-items: center;

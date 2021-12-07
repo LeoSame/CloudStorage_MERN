@@ -22,7 +22,7 @@ export const getFiles = (dirId, sort) => {
       });
       dispatch(setFiles(response.data));
     } catch (e) {
-      alert(e.response.data.message);
+      console.log(e.response.data.message);
     } finally {
       dispatch(hideLoader());
     }

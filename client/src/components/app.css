@@ -2,10 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: #566885;
+  color: #31373e;
 }
 body {
-  background-color: #E9E6E6;
+  background-color: #f4f6f9;
 }
 #root {
   width: 100%;
@@ -20,4 +20,3 @@ body {
   display: flex;
   flex-direction: column;
 }
-/*# sourceMappingURL=app.css.map */

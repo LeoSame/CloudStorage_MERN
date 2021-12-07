@@ -18,7 +18,7 @@
 }
 .authorization__btn {
   border: none;
-  background-color: #566885;
+  background-color: #31373e;
   border-radius: 8px;
   color: white;
   font-weight: 700;
@@ -26,4 +26,3 @@
   align-self: flex-end;
   margin-top: 10px;
 }
-/*# sourceMappingURL=authorization.css.map */

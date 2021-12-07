@@ -4,7 +4,7 @@
   height: 300px;
   width: 300px;
   position: fixed;
-  background-color: @font-color;
+  background-color: @font-color-primary;
   bottom: 0;
   right: 0;
   padding: 20px;
@@ -17,7 +17,7 @@
     justify-content: space-between;
   }
   &__title {
-    color: @background-color;
+    color: @font-color-secondary;
     font-size: 1.2rem;
   }
   &__close {
@@ -26,7 +26,7 @@
 }
 
 .upload-file {
-  background-color: @background-color;
+  background-color: @font-color-secondary;
   border-radius: 8px;
   margin: 5px 0;
   padding: 5px 10px;
@@ -38,7 +38,7 @@
   &__progress-bar {
     height: 1rem;
     border-radius: 8px;
-    background-color: @font-color;
+    background-color: @font-color-primary;
     display: flex;
     margin: 3px 0;
   }
@@ -48,7 +48,7 @@
     border-radius: 8px;
   }
   &__percent {
-    color: @background-color;
+    color: @font-color-secondary;
     left: 50%;
     position: absolute;
   }

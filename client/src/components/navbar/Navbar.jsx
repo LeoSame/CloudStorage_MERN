@@ -1,87 +1,45 @@
-import React, { useState } from 'react';
-import './navbar.css';
-import Logo from '../../assets/img/navbar-logo.svg';
+import React from 'react';
 import avatarLogo from '../../assets/img/avatar.svg';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../reducers/userReducer';
-import { getFiles, searchFiles } from '../../actions/file';
 import { API_URL } from '../../config';
+import Logo from './Logo';
+import FileSearch from '../disk/file.search/FileSearch';
+import './navbar.css';
 
 const Navbar = () => {
   const isAuth = useSelector(state => state.user.isAuth);
-  const currentDir = useSelector(state => state.files.currentDir);
   const currentUser = useSelector(state => state.user.currentUser);
   const dispatch = useDispatch();
-  const [searchName, setSearchName] = useState('');
-  const [searchTimeout, setSearchTimeout] = useState(false);
   const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
-  const location = useLocation();
-
-  function searchChangeHandler(value) {
-    setSearchName(value);
-    if (searchTimeout !== false) {
-      clearTimeout(searchTimeout);
-    }
-
-    if (value !== '') {
-      setSearchTimeout(
-        setTimeout(
-          value => {
-            dispatch(searchFiles(value));
-          },
-          500,
-          value
-        )
-      );
-    } else {
-      dispatch(getFiles(currentDir));
-    }
-  }
 
   return (
     <div className='navbar'>
       <div className='container'>
-        {location.pathname === '/' ? (
-          <div className='navbar__logo-container'>
-            <img src={Logo} alt='' className='navbar__logo' />
-            <div className='navbar__header'>MERN CLOUD</div>
-          </div>
-        ) : (
-          <NavLink className='navbar__logo-link' to='/'>
-            <div className='navbar__logo-container'>
-              <img src={Logo} alt='' className='navbar__logo' />
-              <div className='navbar__header'>MERN CLOUD</div>
-            </div>
-          </NavLink>
-        )}
-        {isAuth && (
-          <input
-            value={searchName}
-            onChange={e => searchChangeHandler(e.target.value)}
-            type='text'
-            className='navbar__search'
-            placeholder='Название файла...'
-          />
-        )}
+        <Logo />
+        {isAuth && <FileSearch />}
         {isAuth ? (
-          <>
-            <div className='navbar__login' onClick={() => dispatch(logout())}>
+          <div className='navbar__user'>
+            <div className='navbar__link' onClick={() => dispatch(logout())}>
               Выход
             </div>
             <NavLink to='/profile'>
               <img className='navbar__avatar' src={avatar} alt='' />
             </NavLink>
-          </>
+          </div>
         ) : (
-          <>
-            <div className='navbar__registration'>
-              <NavLink to='/registration'>Регистрация</NavLink>
-            </div>
-            <div className='navbar__login'>
-              <NavLink to='/login'>Войти</NavLink>
-            </div>
-          </>
+          <div className='navbar__user'>
+            <NavLink className='navbar__link' to='/registration'>
+              Регистрация
+            </NavLink>
+            <NavLink className='navbar__link' to='/login'>
+              Войти
+            </NavLink>
+            <NavLink to='/profile'>
+              <img className='navbar__avatar' src={avatar} alt='' />
+            </NavLink>
+          </div>
         )}
       </div>
     </div>
