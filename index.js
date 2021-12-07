@@ -15,8 +15,14 @@ app.use(corsMiddleware);
 app.use(filePathMiddleware(path.resolve(__dirname, 'files')));
 app.use(express.json());
 app.use(express.static('static'));
+app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+
 app.use('/api/auth', authRouter);
 app.use('/api/files', fileRouter);
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
 
 const start = async () => {
   try {

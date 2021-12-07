@@ -1,5 +1,5 @@
 {
-  "serverPort": 5000,
+  "serverPort": 8080,
   "dbUrl": "mongodb+srv://leonid:08Uxl7fu7vjjtN23@cloud.05q0y.mongodb.net/cloud?retryWrites=true&w=majority",
   "secretKey": "hey-secret",
   "filePath": "C:\\Users\\Леонид\\Desktop\\Front-end\\CloudStorage_MERN\\server\\files",

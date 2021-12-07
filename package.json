@@ -1,20 +1,26 @@
 {
-  "name": "app",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "run-p  start-server start-front",
-    "start-dev": "run-p  start-server start-front-dev",
-    "start-server": "npm start --prefix server",
-    "start-front-dev": "npm run start-dev --prefix client",
-    "start-front": "npm run start --prefix client",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm i --prefix client && npm run build --prefix client && npm i --prefix server"
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "npm i --prefix mail-client && npm run build --prefix mail-client && npm i"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "npm-run-all": "^4.1.5"
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "express-validator": "^6.12.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.5",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
