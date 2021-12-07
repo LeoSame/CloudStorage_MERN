@@ -67,9 +67,9 @@ class FileController {
 
       let path;
       if (parent) {
-        path = `${req.filePath}\\${user._id}\\${parent.path}\\${file.name}`;
+        path = `${req.serverPath}\\files\\${user._id}\\${parent.path}\\${file.name}`;
       } else {
-        path = `${req.filePath}\\${user._id}\\${file.name}`;
+        path = `${req.serverPath}\\files\\${user._id}\\${file.name}`;
       }
 
       if (fs.existsSync(path)) {
@@ -150,7 +150,7 @@ class FileController {
       const file = req.files.file;
       const user = await User.findById(req.user.id);
       const avatarName = Uuid.v4() + '.jpg';
-      file.mv(config.get('staticPath') + '\\' + avatarName);
+      file.mv(req.serverPath + '\\static\\' + avatarName);
       user.avatar = avatarName;
       await user.save();
       return res.json(user);
@@ -163,7 +163,7 @@ class FileController {
   async deleteAvatar(req, res) {
     try {
       const user = await User.findById(req.user.id);
-      fs.unlinkSync(config.get('staticPath') + '\\' + user.avatar);
+      fs.unlinkSync(req.serverPath + '\\static\\' + user.avatar);
       user.avatar = null;
       await user.save();
       return res.json(user);

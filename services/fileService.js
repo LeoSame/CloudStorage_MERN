@@ -1,6 +1,4 @@
 const fs = require('fs');
-const File = require('../models/File');
-const config = require('config');
 
 class FileService {
   createDir(req, file) {
@@ -29,7 +27,7 @@ class FileService {
   }
 
   getPath(req, file) {
-    return req.filePath + '\\' + file.user + '\\' + file.path;
+    return req.serverPath + '\\files\\' + file.user + '\\' + file.path;
   }
 }
 
