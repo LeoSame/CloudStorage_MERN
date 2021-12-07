@@ -150,7 +150,7 @@ class FileController {
       const user = await User.findById(req.user.id);
       const avatarName = Uuid.v4() + '.jpg';
       file.mv(config.get('staticPath') + '\\' + avatarName);
-      user.avatar = avatarNme;
+      user.avatar = avatarName;
       await user.save();
       return res.json(user);
     } catch (e) {
