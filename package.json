@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "npm i --prefix mail-client && npm run build --prefix mail-client && npm i"
+    "build": "npm i --prefix client && npm run build --prefix client && npm i"
   },
   "author": "",
   "license": "ISC",
