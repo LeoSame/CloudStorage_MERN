@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "start-dev": "run-p  start start-front",
-    "start-front": "npm run start-dev --prefix client",
-    "dev": "nodemon index.js",
+    "dev": "run-p  server-dev start-front",
+    "start-front": "npm start --prefix client",
+    "server-dev": "nodemon index.js",
     "build": "npm i --prefix client && npm run build --prefix client && npm i"
   },
   "author": "",
