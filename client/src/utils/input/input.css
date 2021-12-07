@@ -1,13 +1,12 @@
 input {
   border: none;
   border-bottom: #31373e solid 3px;
-  background: transparent;
   width: 100%;
   padding: 3px;
 }
 input:focus {
   outline: none;
-  transform: scale(1.01);
+  transform: scale(1.02);
 }
 ::-webkit-input-placeholder {
   /* Chrome */

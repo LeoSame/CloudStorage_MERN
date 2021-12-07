@@ -9,12 +9,11 @@ import sizeFormat from '../../../../utils/sizeFormat';
 
 const File = ({ file }) => {
   const dispatch = useDispatch();
-  const currentDir = useSelector(state => state.files.currentDir);
   const fileView = useSelector(state => state.files.view);
 
   function openDirHandler(file) {
     if (file.type === 'dir') {
-      dispatch(pushToStack(currentDir));
+      dispatch(pushToStack({ id: file._id, name: file.name }));
       dispatch(setCurrentDir(file._id));
     }
   }

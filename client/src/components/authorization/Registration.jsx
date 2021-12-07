@@ -9,11 +9,11 @@ const Registration = () => {
 
   return (
     <div className='authorization'>
-      <div className='authorization__header'>Регистрация</div>
-      <Input value={email} setValue={setEmail} type='text' placeholder='Введите email...' />
-      <Input value={password} setValue={setPassword} type='password' placeholder='Введите пароль...' />
+      <div className='authorization__header'>Реєстрація</div>
+      <Input value={email} setValue={setEmail} type='text' placeholder='Введіть email...' />
+      <Input value={password} setValue={setPassword} type='password' placeholder='Введіть пароль...' />
       <button className='authorization__btn' onClick={() => registration(email, password)}>
-        Зарегистрироваться
+        Зареєструватись
       </button>
     </div>
   );

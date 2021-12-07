@@ -15,14 +15,14 @@ const Navbar = () => {
   const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
 
   return (
-    <div className='navbar'>
-      <div className='container'>
+    <header className='navbar'>
+      <div className='navbar__container container'>
         <Logo />
         {isAuth && <FileSearch />}
         {isAuth ? (
           <div className='navbar__user'>
             <div className='navbar__link' onClick={() => dispatch(logout())}>
-              Выход
+              Вихід
             </div>
             <NavLink to='/profile'>
               <img className='navbar__avatar' src={avatar} alt='' />
@@ -31,10 +31,10 @@ const Navbar = () => {
         ) : (
           <div className='navbar__user'>
             <NavLink className='navbar__link' to='/registration'>
-              Регистрация
+              Реєстрація
             </NavLink>
             <NavLink className='navbar__link' to='/login'>
-              Войти
+              Вхід
             </NavLink>
             <NavLink to='/profile'>
               <img className='navbar__avatar' src={avatar} alt='' />
@@ -42,7 +42,7 @@ const Navbar = () => {
           </div>
         )}
       </div>
-    </div>
+    </header>
   );
 };
 

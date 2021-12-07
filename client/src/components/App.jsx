@@ -20,21 +20,19 @@ function App() {
     <BrowserRouter>
       <div className='app'>
         <Navbar />
-        <div className='wrap'>
-          {!isAuth ? (
-            <Switch>
-              <Route path='/registration' component={Registration} />
-              <Route path='/login' component={Login} />
-              <Redirect to='/login' />
-            </Switch>
-          ) : (
-            <Switch>
-              <Route exact path='/' component={Disk} />
-              <Route exact path='/profile' component={Profile} />
-              <Redirect to='/' />
-            </Switch>
-          )}
-        </div>
+        {!isAuth ? (
+          <Switch>
+            <Route path='/registration' component={Registration} />
+            <Route path='/login' component={Login} />
+            <Redirect to='/login' />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact path='/' component={Disk} />
+            <Route exact path='/profile' component={Profile} />
+            <Redirect to='/' />
+          </Switch>
+        )}
       </div>
     </BrowserRouter>
   );

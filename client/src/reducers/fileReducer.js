@@ -10,7 +10,7 @@ const defaultState = {
   files: [],
   currentDir: null,
   popupDisplay: 'none',
-  dirStack: [],
+  dirStack: [{ name: 'root', id: 'root' }],
   view: 'list',
 };
 
