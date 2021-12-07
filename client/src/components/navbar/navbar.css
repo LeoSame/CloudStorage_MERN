@@ -5,10 +5,17 @@
   background-color: white;
   width: 100%;
 }
+.navbar__logo-container {
+  display: flex;
+  align-items: center;
+}
 .navbar__header {
   margin-left: 10px;
   font-size: 24px;
   font-weight: 700;
+}
+.navbar__logo-link {
+  text-decoration: none;
 }
 .navbar__login {
   margin-left: auto;
