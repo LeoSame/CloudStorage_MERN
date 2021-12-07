@@ -4,16 +4,25 @@ const config = require('config');
 const authRouter = require('./routes/auth.routes');
 const fileRouter = require('./routes/file.routes');
 const app = express();
-const PORT = config.get('serverPort');
+const PORT = process.env.PORT || config.get('serverPort');
 const corsMiddleware = require('./middleware/cors.middleware');
+const serverPathMiddleware = require('./middleware/serverpath.middleware');
 const fileUpload = require('express-fileupload');
+const path = require('path');
 
 app.use(fileUpload({}));
 app.use(corsMiddleware);
+app.use(serverPathMiddleware(path.resolve(__dirname)));
 app.use(express.json());
 app.use(express.static('static'));
+app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+
 app.use('/api/auth', authRouter);
 app.use('/api/files', fileRouter);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+});
 
 const start = async () => {
   try {
