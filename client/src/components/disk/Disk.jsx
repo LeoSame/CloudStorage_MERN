@@ -26,8 +26,9 @@ const Disk = () => {
   }
 
   function backClickHandler() {
-    const backDirId = dirStack.pop();
-    dispatch(setCurrentDir(backDirId));
+    dirStack.pop();
+    const backDir = dirStack[dirStack.length - 1];
+    dispatch(setCurrentDir(backDir.id));
   }
 
   function fileUploadHandler(event) {

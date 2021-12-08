@@ -3,19 +3,23 @@
 }
 .bread-crumbs__list {
   height: 40px;
-  display: flex;
-  align-items: center;
+  color: #afafaf;
 }
 .bread-crumbs__item {
   margin-right: 20px;
+}
+.bread-crumbs__content {
+  cursor: pointer;
+}
+.bread-crumbs__content:last-child {
+  cursor: default;
 }
 .bread-crumbs__logo {
   margin-right: 10px;
 }
 .bread-crumbs__direct {
-  color: #ffffff;
   margin-right: 20px;
 }
-.bread-crumbs__arrow {
-  color: #ffffff;
+.bread-crumbs__arrow line {
+  stroke: #afafaf;
 }

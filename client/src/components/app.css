@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  color: #31373e;
 }
 body {
   background-color: #f4f6f9;
@@ -21,4 +20,11 @@ li {
 .container {
   width: 1140px;
   margin: 0 auto;
+}
+.font-color-second {
+  color: #ffffff;
+}
+.flexAIcenter {
+  display: flex;
+  align-items: center;
 }

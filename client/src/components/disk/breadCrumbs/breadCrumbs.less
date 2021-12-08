@@ -4,20 +4,32 @@
   background-color: @background-color-thirty;
   &__list {
     height: 40px;
-    display: flex;
-    align-items: center;
+    color: @font-color-thirty;
   }
+
   &__item {
     margin-right: 20px;
   }
+
+  &__content {
+    cursor: pointer;
+
+    &:last-child {
+      cursor: default;
+    }
+  }
+
   &__logo {
     margin-right: 10px;
   }
+
   &__direct {
-    color: @font-color-secondary;
     margin-right: 20px;
   }
+
   &__arrow {
-    color: @font-color-secondary;
+    line {
+      stroke: @font-color-thirty;
+    }
   }
 }

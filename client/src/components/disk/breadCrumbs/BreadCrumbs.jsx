@@ -1,16 +1,37 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import dirLogo from '../../../assets/img/bread-crumb-dir.svg';
+import { useDispatch, useSelector } from 'react-redux';
+import { breadCrumbDir } from '../../../assets/img/breadCrumbDir.jsx';
+import { rightArrow } from '../../../assets/img/rightArrow.jsx';
+import { setCurrentDir } from '../../../reducers/fileReducer.js';
 import './breadCrumbs.css';
 
 const BreadCrumbs = () => {
   const dirStack = useSelector(state => state.files.dirStack);
+  const dispatch = useDispatch();
+
+  function сlickHandler(dirId, isLastDir) {
+    if (isLastDir) {
+      dirStack.pop();
+      let backDir = dirStack[dirStack.length - 1];
+      while (dirId !== backDir.id) {
+        backDir = dirStack.pop();
+        backDir = dirStack[dirStack.length - 1];
+      }
+      dispatch(setCurrentDir(backDir.id));
+    }
+  }
+
   let breadCrumbsList = dirStack.map((dir, index) => {
+    const isLastDir = index + 1 !== dirStack.length;
     return (
-      <li key={dir.id} className='bread-crumbs__item'>
-        <img className='bread-crumbs__logo' src={dirLogo} alt='' width='20' height='15' />
-        <span className='bread-crumbs__direct'>{index === 0 ? 'Моє сховище' : dir.name}</span>
-        {index + 1 !== dirStack.length && <span className='bread-crumbs__arrow'>{'>'}</span>}
+      <li key={dir.id} className='bread-crumbs__item flexAIcenter'>
+        <div className='bread-crumbs__content flexAIcenter' onClick={() => сlickHandler(dir.id, isLastDir)}>
+          <div className='bread-crumbs__logo'>{isLastDir ? breadCrumbDir('silver') : breadCrumbDir('blue')}</div>
+          <span className={isLastDir ? 'bread-crumbs__direct' : 'bread-crumbs__direct font-color-second'}>
+            {index === 0 ? 'Моє сховище' : dir.name}
+          </span>
+        </div>
+        {isLastDir && <span className='bread-crumbs__arrow flexAIcenter'>{rightArrow()}</span>}
       </li>
     );
   });
@@ -18,7 +39,7 @@ const BreadCrumbs = () => {
   return (
     <div className='bread-crumbs'>
       <div className='container'>
-        <ul className='bread-crumbs__list'>{breadCrumbsList}</ul>
+        <ul className='bread-crumbs__list flexAIcenter'>{breadCrumbsList}</ul>
       </div>
     </div>
   );
