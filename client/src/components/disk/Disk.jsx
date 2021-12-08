@@ -15,7 +15,7 @@ const Disk = () => {
   const dirStack = useSelector(state => state.files.dirStack);
   const isLoader = useSelector(state => state.app.loader);
   const [dragEnter, setDragEnter] = useState(false);
-  const [sort, setSort] = useState('type');
+  const [sort, setSort] = useState('date');
 
   useEffect(() => {
     dispatch(getFiles(currentDir, sort));

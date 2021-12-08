@@ -60,7 +60,17 @@ class FileController {
           files = await File.find({ user: req.user.id, parent: parentId });
           break;
       }
-      return res.json(files);
+
+      let dir = [];
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        if (file.type === 'dir') {
+          dir.push(file);
+          delete files[i];
+        }
+      }
+      return res.json([...dir, ...files.filter(x => x)]);
     } catch (e) {
       return res.status(500).json({ message: 'Can not get files' });
     }
