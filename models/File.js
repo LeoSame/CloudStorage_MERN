@@ -4,6 +4,7 @@ const File = new Schema({
   name: { type: String, required: true },
   type: { type: String, required: true },
   accessLink: { type: String },
+  isEmpty: { type: Boolean, default: true },
   size: { type: Number, default: 0 },
   path: { type: String, default: '' },
   date: { type: Date, default: Date.now() },

@@ -1,5 +1,4 @@
 const fileService = require('../services/fileService');
-const config = require('config');
 const fs = require('fs');
 const Uuid = require('uuid');
 const User = require('../models/User');
@@ -8,9 +7,14 @@ const File = require('../models/File');
 class FileController {
   async creqteDir(req, res) {
     try {
-      const { name, type, parent } = req.body;
-      const file = new File({ name, type, parent, user: req.user.id });
-      const parentFile = await File.findOne({ _id: parent });
+      const { name, type } = req.body;
+      let parentId = req.body.parent;
+
+      if (parentId === 'root') {
+        parentId = undefined;
+      }
+      const file = new File({ name, type, parent: parentId, user: req.user.id });
+      const parentFile = await File.findOne({ _id: parentId });
       if (!parentFile) {
         file.path = name;
         await fileService.createDir(req, file);
@@ -18,6 +22,7 @@ class FileController {
         file.path = `${parentFile.path}\\${file.name}`;
         await fileService.createDir(req, file);
         parentFile.childs.push(file._id);
+        parentFile.isEmpty = false;
         await parentFile.save();
       }
       await file.save();
@@ -30,26 +35,29 @@ class FileController {
 
   async getFiles(req, res) {
     try {
-      const { sort } = req.query;
-      let parent = req.query.parent;
+      const sort = req.query.sort;
+      let parentId = req.query.parent;
 
-      if (parent === 'root') {
-        parent = undefined;
+      if (parentId === 'root') {
+        parentId = undefined;
       }
 
       let files;
       switch (sort) {
         case 'name':
-          files = await File.find({ user: req.user.id, parent: parent }).sort({ name: 1 });
+          files = await File.find({ user: req.user.id, parent: parentId }).sort({ name: 1 });
           break;
         case 'type':
-          files = await File.find({ user: req.user.id, parent: parent }).sort({ type: 1 });
+          files = await File.find({ user: req.user.id, parent: parentId }).sort({ type: 1 });
           break;
         case 'date':
-          files = await File.find({ user: req.user.id, parent: parent }).sort({ date: 1 });
+          files = await File.find({ user: req.user.id, parent: parentId }).sort({ date: 1 });
+          break;
+        case 'size':
+          files = await File.find({ user: req.user.id, parent: parentId }).sort({ size: 1 });
           break;
         default:
-          files = await File.find({ user: req.user.id, parent: parent });
+          files = await File.find({ user: req.user.id, parent: parentId });
           break;
       }
       return res.json(files);
@@ -61,8 +69,13 @@ class FileController {
   async uploadFile(req, res) {
     try {
       const file = req.files.file;
+      let parentId = req.body.parent;
 
-      const parent = await File.findOne({ user: req.user.id, _id: req.body.parent });
+      if (parentId === 'root') {
+        parentId = undefined;
+      }
+
+      const parent = await File.findOne({ user: req.user.id, _id: parentId });
       const user = await User.findOne({ _id: req.user.id });
 
       if (user.usedSpace + file.size > user.diskSpace) {
@@ -88,6 +101,7 @@ class FileController {
       let filePath = file.name;
       if (parent) {
         filePath = parent.path + '\\' + file.name;
+        parent.isEmpty = false;
       }
       const dbFile = new File({
         name: file.name,
@@ -100,6 +114,7 @@ class FileController {
 
       await dbFile.save();
       await user.save();
+      await parent.save();
 
       res.json(dbFile);
     } catch (e) {
