@@ -1,0 +1,29 @@
+@import '../../../utils/colors';
+
+.uploaFile {
+  background-color: $font-color-secondary;
+  border-radius: 8px;
+  margin: 5px 0;
+  padding: 5px 10px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.progressBar {
+  height: 1rem;
+  border-radius: 8px;
+  background-color: $font-color-primary;
+  display: flex;
+  margin: 3px 0;
+}
+.uploadBar {
+  background-color: green;
+  border-radius: 8px;
+}
+
+.percent {
+  color: $font-color-secondary;
+  left: 50%;
+  position: absolute;
+}

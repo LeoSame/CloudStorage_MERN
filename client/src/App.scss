@@ -1,30 +1,41 @@
+@import './utils/colors.scss';
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
-  background-color: #f4f6f9;
+  background-color: $background-color-primary;
 }
+
 li {
   list-style: none;
 }
+
 #root {
   width: 100%;
 }
+
 .app {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .container {
   width: 1140px;
   margin: 0 auto;
 }
+
 .font-color-second {
-  color: #ffffff;
+  color: $font-color-secondary;
 }
-.flexAIcenter {
+
+.flex {
   display: flex;
+}
+.alignCenter {
   align-items: center;
 }

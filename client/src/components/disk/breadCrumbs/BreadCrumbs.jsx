@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { breadCrumbDir } from '../../../assets/img/breadCrumbDir.jsx';
 import { rightArrow } from '../../../assets/img/rightArrow.jsx';
 import { setCurrentDir } from '../../../reducers/fileReducer.js';
-import './breadCrumbs.css';
+import styles from './BreadCrumbs.module.scss';
 
 const BreadCrumbs = () => {
   const dirStack = useSelector(state => state.files.dirStack);
@@ -24,22 +24,22 @@ const BreadCrumbs = () => {
   let breadCrumbsList = dirStack.map((dir, index) => {
     const isLastDir = index + 1 !== dirStack.length;
     return (
-      <li key={dir.id} className='bread-crumbs__item flexAIcenter'>
-        <div className='bread-crumbs__content flexAIcenter' onClick={() => сlickHandler(dir.id, isLastDir)}>
-          <div className='bread-crumbs__logo'>{isLastDir ? breadCrumbDir('silver') : breadCrumbDir('blue')}</div>
-          <span className={isLastDir ? 'bread-crumbs__direct' : 'bread-crumbs__direct font-color-second'}>
+      <li key={dir.id} className={styles.item + ' flex alignCenter'}>
+        <div className={styles.content + ' flex alignCenter'} onClick={() => сlickHandler(dir.id, isLastDir)}>
+          <div className={styles.logo}>{isLastDir ? breadCrumbDir('silver') : breadCrumbDir('blue')}</div>
+          <span className={isLastDir ? styles.direct : styles.direct + ' font-color-second'}>
             {index === 0 ? 'Моє сховище' : dir.name}
           </span>
         </div>
-        {isLastDir && <span className='bread-crumbs__arrow flexAIcenter'>{rightArrow()}</span>}
+        {isLastDir && <span className={styles.arrow + ' flex alignCenter'}>{rightArrow()}</span>}
       </li>
     );
   });
 
   return (
-    <div className='bread-crumbs'>
-      <div className='container'>
-        <ul className='bread-crumbs__list flexAIcenter'>{breadCrumbsList}</ul>
+    <div className={styles.breadCrumbs}>
+      <div className={'container'}>
+        <ul className={styles.list + ' flex alignCenter'}>{breadCrumbsList}</ul>
       </div>
     </div>
   );

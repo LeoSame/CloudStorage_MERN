@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
-import Navbar from './navbar/Navbar';
-import './app.css';
+import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Registration from './authorization/Registration';
-import Login from './authorization/Login';
+import Registration from './components/Authorization/Registration';
+import Login from './components/Authorization/Login';
 import { useDispatch, useSelector } from 'react-redux';
-import { auth } from '../actions/user';
-import Disk from './disk/Disk';
-import Profile from './profile/Profile';
+import { auth } from './actions/user';
+import Disk from './components/disk/Disk';
+import Profile from './components/profile/Profile';
+import './App.scss';
 
 function App() {
   const isAuth = useSelector(state => state.user.isAuth);

@@ -7,7 +7,7 @@ import { setCurrentDir, setFileView, setPopupDisplay } from '../../reducers/file
 import Uploader from './uploader/Uploader';
 import Loader from '../../utils/loader/Loader';
 import BreadCrumbs from './breadCrumbs/BreadCrumbs';
-import './disk.css';
+import styles from './Disk.module.scss';
 
 const Disk = () => {
   const dispatch = useDispatch();
@@ -61,25 +61,25 @@ const Disk = () => {
   }
 
   return (
-    <div className='disk'>
+    <div className={styles.disk}>
       <BreadCrumbs />
       <div className='container'>
-        <div className='disk__btns'>
+        <div className={styles.btns}>
           {currentDir && (
-            <button className='disk__back' onClick={() => backClickHandler()}>
+            <button className={styles.back} onClick={() => backClickHandler()}>
               Назад
             </button>
           )}
           <button
-            className='disk__create'
+            className={styles.create}
             onClick={() => {
               showPopupHandler();
             }}
           >
             Створити папку
           </button>
-          <div className='disk__upload'>
-            <label htmlFor='disk__upload-input' className='disk__upload-label'>
+          <div className={styles.upload}>
+            <label htmlFor='disk__upload-input' className={styles.uploadLabel}>
               Завантажити файл
             </label>
             <input
@@ -87,17 +87,17 @@ const Disk = () => {
               onChange={event => fileUploadHandler(event)}
               type='file'
               id='disk__upload-input'
-              className='disk__upload-input'
+              className={styles.uploadInput}
             />
           </div>
-          <select value={sort} onChange={e => setSort(e.target.value)} className='disk__select'>
+          <select value={sort} onChange={e => setSort(e.target.value)} className={styles.select}>
             <option value='name'>За назвою</option>
             <option value='type'>За типоп</option>
             <option value='date'>За датою</option>
             <option value='size'>За розміром</option>
           </select>
-          <button className='disk__plate' onClick={() => dispatch(setFileView('plate'))} />
-          <button className='disk__list' onClick={() => dispatch(setFileView('list'))} />
+          <button className={styles.plate} onClick={() => dispatch(setFileView('plate'))} />
+          <button className={styles.list} onClick={() => dispatch(setFileView('list'))} />
         </div>
         {!dragEnter ? (
           <div onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}>
@@ -105,7 +105,7 @@ const Disk = () => {
           </div>
         ) : (
           <div
-            className='drop-area'
+            className={styles.dropArea}
             onDrop={dropHandler}
             onDragEnter={dragEnterHandler}
             onDragLeave={dragLeaveHandler}

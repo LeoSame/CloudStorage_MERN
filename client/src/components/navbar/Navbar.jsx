@@ -7,13 +7,14 @@ import { API_URL } from '../../config';
 import Logo from './Logo';
 import FileSearch from '../disk/file.search/FileSearch';
 import './navbar.css';
+import styles from './Navbar.module.scss';
 
 const Navbar = () => {
   const isAuth = useSelector(state => state.user.isAuth);
   const currentUser = useSelector(state => state.user.currentUser);
   const dispatch = useDispatch();
   const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
-
+  console.log(styles);
   return (
     <header className='navbar'>
       <div className='navbar__container container'>

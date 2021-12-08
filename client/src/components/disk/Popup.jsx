@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createDir } from '../../actions/file';
 import { setPopupDisplay } from '../../reducers/fileReducer';
 import Input from '../../utils/input/Input';
+import styles from './Popup.module.scss';
 
 const Popup = () => {
   const [dirName, setDirName] = useState('');
@@ -21,16 +22,16 @@ const Popup = () => {
   }
 
   return (
-    <div className='popup' onClick={() => closePopup()} style={{ display: popupDisplay }}>
-      <div className='popup__content' onClick={event => event.stopPropagation()}>
-        <div className='popup__header'>
-          <div className='popup__title'>Создать новую папку</div>
-          <button className='popup__close' onClick={() => closePopup()}>
+    <div className={styles.popup} onClick={() => closePopup()} style={{ display: popupDisplay }}>
+      <div className={styles.content} onClick={event => event.stopPropagation()}>
+        <div className={styles.header}>
+          <div className={styles.title}>Создать новую папку</div>
+          <button className={styles.close} onClick={() => closePopup()}>
             X
           </button>
         </div>
         <Input type='text' placeholder='Введите название папки...' value={dirName} setValue={setDirName} />
-        <button className='popup__create' onClick={() => createHandler()}>
+        <button className={styles.create} onClick={() => createHandler()}>
           Создать
         </button>
       </div>

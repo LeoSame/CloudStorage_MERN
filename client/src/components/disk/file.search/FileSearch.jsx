@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFiles, searchFiles } from '../../../actions/file';
-import './fileSearch.css';
+import styles from './FileSearch.module.scss';
 
 const FileSearch = () => {
   const [searchName, setSearchName] = useState('');
@@ -35,7 +35,7 @@ const FileSearch = () => {
       value={searchName}
       onChange={e => searchChangeHandler(e.target.value)}
       type='text'
-      className='file-search'
+      className={styles.fileSearch}
       placeholder='Название файла...'
     />
   );

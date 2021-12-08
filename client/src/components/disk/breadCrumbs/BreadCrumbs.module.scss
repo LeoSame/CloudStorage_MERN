@@ -1,0 +1,31 @@
+@import '../../../utils/colors';
+
+.breadCrumbs {
+  background-color: $background-color-thirty;
+}
+.list {
+  height: 40px;
+  color: $font-color-thirty;
+}
+
+.item {
+  margin-right: 20px;
+}
+.content {
+  cursor: pointer;
+
+  &:last-child {
+    cursor: default;
+  }
+}
+.logo {
+  margin-right: 10px;
+}
+.direct {
+  margin-right: 20px;
+}
+.arrow {
+  line {
+    stroke: $font-color-thirty;
+  }
+}
