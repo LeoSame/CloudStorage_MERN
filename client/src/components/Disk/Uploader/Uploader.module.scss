@@ -1,0 +1,25 @@
+@import '../../../utils/colors';
+
+.uploader {
+  height: 300px;
+  width: 300px;
+  position: fixed;
+  background-color: $font-color-primary;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+  border-radius: 12px;
+  border-bottom-right-radius: 0;
+  overflow-y: auto;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.title {
+  color: $font-color-secondary;
+  font-size: 1.2rem;
+}
+.close {
+  padding: 3px;
+}

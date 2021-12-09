@@ -1,0 +1,36 @@
+@import './utils/colors.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $background-color-primary;
+}
+
+li {
+  list-style: none;
+}
+
+#root {
+  width: 100%;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.font-color-second {
+  color: $font-color-secondary;
+}
+
+.flex {
+  display: flex;
+}
+.alignCenter {
+  align-items: center;
+}
