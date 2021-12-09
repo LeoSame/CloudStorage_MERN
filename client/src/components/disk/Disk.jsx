@@ -8,6 +8,7 @@ import Uploader from './Uploader/Uploader';
 import Loader from '../../elements/Loader/Loader';
 import BreadCrumbs from './BreadCrumbs/BreadCrumbs';
 import styles from './Disk.module.scss';
+import Container from '../../elements/Container/Container';
 
 const Disk = () => {
   const dispatch = useDispatch();
@@ -63,9 +64,9 @@ const Disk = () => {
   return (
     <div className={styles.disk}>
       <BreadCrumbs />
-      <div className='container'>
+      <Container>
         <div className={styles.btns}>
-          {currentDir && (
+          {currentDir && currentDir !== 'root' && (
             <button className={styles.back} onClick={() => backClickHandler()}>
               Назад
             </button>
@@ -116,7 +117,7 @@ const Disk = () => {
         )}
         <Popup />
         <Uploader />
-      </div>
+      </Container>
     </div>
   );
 };

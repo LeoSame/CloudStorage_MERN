@@ -9,7 +9,7 @@ const FileList = () => {
   const fileView = useSelector(state => state.files.view);
 
   if (files.length === 0) {
-    return <div className={styles.fileNotFound + ' loader'}>Файли не знайдені</div>;
+    return <div className={styles.fileNotFound}>Файли не знайдені</div>;
   }
 
   if (fileView === 'plate') {

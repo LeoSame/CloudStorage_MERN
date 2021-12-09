@@ -1,6 +1,6 @@
 import React from 'react';
-import dirLogo from '../../../../assets/img/dir.svg';
-import fileLogo from '../../../../assets/img/file.svg';
+import { dirLogo } from '../../../../assets/img/dirLogo.jsx';
+import { fileLogo } from '../../../../assets/img/fileLogo.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { pushToStack, setCurrentDir } from '../../../../reducers/fileReducer';
 import { deleteFile, downloadFile } from '../../../../actions/file';
@@ -31,7 +31,7 @@ const File = ({ file }) => {
   if (fileView === 'plate') {
     return (
       <div className={styles.filePlate} onClick={() => openDirHandler(file)}>
-        <img src={file.type === 'dir' ? dirLogo : fileLogo} alt='' className={styles.filePlate__img} />
+        <div className={styles.filePlate__img}>{file.type === 'dir' ? dirLogo(file.isEmpty) : fileLogo()}</div>
         <div>{file.name}</div>
         <div className={styles.filePlate__btns}>
           {file.type !== 'dir' && (
@@ -50,7 +50,7 @@ const File = ({ file }) => {
   if (fileView === 'list') {
     return (
       <div className={styles.file} onClick={() => openDirHandler(file)}>
-        <img src={file.type === 'dir' ? dirLogo : fileLogo} alt='' className={styles.file__img} />
+        <div className={styles.file__img}>{file.type === 'dir' ? dirLogo(file.isEmpty) : fileLogo()}</div>
         <div>{file.name}</div>
         <div className={styles.date}>{file.date.slice(0, 10)}</div>
         <div className={styles.size}>{sizeFormat(file.size)}</div>

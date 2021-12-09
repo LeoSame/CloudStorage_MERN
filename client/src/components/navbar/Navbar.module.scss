@@ -1,9 +1,10 @@
 @import '../../utils/colors';
 
 .navbar {
-  display: flex;
   height: 65px;
+  display: flex;
   justify-content: center;
+  align-items: center;
   background-color: $background-color-secondary;
   width: 100%;
 }
@@ -28,8 +29,4 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-}
-.container {
-  display: flex;
-  align-items: center;
 }

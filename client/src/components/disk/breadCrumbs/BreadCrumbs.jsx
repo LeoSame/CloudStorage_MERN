@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { breadCrumbDir } from '../../../assets/img/breadCrumbDir.jsx';
 import { rightArrow } from '../../../assets/img/rightArrow.jsx';
+import Container from '../../../elements/Container/Container.jsx';
 import { setCurrentDir } from '../../../reducers/fileReducer.js';
 import styles from './BreadCrumbs.module.scss';
 
@@ -37,10 +38,10 @@ const BreadCrumbs = () => {
   });
 
   return (
-    <div className={styles.breadCrumbs}>
-      <div className={'container'}>
+    <div className={styles.placeholder}>
+      <Container>
         <ul className={styles.list + ' flex alignCenter'}>{breadCrumbsList}</ul>
-      </div>
+      </Container>
     </div>
   );
 };
