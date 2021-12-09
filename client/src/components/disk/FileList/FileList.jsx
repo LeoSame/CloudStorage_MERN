@@ -9,7 +9,7 @@ const FileList = () => {
   const fileView = useSelector(state => state.files.view);
 
   if (files.length === 0) {
-    return <div className={styles.fileNotFound + ' loader'}>Файлы не найдены</div>;
+    return <div className={styles.fileNotFound + ' loader'}>Файли не знайдені</div>;
   }
 
   if (fileView === 'plate') {
@@ -20,7 +20,7 @@ const FileList = () => {
 
   if (fileView === 'list') {
     const fileList = files.map(file => (
-      <CSSTransition key={file._id} timeout={500} classNames={styles.fileEnterActive} exit={false}>
+      <CSSTransition key={file._id} timeout={500} classNames={'file'} exit={false}>
         <File file={file} />
       </CSSTransition>
     ));

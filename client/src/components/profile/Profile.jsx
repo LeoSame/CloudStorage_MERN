@@ -4,7 +4,6 @@ import { deleteAvatar, uploadAvatar } from '../../actions/user';
 
 const Profile = () => {
   const dispatch = useDispatch();
-  console.log();
 
   function changeHandler(e) {
     const file = e.target.files[0];

@@ -5,21 +5,19 @@ import styles from './Logo.module.scss';
 
 const Logo = () => {
   const location = useLocation();
+  const logo = (
+    <div className={styles.logoContainer}>
+      <img src={imgLogo} alt='site logo' className={styles.logo} width='45' height='45' />
+      <div className={styles.header}>MERN CLOUD</div>
+    </div>
+  );
 
   if (location.pathname === '/') {
-    return (
-      <div className={styles.logoContainer}>
-        <img src={imgLogo} alt='site logo' className={styles.logo} width='45' height='45' />
-        <div className={styles.header}>MERN CLOUD</div>
-      </div>
-    );
+    return logo;
   } else {
     return (
       <NavLink className={styles.logoLink} to='/'>
-        <div className={styles.logoContainer}>
-          <img src={imgLogo} alt='site logo' className={styles.logo} width='45' height='45' />
-          <div className={styles.header}>MERN CLOUD</div>
-        </div>{' '}
+        {logo}
       </NavLink>
     );
   }

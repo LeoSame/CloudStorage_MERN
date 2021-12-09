@@ -20,7 +20,6 @@ export const getFiles = (dirId, sort) => {
       const response = await axios.get(url.toString(), {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
-      console.log(response.data);
       dispatch(setFiles(response.data));
     } catch (e) {
       console.log(e.response.data.message);
