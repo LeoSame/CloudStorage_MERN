@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../reducers/userReducer';
 import { API_URL } from '../../config';
 import Logo from './Logo';
-import FileSearch from '../disk/file.search/FileSearch';
+import FileSearch from '../Disk/FileSearch/FileSearch';
 import styles from './Navbar.module.scss';
 
 const Navbar = () => {

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFiles, uploadFile } from '../../actions/file';
-import FileList from './file.list/FileList';
+import FileList from './FileList/FileList';
 import Popup from './Popup';
 import { setCurrentDir, setFileView, setPopupDisplay } from '../../reducers/fileReducer';
-import Uploader from './uploader/Uploader';
-import Loader from '../../utils/loader/Loader';
-import BreadCrumbs from './breadCrumbs/BreadCrumbs';
+import Uploader from './Uploader/Uploader';
+import Loader from '../../elements/Loader/Loader';
+import BreadCrumbs from './BreadCrumbs/BreadCrumbs';
 import styles from './Disk.module.scss';
 
 const Disk = () => {

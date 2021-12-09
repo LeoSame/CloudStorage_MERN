@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import File from './file/File';
+import File from './File/File';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styles from './FileList.module.scss';
 

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import Input from '../../utils/input/Input';
+import Input from '../../elements/Input/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../actions/user';
-import Loader from '../../utils/loader/Loader';
+import Loader from '../../elements/Loader/Loader';
 import styles from './Authorization.module.scss';
 
 const Login = () => {

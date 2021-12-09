@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createDir } from '../../actions/file';
 import { setPopupDisplay } from '../../reducers/fileReducer';
-import Input from '../../utils/input/Input';
+import Input from '../../elements/Input/Input';
 import styles from './Popup.module.scss';
 
 const Popup = () => {
