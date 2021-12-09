@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
-const authRouter = require('./routes/auth.routes');
+const userRouter = require('./routes/user.routes');
 const fileRouter = require('./routes/file.routes');
 const app = express();
 const PORT = process.env.PORT || config.get('serverPort');
@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.static('static'));
 app.use(express.static(path.resolve(__dirname, 'client', 'build')));
 
-app.use('/api/auth', authRouter);
+app.use('/api/auth', userRouter);
 app.use('/api/files', fileRouter);
 
 app.get('*', (req, res) => {

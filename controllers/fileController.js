@@ -149,13 +149,32 @@ class FileController {
 
   async deleteFile(req, res) {
     try {
-      const file = await File.findOne({ _id: req.query.id, user: req.user.id });
+      const userId = req.user.id;
+      const fileId = req.query.id;
+      const file = await File.findOne({ _id: fileId, user: userId });
+      const parent = file.parent;
+
       if (!file) {
         return res.status(400).json({ message: 'file not found' });
       }
+
       fileService.deleteFile(req, file);
       await file.remove();
-      return res.json({ message: 'File was deleted' });
+
+      if (parent) {
+        const parentFile = await File.findOne({ _id: parent, user: userId });
+
+        const parentChilds = parentFile.childs.filter(c => c != fileId);
+        parentFile.childs = parentChilds;
+
+        if (parentFile.childs.length === 0) {
+          parentFile.isEmpty = true;
+        }
+
+        await parentFile.save();
+      }
+
+      return res.json('File was deleted');
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: 'Dir is not empty' });
