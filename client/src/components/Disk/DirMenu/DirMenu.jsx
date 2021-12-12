@@ -1,16 +1,18 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadFile } from '../../../actions/file.js';
-import { createFolder } from '../../../assets/img/createFolder.jsx';
-import { drop } from '../../../assets/img/drop.jsx';
+import { createFolderLogo } from '../../../assets/img/createFolderLogo.jsx';
+import { dropLogo } from '../../../assets/img/dropLogo.jsx';
 import { uploadFileLogo } from '../../../assets/img/uploadFileLogo.jsx';
 import Button from '../../../elements/Button/Button.jsx';
 import Container from '../../../elements/Container/Container.jsx';
 import { setPopupDisplay } from '../../../reducers/fileReducer.js';
+import FileSearch from '../FileSearch/FileSearch.jsx';
 import styles from './DirMenu.module.scss';
 
 const DirMenu = () => {
   const currentDir = useSelector(state => state.files.currentDir);
+  const isAuth = useSelector(state => state.user.isAuth);
   const dispatch = useDispatch();
 
   function showPopupHandler() {
@@ -30,10 +32,11 @@ const DirMenu = () => {
             <div className={styles.currentDir}>
               <h2 className={styles.currentTitle}>{currentDir.name}</h2>
             </div>
+            {isAuth && <FileSearch />}
           </div>
           <div className={styles.controls}>
             <Button className={styles.btn} variant='outline'>
-              {createFolder()}
+              {createFolderLogo()}
               <span className={styles.btnText} onClick={() => showPopupHandler()}>
                 Створити папку
               </span>
@@ -53,7 +56,7 @@ const DirMenu = () => {
               />
             </Button>
             <Button className={styles.btn} variant='drop' disabled>
-              {drop()}
+              {dropLogo()}
               <span className={styles.btnText}>Сміття</span>
             </Button>
           </div>

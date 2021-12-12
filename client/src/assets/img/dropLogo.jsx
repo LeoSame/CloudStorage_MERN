@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const drop = (color = '#ffffff', width = 24, height = 24) => (
+export const dropLogo = (color = '#ffffff', width = 24, height = 24) => (
   <svg width={width} height={height} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'>
     <path
       fill={color}
