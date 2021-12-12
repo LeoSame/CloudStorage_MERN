@@ -43,11 +43,9 @@ const DirMenu = () => {
             {isAuth && <FileSearch />}
           </div>
           <div className={styles.controls}>
-            <Button className={styles.btn} variant='outline'>
+            <Button className={styles.btn} variant='outline' onClick={() => showPopupHandler()}>
               {createFolderLogo()}
-              <span className={styles.btnText} onClick={() => showPopupHandler()}>
-                Створити папку
-              </span>
+              <span className={styles.btnText}>Створити папку</span>
             </Button>
             <div></div>
             <Button className={styles.btnFile}>
