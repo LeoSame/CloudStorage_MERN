@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_URL } from '../config';
 import { hideLoader, showLoader } from '../reducers/appReducer';
-import { addFile, deleteFileAction, setFiles } from '../reducers/fileReducer';
+import { addFile, deleteFileAction, setFiles, setCurrentDir, addDir } from '../reducers/fileReducer';
 import { addUploadFile, changeUploadFile, showUploader } from '../reducers/uploadReducer';
 
 export const getFiles = (dirId, sort) => {
@@ -39,7 +39,7 @@ export const createDir = (dirId, name) => {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         }
       );
-      dispatch(addFile(response.data));
+      dispatch(addDir(response.data));
     } catch (e) {
       console.log(e.response.data.message);
     }
@@ -137,6 +137,26 @@ export const searchFiles = search => {
       alert(e?.response?.data?.message);
     } finally {
       dispatch(hideLoader());
+    }
+  };
+};
+
+export const renameFiles = (id, name) => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(
+        `${API_URL}api/files/rename`,
+        { name, id },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      const file = response.data;
+      dispatch(setCurrentDir({ id: file._id, name: file.name }));
+    } catch (e) {
+      alert(e?.response?.data?.message);
     }
   };
 };

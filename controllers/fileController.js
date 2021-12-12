@@ -195,6 +195,21 @@ class FileController {
     }
   }
 
+  async renameFile(req, res) {
+    try {
+      const userId = req.user.id;
+      const { id, name } = req.query.id;
+      const file = await File.findOne({ _id: id, user: userId });
+      file.name = name;
+      file.save();
+
+      return res.json(file);
+    } catch (e) {
+      console.log(e);
+      return res.status(400).json({ message: 'Serarch error' });
+    }
+  }
+
   async uploadAvatar(req, res) {
     try {
       const file = req.files.file;

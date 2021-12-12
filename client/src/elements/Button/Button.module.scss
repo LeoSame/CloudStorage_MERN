@@ -18,6 +18,15 @@
   & path {
     fill: $button-color;
   }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: initial;
+
+    &:hover {
+      background: $button-background;
+    }
+  }
 }
 
 .outline {
@@ -27,26 +36,32 @@
   &:hover {
     background-color: $button-outline-background-hover;
   }
+
   & path {
     fill: $button-outline-color;
+  }
+
+  &:disabled:hover {
+    opacity: 0.5;
+    background: $button-background;
   }
 }
 
 .drop {
   color: $button-color;
-  background: $error-color;
+  background-color: $error-color;
 
   &:hover {
     opacity: 0.8;
-    background: $error-color;
+    background-color: $error-color;
   }
 
   & path {
     fill: $button-color;
   }
 
-  &:disabled {
+  &:disabled:hover {
     opacity: 0.5;
-    cursor: initial;
+    background: $error-color;
   }
 }

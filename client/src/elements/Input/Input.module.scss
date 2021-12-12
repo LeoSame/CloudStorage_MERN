@@ -1,13 +1,16 @@
 @import '../../utils/colors.scss';
 :global {
   input {
-    border: none;
-    border-bottom: $font-color-primary solid 3px;
     width: 100%;
-    padding: 3px;
+    height: 40px;
+    padding: 10px 16px;
+    font-weight: 400;
+    border: $font-color-thirty solid 1px;
+    border-radius: 3px;
+
     &:focus {
       outline: none;
-      transform: scale(1.02);
+      border-color: $button-background;
     }
   }
 
