@@ -26,7 +26,7 @@ const FileSearch = () => {
         )
       );
     } else {
-      dispatch(getFiles(currentDir));
+      dispatch(getFiles(currentDir.id));
     }
   }
 

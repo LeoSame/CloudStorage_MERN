@@ -3,24 +3,24 @@ import React from 'react';
 export const dirLogo = (isEmpty, width = 48, height = 48) => {
   let stroke = false;
   let gradient = 'url(#DirGradient1)';
-  let secondColor = 'rgba(129,129,129,1)';
+  let secondColor = '#818181';
   if (isEmpty) {
     gradient = 'url(#DirGradient2)';
-    secondColor = 'rgba(237,237,237,1)';
+    secondColor = '#ededed';
     stroke = true;
   }
   return (
     <svg width={width} height={height} viewBox='0 0 48 48' fill='none' xmlns='http://www.w3.org/2000/svg'>
       <defs>
         <linearGradient id='DirGradient1' x1='0' x2='0' y1='0' y2='1'>
-          <stop offset='0%' stop-color='rgba(237,237,237,1)' />
-          <stop offset='25%' stop-color='rgba(218,215,215,1)' />
-          <stop offset='100%' stop-color='rgba(129,129,129,1)' />
+          <stop offset='0%' stopColor='#ededed' />
+          <stop offset='25%' stopColor='#dad7d7' />
+          <stop offset='100%' stopColor='#818181' />
         </linearGradient>
         <linearGradient id='DirGradient2' x1='0' x2='0' y1='0' y2='1'>
-          <stop offset='0%' stop-color='rgba(255,255,255,1)' />
-          <stop offset='25%' stop-color='rgba(235,235,235,1)' />
-          <stop offset='100%' stop-color='rgba(220,220,220,1)' />
+          <stop offset='0%' stopColor='#ffffff' />
+          <stop offset='25%' stopColor='#ebebeb' />
+          <stop offset='100%' stopColor='#dcdcdc' />
         </linearGradient>
       </defs>
       <path

@@ -112,6 +112,7 @@ class FileController {
       if (parent) {
         filePath = parent.path + '\\' + file.name;
         parent.isEmpty = false;
+        await parent.save();
       }
       const dbFile = new File({
         name: file.name,
@@ -124,7 +125,6 @@ class FileController {
 
       await dbFile.save();
       await user.save();
-      await parent.save();
 
       res.json(dbFile);
     } catch (e) {

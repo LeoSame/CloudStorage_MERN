@@ -8,9 +8,9 @@ const SET_VIEW = 'SET_VIEW';
 
 const defaultState = {
   files: [],
-  currentDir: null,
+  currentDir: { id: 'root', name: 'Моє сховище' },
   popupDisplay: 'none',
-  dirStack: [{ name: 'root', id: 'root' }],
+  dirStack: [{ id: 'root', name: 'Моє сховище' }],
   view: 'list',
 };
 
