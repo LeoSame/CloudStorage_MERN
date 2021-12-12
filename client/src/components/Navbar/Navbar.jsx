@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../reducers/userReducer';
 import { API_URL } from '../../config';
 import Logo from './Logo';
-import FileSearch from '../Disk/FileSearch/FileSearch';
 import styles from './Navbar.module.scss';
 import Container from '../../elements/Container/Container';
 
@@ -20,7 +19,6 @@ const Navbar = () => {
       <Container>
         <div className={styles.navbar}>
           <Logo />
-          {isAuth && <FileSearch />}
           {isAuth ? (
             <div className={styles.user}>
               <div className={styles.link} onClick={() => dispatch(logout())}>

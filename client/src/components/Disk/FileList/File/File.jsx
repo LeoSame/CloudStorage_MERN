@@ -13,8 +13,9 @@ const File = ({ file }) => {
 
   function openDirHandler(file) {
     if (file.type === 'dir') {
-      dispatch(pushToStack({ id: file._id, name: file.name }));
-      dispatch(setCurrentDir(file._id));
+      const currentDir = { id: file._id, name: file.name };
+      dispatch(pushToStack(currentDir));
+      dispatch(setCurrentDir(currentDir));
     }
   }
 

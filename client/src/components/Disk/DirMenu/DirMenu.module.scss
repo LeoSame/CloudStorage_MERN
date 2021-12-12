@@ -1,0 +1,54 @@
+@import '../../../utils/colors.scss';
+
+.placeholder {
+  background-color: $background-color-white;
+  padding: 20px 0;
+}
+
+.dirMenu {
+  display: flex;
+  justify-content: space-between;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+}
+
+.currentDir {
+}
+
+.currentTitle {
+  font-weight: 500;
+}
+
+.btn {
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btnText {
+  color: inherit;
+  padding-left: 10px;
+}
+
+.btnFile {
+  padding: 0;
+  margin-left: 16px;
+}
+
+.uploadInput {
+  display: none;
+}
+
+.uploadLabel {
+  color: inherit;
+  cursor: pointer;
+  height: 100%;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

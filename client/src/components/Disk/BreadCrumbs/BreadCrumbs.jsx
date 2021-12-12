@@ -18,7 +18,7 @@ const BreadCrumbs = () => {
         backDir = dirStack.pop();
         backDir = dirStack[dirStack.length - 1];
       }
-      dispatch(setCurrentDir(backDir.id));
+      dispatch(setCurrentDir(backDir));
     }
   }
 
@@ -28,9 +28,7 @@ const BreadCrumbs = () => {
       <li key={dir.id} className={styles.item + ' flex alignCenter'}>
         <div className={styles.content + ' flex alignCenter'} onClick={() => сlickHandler(dir.id, isLastDir)}>
           <div className={styles.logo}>{isLastDir ? breadCrumbDir('silver') : breadCrumbDir('blue')}</div>
-          <span className={isLastDir ? styles.direct : styles.direct + ' font-color-second'}>
-            {index === 0 ? 'Моє сховище' : dir.name}
-          </span>
+          <span className={isLastDir ? styles.direct : styles.direct + ' font-color-second'}>{dir.name}</span>
         </div>
         {isLastDir && <span className={styles.arrow + ' flex alignCenter'}>{rightArrow()}</span>}
       </li>
@@ -40,7 +38,9 @@ const BreadCrumbs = () => {
   return (
     <div className={styles.placeholder}>
       <Container>
-        <ul className={styles.list + ' flex alignCenter'}>{breadCrumbsList}</ul>
+        <nav>
+          <ul className={styles.list + ' flex alignCenter'}>{breadCrumbsList}</ul>
+        </nav>
       </Container>
     </div>
   );

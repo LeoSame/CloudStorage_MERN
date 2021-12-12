@@ -3,39 +3,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFiles, uploadFile } from '../../actions/file';
 import FileList from './FileList/FileList';
 import Popup from './Popup';
-import { setCurrentDir, setFileView, setPopupDisplay } from '../../reducers/fileReducer';
+import { setFileView } from '../../reducers/fileReducer';
 import Uploader from './Uploader/Uploader';
 import Loader from '../../elements/Loader/Loader';
 import BreadCrumbs from './BreadCrumbs/BreadCrumbs';
-import styles from './Disk.module.scss';
 import Container from '../../elements/Container/Container';
+import styles from './Disk.module.scss';
+import DirMenu from './DirMenu/DirMenu';
 
 const Disk = () => {
   const dispatch = useDispatch();
   const currentDir = useSelector(state => state.files.currentDir);
-  const dirStack = useSelector(state => state.files.dirStack);
   const isLoader = useSelector(state => state.app.loader);
   const [dragEnter, setDragEnter] = useState(false);
   const [sort, setSort] = useState('date');
 
   useEffect(() => {
-    dispatch(getFiles(currentDir, sort));
-  }, [currentDir, sort]);
-
-  function showPopupHandler() {
-    dispatch(setPopupDisplay('flex'));
-  }
-
-  function backClickHandler() {
-    dirStack.pop();
-    const backDir = dirStack[dirStack.length - 1];
-    dispatch(setCurrentDir(backDir.id));
-  }
-
-  function fileUploadHandler(event) {
-    const files = [...event.target.files];
-    files.forEach(file => dispatch(uploadFile(file, currentDir)));
-  }
+    dispatch(getFiles(currentDir.id, sort));
+  }, [currentDir, sort, dispatch]);
 
   function dragEnterHandler(event) {
     event.preventDefault();
@@ -53,7 +38,7 @@ const Disk = () => {
     event.preventDefault();
     event.stopPropagation();
     let files = [...event.dataTransfer.files];
-    files.forEach(file => dispatch(uploadFile(file, currentDir)));
+    files.forEach(file => dispatch(uploadFile(file, currentDir.id)));
     setDragEnter(false);
   }
 
@@ -64,33 +49,9 @@ const Disk = () => {
   return (
     <div className={styles.disk}>
       <BreadCrumbs />
+      <DirMenu />
       <Container>
-        <div className={styles.btns}>
-          {currentDir && currentDir !== 'root' && (
-            <button className={styles.back} onClick={() => backClickHandler()}>
-              Назад
-            </button>
-          )}
-          <button
-            className={styles.create}
-            onClick={() => {
-              showPopupHandler();
-            }}
-          >
-            Створити папку
-          </button>
-          <div className={styles.upload}>
-            <label htmlFor='disk__upload-input' className={styles.uploadLabel}>
-              Завантажити файл
-            </label>
-            <input
-              multiple={true}
-              onChange={event => fileUploadHandler(event)}
-              type='file'
-              id='disk__upload-input'
-              className={styles.uploadInput}
-            />
-          </div>
+        <div className='flex'>
           <select value={sort} onChange={e => setSort(e.target.value)} className={styles.select}>
             <option value='name'>За назвою</option>
             <option value='type'>За типоп</option>
