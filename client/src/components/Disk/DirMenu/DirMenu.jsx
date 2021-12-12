@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadFile } from '../../../actions/file.js';
+import { createDir, uploadFile } from '../../../actions/file.js';
 import { createFolderLogo } from '../../../assets/img/createFolderLogo.jsx';
 import { dropLogo } from '../../../assets/img/dropLogo.jsx';
 import { uploadFileLogo } from '../../../assets/img/uploadFileLogo.jsx';
 import Button from '../../../elements/Button/Button.jsx';
 import Container from '../../../elements/Container/Container.jsx';
-import { setPopupDisplay } from '../../../reducers/fileReducer.js';
+import Input from '../../../elements/Input/Input.jsx';
+import Modal from '../../../elements/Modal/Modal.jsx';
+import { setModalDisplay } from '../../../reducers/appReducer.js';
 import FileSearch from '../FileSearch/FileSearch.jsx';
 import styles from './DirMenu.module.scss';
 
 const DirMenu = () => {
   const currentDir = useSelector(state => state.files.currentDir);
+  const [dirName, setDirName] = useState('');
   const isAuth = useSelector(state => state.user.isAuth);
   const dispatch = useDispatch();
 
+  function createHandler() {
+    dispatch(createDir(currentDir.id, dirName));
+    dispatch(setModalDisplay('none'));
+    setDirName('');
+  }
   function showPopupHandler() {
-    dispatch(setPopupDisplay('flex'));
+    dispatch(setModalDisplay('flex'));
   }
 
   function fileUploadHandler(event) {
@@ -62,6 +70,17 @@ const DirMenu = () => {
           </div>
         </div>
       </Container>
+      <Modal
+        title='Створити нову папку'
+        cancelBtn='Скасувати'
+        confirmBtn='Створити'
+        confirmAction={createHandler}
+        confirmDisabled={dirName.length <= 0}
+      >
+        <div className={styles.modalContent}>
+          <Input type='text' placeholder='Введите название папки...' value={dirName} setValue={setDirName} />
+        </div>
+      </Modal>
     </div>
   );
 };

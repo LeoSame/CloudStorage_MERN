@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFiles, uploadFile } from '../../actions/file';
 import FileList from './FileList/FileList';
-import Popup from './Popup';
 import { setFileView } from '../../reducers/fileReducer';
 import Uploader from './Uploader/Uploader';
 import Loader from '../../elements/Loader/Loader';
@@ -76,7 +75,6 @@ const Disk = () => {
             Перетащите файлы сюда
           </div>
         )}
-        <Popup />
         <Uploader />
       </Container>
     </div>
