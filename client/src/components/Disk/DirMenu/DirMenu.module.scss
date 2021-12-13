@@ -1,4 +1,5 @@
 @import '../../../utils/colors.scss';
+@import '../../../utils/media.scss';
 
 .placeholder {
   background-color: $background-color-white;
@@ -17,6 +18,15 @@
 
 .currentTitle {
   font-weight: 500;
+  @media (min-width: $deskMin) and (max-width: $deskMax) {
+    font-size: 1.3rem;
+  }
+  @media (min-width: $tabMin) and (max-width: $tabMax) {
+    font-size: 1.1rem;
+  }
+  @media (max-width: $mobMax) {
+    font-size: 0.9rem;
+  }
 }
 
 .titleRename {
@@ -28,20 +38,78 @@
 }
 
 .btn {
-  margin-left: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: 16px;
+  @media (min-width: $deskMin) and (max-width: $deskMax) {
+    margin-left: 12px;
+  }
+  @media (min-width: $tabMin) and (max-width: $tabMax) {
+    margin-left: 10px;
+  }
+  @media (max-width: $mobMax) {
+    margin-left: 8px;
+  }
+  & svg {
+    @media (min-width: $deskMin) and (max-width: $deskMax) {
+      width: 20px;
+      height: 20px;
+    }
+    @media (min-width: $tabMin) and (max-width: $tabMax) {
+      width: 16px;
+      height: 16px;
+    }
+    @media (max-width: $mobMax) {
+      width: 14px;
+      height: 14px;
+    }
+  }
 }
 
 .btnText {
   color: inherit;
   padding-left: 10px;
+  @media (min-width: $deskMin) and (max-width: $deskMax) {
+    padding-left: 8px;
+    font-size: 0.8rem;
+  }
+  @media (min-width: $tabMin) and (max-width: $tabMax) {
+    padding-left: 6px;
+    font-size: 0.7rem;
+  }
+  @media (max-width: $mobMax) {
+    padding-left: 4px;
+    font-size: 0.6rem;
+  }
 }
 
 .btnFile {
   padding: 0;
   margin-left: 16px;
+  @media (min-width: $deskMin) and (max-width: $deskMax) {
+    margin-left: 12px;
+  }
+  @media (min-width: $tabMin) and (max-width: $tabMax) {
+    margin-left: 10px;
+  }
+  @media (max-width: $mobMax) {
+    margin-left: 8px;
+  }
+  & svg {
+    @media (min-width: $deskMin) and (max-width: $deskMax) {
+      width: 20px;
+      height: 20px;
+    }
+    @media (min-width: $tabMin) and (max-width: $tabMax) {
+      width: 16px;
+      height: 16px;
+    }
+    @media (max-width: $mobMax) {
+      width: 14px;
+      height: 14px;
+    }
+  }
 }
 
 .uploadInput {
@@ -56,6 +124,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (min-width: $deskMin) and (max-width: $deskMax) {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+  @media (min-width: $tabMin) and (max-width: $tabMax) {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 }
 
 .modalContent {

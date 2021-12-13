@@ -5,7 +5,7 @@ const User = require('../models/User');
 const File = require('../models/File');
 const Dir = require('../models/Dir');
 
-class FileController {
+class DiscController {
   async createDir(req, res) {
     try {
       const { name } = req.body;
@@ -270,4 +270,4 @@ class FileController {
   }
 }
 
-module.exports = new FileController();
+module.exports = new DiscController();

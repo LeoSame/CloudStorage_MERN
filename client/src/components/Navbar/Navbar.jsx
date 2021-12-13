@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../reducers/userReducer';
 import { API_URL } from '../../config';
-import Logo from './Logo';
+import Logo from './Logo/Logo';
 import styles from './Navbar.module.scss';
 import Container from '../../elements/Container/Container';
 
@@ -15,7 +15,7 @@ const Navbar = () => {
   const avatar = currentUser.avatar ? `${API_URL + currentUser.avatar}` : avatarLogo;
 
   return (
-    <header className={styles.navbar}>
+    <header className={styles.header}>
       <Container>
         <div className={styles.navbar}>
           <Logo />

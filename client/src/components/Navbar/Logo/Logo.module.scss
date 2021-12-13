@@ -1,0 +1,35 @@
+@import '../../../utils/colors';
+@import '../../../utils/media.scss';
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.header {
+  margin-left: 10px;
+  font-size: 24px;
+  font-weight: 400;
+  color: $font-color-secondary;
+  @media (min-width: $tabMin) and (max-width: $tabMax) {
+    font-size: 20px;
+  }
+  @media (max-width: $mobMax) {
+    font-size: 16px;
+  }
+}
+
+.logo {
+  @media (min-width: $tabMin) and (max-width: $tabMax) {
+    height: 35px;
+    width: 35px;
+  }
+  @media (max-width: $mobMax) {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.logoLink {
+  text-decoration: none;
+}

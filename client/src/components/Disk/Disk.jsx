@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFiles, uploadFile } from '../../actions/file';
+import { getFiles, uploadFile } from '../../actions/disk';
 import FileList from './FileList/FileList';
 import { setFileView } from '../../reducers/fileReducer';
 import Uploader from './Uploader/Uploader';

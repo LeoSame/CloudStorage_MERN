@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFiles, searchFiles } from '../../../actions/file';
+import { getFiles, searchFiles } from '../../../actions/disk';
 import styles from './FileSearch.module.scss';
 
 const FileSearch = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createDir, renameFiles, uploadFile } from '../../../actions/file.js';
+import { createDir, renameFiles, uploadFile } from '../../../actions/disk.js';
 import { createFolderLogo } from '../../../assets/img/createFolderLogo.jsx';
 import { dropLogo } from '../../../assets/img/dropLogo.jsx';
 import { uploadFileLogo } from '../../../assets/img/uploadFileLogo.jsx';
