@@ -15,11 +15,16 @@
   align-items: center;
 }
 
-.currentDir {
-}
-
 .currentTitle {
   font-weight: 500;
+}
+
+.titleRename {
+  transition: color 0.5s;
+  &:hover {
+    cursor: url('../../../assets//img/renameCursor.png'), pointer;
+    color: $font-color-thirty;
+  }
 }
 
 .btn {

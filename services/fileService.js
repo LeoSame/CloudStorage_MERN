@@ -1,4 +1,5 @@
 const fs = require('fs');
+const File = require('../models/File');
 
 class FileService {
   createDir(req, file) {
@@ -24,6 +25,12 @@ class FileService {
     } else {
       fs.unlinkSync(path);
     }
+  }
+
+  renameFile(req, file, newFilePath) {
+    const prevPath = this.getPath(req, file);
+    const newPath = this.getPath(req, { user: file.user, path: newFilePath });
+    fs.renameSync(prevPath, newPath);
   }
 
   getPath(req, file) {

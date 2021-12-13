@@ -4,7 +4,6 @@ import { getFiles, uploadFile } from '../../actions/file';
 import FileList from './FileList/FileList';
 import { setFileView } from '../../reducers/fileReducer';
 import Uploader from './Uploader/Uploader';
-import Loader from '../../elements/Loader/Loader';
 import BreadCrumbs from './BreadCrumbs/BreadCrumbs';
 import Container from '../../elements/Container/Container';
 import styles from './Disk.module.scss';
@@ -13,7 +12,6 @@ import DirMenu from './DirMenu/DirMenu';
 const Disk = () => {
   const dispatch = useDispatch();
   const currentDir = useSelector(state => state.files.currentDir);
-  const isLoader = useSelector(state => state.app.loader);
   const [dragEnter, setDragEnter] = useState(false);
   const [sort, setSort] = useState('date');
 
@@ -39,10 +37,6 @@ const Disk = () => {
     let files = [...event.dataTransfer.files];
     files.forEach(file => dispatch(uploadFile(file, currentDir.id)));
     setDragEnter(false);
-  }
-
-  if (isLoader === true) {
-    return <Loader />;
   }
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createDir, uploadFile } from '../../../actions/file.js';
+import { createDir, renameFiles, uploadFile } from '../../../actions/file.js';
 import { createFolderLogo } from '../../../assets/img/createFolderLogo.jsx';
 import { dropLogo } from '../../../assets/img/dropLogo.jsx';
 import { uploadFileLogo } from '../../../assets/img/uploadFileLogo.jsx';
@@ -8,23 +9,40 @@ import Button from '../../../elements/Button/Button.jsx';
 import Container from '../../../elements/Container/Container.jsx';
 import Input from '../../../elements/Input/Input.jsx';
 import Modal from '../../../elements/Modal/Modal.jsx';
-import { setModalDisplay } from '../../../reducers/appReducer.js';
+import { setModalCreateDirOpen, setModalRenameOpen } from '../../../reducers/appReducer.js';
 import FileSearch from '../FileSearch/FileSearch.jsx';
 import styles from './DirMenu.module.scss';
 
 const DirMenu = () => {
   const currentDir = useSelector(state => state.files.currentDir);
-  const [dirName, setDirName] = useState('');
+  const modalCreateDirOpen = useSelector(state => state.app.modalCreateDirOpen);
+  const modalRenameOpen = useSelector(state => state.app.modalRenameOpen);
+  const [createDirName, setCreateDirName] = useState('');
+  const [renameDirName, setRenameDirName] = useState(currentDir.name);
   const isAuth = useSelector(state => state.user.isAuth);
   const dispatch = useDispatch();
 
-  function createHandler() {
-    dispatch(createDir(currentDir.id, dirName));
-    dispatch(setModalDisplay('none'));
-    setDirName('');
+  useEffect(() => {
+    setRenameDirName(currentDir.name);
+  }, [currentDir, modalRenameOpen]);
+
+  function modalCreateHandler() {
+    dispatch(setModalCreateDirOpen(!modalCreateDirOpen));
   }
-  function showPopupHandler() {
-    dispatch(setModalDisplay('flex'));
+
+  function createDirHandler() {
+    dispatch(createDir(currentDir.id, createDirName));
+    modalCreateHandler();
+    setCreateDirName('');
+  }
+
+  function modalRenameHandler() {
+    dispatch(setModalRenameOpen(!modalRenameOpen));
+  }
+
+  function renameHandler() {
+    dispatch(renameFiles(currentDir.id, renameDirName));
+    modalRenameHandler();
   }
 
   function fileUploadHandler(event) {
@@ -37,13 +55,21 @@ const DirMenu = () => {
       <Container>
         <div className={styles.dirMenu}>
           <div className={styles.controls}>
-            <div className={styles.currentDir}>
-              <h2 className={styles.currentTitle}>{currentDir.name}</h2>
+            <div>
+              <h2 className={styles.currentTitle}>
+                {currentDir.id === 'root' ? (
+                  <span>{currentDir.name}</span>
+                ) : (
+                  <span onClick={() => modalRenameHandler()} className={styles.titleRename}>
+                    {currentDir.name}
+                  </span>
+                )}
+              </h2>
             </div>
             {isAuth && <FileSearch />}
           </div>
           <div className={styles.controls}>
-            <Button className={styles.btn} variant='outline' onClick={() => showPopupHandler()}>
+            <Button className={styles.btn} variant='outline' onClick={() => modalCreateHandler()}>
               {createFolderLogo()}
               <span className={styles.btnText}>Створити папку</span>
             </Button>
@@ -68,17 +94,36 @@ const DirMenu = () => {
           </div>
         </div>
       </Container>
-      <Modal
-        title='Створити нову папку'
-        cancelBtn='Скасувати'
-        confirmBtn='Створити'
-        confirmAction={createHandler}
-        confirmDisabled={dirName.length <= 0}
-      >
-        <div className={styles.modalContent}>
-          <Input type='text' placeholder='Введите название папки...' value={dirName} setValue={setDirName} />
-        </div>
-      </Modal>
+
+      {modalCreateDirOpen && (
+        <Modal
+          title='Створити нову папку'
+          modalHandler={modalCreateHandler}
+          cancelBtn='Скасувати'
+          confirmBtn='Створити'
+          confirmAction={createDirHandler}
+          confirmDisabled={createDirName.length <= 0}
+        >
+          <div className={styles.modalContent}>
+            <Input type='text' placeholder='Введіть назву папки...' value={createDirName} setValue={setCreateDirName} />
+          </div>
+        </Modal>
+      )}
+
+      {modalRenameOpen && (
+        <Modal
+          title='Введіть назву папки'
+          modalHandler={modalRenameHandler}
+          cancelBtn='Скасувати'
+          confirmBtn='Зберегти'
+          confirmAction={renameHandler}
+          confirmDisabled={renameDirName.length <= 0 || renameDirName === currentDir.name}
+        >
+          <div className={styles.modalContent}>
+            <Input type='text' placeholder='Введіть назву папки...' value={renameDirName} setValue={setRenameDirName} />
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

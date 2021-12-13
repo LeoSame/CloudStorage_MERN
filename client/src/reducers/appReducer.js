@@ -1,10 +1,12 @@
 const SHOW_LOADER = 'SHOW_LOADER';
 const HIDE_LOADER = 'HIDE_LOADER';
-const SET_MODAL_DISPLAY = 'SET_MODAL_DISPLAY';
+const SET_MODAL_CREATE_DIR_OPEN = 'SET_MODAL_CREATE_DIR_OPEN';
+const SET_MODAL_RENAME_OPEN = 'SET_MODAL_RENAME_OPEN';
 
 const defaultState = {
   loader: false,
-  modalDisplay: 'none',
+  modalCreateDirOpen: false,
+  modalRenameOpen: false,
 };
 
 export default function appReducer(state = defaultState, action) {
@@ -13,8 +15,10 @@ export default function appReducer(state = defaultState, action) {
       return { ...state, loader: true };
     case HIDE_LOADER:
       return { ...state, loader: false };
-    case SET_MODAL_DISPLAY:
-      return { ...state, modalDisplay: action.payload };
+    case SET_MODAL_CREATE_DIR_OPEN:
+      return { ...state, modalCreateDirOpen: action.payload };
+    case SET_MODAL_RENAME_OPEN:
+      return { ...state, modalRenameOpen: action.payload };
     default:
       return state;
   }
@@ -22,4 +26,5 @@ export default function appReducer(state = defaultState, action) {
 
 export const showLoader = () => ({ type: SHOW_LOADER });
 export const hideLoader = () => ({ type: HIDE_LOADER });
-export const setModalDisplay = display => ({ type: SET_MODAL_DISPLAY, payload: display });
+export const setModalCreateDirOpen = display => ({ type: SET_MODAL_CREATE_DIR_OPEN, payload: display });
+export const setModalRenameOpen = display => ({ type: SET_MODAL_RENAME_OPEN, payload: display });

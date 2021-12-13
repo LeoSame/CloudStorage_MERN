@@ -144,7 +144,7 @@ export const searchFiles = search => {
 export const renameFiles = (id, name) => {
   return async dispatch => {
     try {
-      const response = await axios.get(
+      const response = await axios.post(
         `${API_URL}api/files/rename`,
         { name, id },
         {

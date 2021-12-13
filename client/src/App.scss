@@ -12,6 +12,11 @@ body {
   background-color: $background-color-primary;
 }
 
+body.lock {
+  overflow: hidden;
+  padding-right: 17px;
+}
+
 li {
   list-style: none;
 }

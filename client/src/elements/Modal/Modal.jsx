@@ -1,29 +1,37 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import { closeLogo } from '../../assets/img/closeLogo';
-import { setModalDisplay } from '../../reducers/appReducer';
 import Button from '../Button/Button';
 import styles from './Modal.module.scss';
 
-const Modal = ({ children, title, confirmBtn, cancelBtn, confirmAction, confirmDisabled }) => {
-  const modalDisplay = useSelector(state => state.app.modalDisplay);
-  const dispatch = useDispatch();
+const Modal = ({ children, title, modalHandler, confirmBtn, cancelBtn, confirmAction, confirmDisabled }) => {
+  const [opacityStyle, setOpacityStyle] = useState({});
 
-  function closePopup() {
-    dispatch(setModalDisplay('none'));
+  setTimeout(() => {
+    setOpacityStyle({ visibility: 'visible', opacity: 1 });
+  }, 10);
+
+  useEffect(() => {
+    document.body.classList.add('lock');
+    return function cleanup() {
+      document.body.classList.remove('lock');
+    };
+  }, []);
+
+  function closeModal() {
+    modalHandler();
   }
 
   return (
-    <div className={styles.popup} onClick={() => closePopup()} style={{ display: modalDisplay }}>
+    <div className={styles.modalFade} onClick={() => closeModal()} style={opacityStyle}>
       <div className={styles.content} onClick={event => event.stopPropagation()}>
-        <div className={styles.close}>{closeLogo(closePopup)}</div>
+        <div className={styles.close}>{closeLogo(closeModal)}</div>
         <header>
           <h3 className={styles.title}>{title}</h3>
         </header>
         {children}
         <div className={styles.buttons}>
           {cancelBtn && (
-            <Button onClick={() => closePopup()} variant='drop' className={styles.button}>
+            <Button onClick={() => closeModal()} variant='drop' className={styles.button}>
               {cancelBtn}
             </Button>
           )}

@@ -3,13 +3,19 @@ import { useSelector } from 'react-redux';
 import File from './File/File';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styles from './FileList.module.scss';
+import Loader from '../../../elements/Loader/Loader';
 
 const FileList = () => {
   const files = useSelector(state => state.files.files);
   const fileView = useSelector(state => state.files.view);
+  const isLoader = useSelector(state => state.app.loader);
 
   if (files.length === 0) {
     return <div className={styles.fileNotFound}>Файли не знайдені</div>;
+  }
+
+  if (isLoader === true) {
+    return <Loader />;
   }
 
   if (fileView === 'plate') {

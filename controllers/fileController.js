@@ -191,22 +191,30 @@ class FileController {
       return res.json(files);
     } catch (e) {
       console.log(e);
-      return res.status(400).json({ message: 'Serarch error' });
+      return res.status(400).json({ message: 'Search error' });
     }
   }
 
   async renameFile(req, res) {
     try {
       const userId = req.user.id;
-      const { id, name } = req.query.id;
+      const { id, name } = req.body;
       const file = await File.findOne({ _id: id, user: userId });
+
+      let newFilePath = file.path.split('\\');
+      newFilePath[newFilePath.length - 1] = name;
+      newFilePath = newFilePath.join('\\');
+
+      fileService.renameFile(req, file, newFilePath);
+
       file.name = name;
-      file.save();
+      file.path = newFilePath;
+      await file.save();
 
       return res.json(file);
     } catch (e) {
       console.log(e);
-      return res.status(400).json({ message: 'Serarch error' });
+      return res.status(400).json({ message: 'Rename error' });
     }
   }
 
