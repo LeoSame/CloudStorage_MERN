@@ -55,7 +55,12 @@ const Disk = () => {
           <button className={styles.list} onClick={() => dispatch(setFileView('list'))} />
         </div>
         {!dragEnter ? (
-          <div onDragEnter={dragEnterHandler} onDragLeave={dragLeaveHandler} onDragOver={dragEnterHandler}>
+          <div
+            onDragEnter={dragEnterHandler}
+            onDragLeave={dragLeaveHandler}
+            onDragOver={dragEnterHandler}
+            className={styles.filePlaceholder}
+          >
             <FileList />
           </div>
         ) : (

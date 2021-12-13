@@ -33,11 +33,6 @@ const FileList = () => {
 
     return (
       <div className={styles.filelist}>
-        <div className={styles.header}>
-          <div className={styles.name}>Назва</div>
-          <div className={styles.date}>Дата</div>
-          <div className={styles.size}>Розмір</div>
-        </div>
         <TransitionGroup>{fileList}</TransitionGroup>
       </div>
     );

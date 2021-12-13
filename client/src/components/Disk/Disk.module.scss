@@ -26,6 +26,10 @@
   background-image: url('../../assets/img/plate.svg');
 }
 
+.filePlaceholder {
+  background-color: $background-color-white;
+}
+
 .dropArea {
   width: 100%;
   height: calc(100vh - 50px - 40px);
