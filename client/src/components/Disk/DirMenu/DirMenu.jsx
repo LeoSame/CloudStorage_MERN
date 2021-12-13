@@ -41,7 +41,7 @@ const DirMenu = () => {
   }
 
   function renameHandler() {
-    dispatch(renameFiles(currentDir.id, renameDirName));
+    dispatch(renameFiles(currentDir.id, renameDirName, 'dir'));
     modalRenameHandler();
   }
 

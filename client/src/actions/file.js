@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { API_URL } from '../config';
 import { hideLoader, showLoader } from '../reducers/appReducer';
-import { addFile, deleteFileAction, setFiles, setCurrentDir, addDir } from '../reducers/fileReducer';
+import { addFile, deleteFileAction, setFiles, setCurrentDir, addDir, replaceStack } from '../reducers/fileReducer';
 import { addUploadFile, changeUploadFile, showUploader } from '../reducers/uploadReducer';
 
 export const getFiles = (dirId, sort) => {
@@ -107,7 +107,11 @@ export const downloadFile = async file => {
 export const deleteFile = file => {
   return async dispatch => {
     try {
-      const response = await axios.delete(`${API_URL}api/files?id=${file._id}`, {
+      let url = new URL(`${API_URL}api/files`);
+      url.searchParams.append('fileId', file._id);
+      url.searchParams.append('type', file.type);
+
+      const response = await axios.delete(url.toString(), {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
@@ -141,20 +145,21 @@ export const searchFiles = search => {
   };
 };
 
-export const renameFiles = (id, name) => {
+export const renameFiles = (id, name, type) => {
   return async dispatch => {
     try {
       const response = await axios.post(
         `${API_URL}api/files/rename`,
-        { name, id },
+        { name, id, type },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
-      const file = response.data;
-      dispatch(setCurrentDir({ id: file._id, name: file.name }));
+      const file = { id: response.data._id, name: response.data.name };
+      dispatch(setCurrentDir(file));
+      dispatch(replaceStack(file));
     } catch (e) {
       alert(e?.response?.data?.message);
     }

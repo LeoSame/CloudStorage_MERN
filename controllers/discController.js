@@ -3,30 +3,35 @@ const fs = require('fs');
 const Uuid = require('uuid');
 const User = require('../models/User');
 const File = require('../models/File');
+const Dir = require('../models/Dir');
 
 class FileController {
-  async creqteDir(req, res) {
+  async createDir(req, res) {
     try {
-      const { name, type } = req.body;
+      const { name } = req.body;
+      const userId = req.user.id;
       let parentId = req.body.parent;
 
       if (parentId === 'root') {
         parentId = undefined;
       }
-      const file = new File({ name, type, parent: parentId, user: req.user.id });
-      const parentFile = await File.findOne({ _id: parentId });
-      if (!parentFile) {
-        file.path = name;
-        await fileService.createDir(req, file);
+      const dir = new Dir({ name, parent: parentId, user: userId });
+
+      const parentDir = await Dir.findOne({ _id: parentId, user: userId });
+
+      if (!parentDir) {
+        dir.path = dir._id;
+        await fileService.createDir(req, dir);
       } else {
-        file.path = `${parentFile.path}\\${file.name}`;
-        await fileService.createDir(req, file);
-        parentFile.childs.push(file._id);
-        parentFile.isEmpty = false;
-        await parentFile.save();
+        dir.path = `${parentDir.path}\\${dir._id}`;
+        await fileService.createDir(req, dir);
+        parentDir.childDirs.push(dir._id);
+        parentDir.isEmpty = false;
+        await parentDir.save();
       }
-      await file.save();
-      return res.json(file);
+
+      await dir.save();
+      return res.json(dir);
     } catch (e) {
       console.log(e);
       return res.status(400).json(e);
@@ -42,35 +47,32 @@ class FileController {
         parentId = undefined;
       }
 
+      let dirs;
       let files;
       switch (sort) {
         case 'name':
+          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ name: 1 });
           files = await File.find({ user: req.user.id, parent: parentId }).sort({ name: 1 });
           break;
         case 'type':
+          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ name: 1 });
           files = await File.find({ user: req.user.id, parent: parentId }).sort({ type: 1 });
           break;
         case 'date':
+          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ date: 1 });
           files = await File.find({ user: req.user.id, parent: parentId }).sort({ date: 1 });
           break;
         case 'size':
+          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ size: 1 });
           files = await File.find({ user: req.user.id, parent: parentId }).sort({ size: 1 });
           break;
         default:
+          dirs = await Dir.find({ user: req.user.id, parent: parentId });
           files = await File.find({ user: req.user.id, parent: parentId });
           break;
       }
 
-      let dir = [];
-
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        if (file.type === 'dir') {
-          dir.push(file);
-          delete files[i];
-        }
-      }
-      return res.json([...dir, ...files.filter(x => x)]);
+      return res.json([...dirs, ...files]);
     } catch (e) {
       return res.status(500).json({ message: 'Can not get files' });
     }
@@ -85,7 +87,7 @@ class FileController {
         parentId = undefined;
       }
 
-      const parent = await File.findOne({ user: req.user.id, _id: parentId });
+      const parent = await Dir.findOne({ user: req.user.id, _id: parentId });
       const user = await User.findOne({ _id: req.user.id });
 
       if (user.usedSpace + file.size > user.diskSpace) {
@@ -112,7 +114,6 @@ class FileController {
       if (parent) {
         filePath = parent.path + '\\' + file.name;
         parent.isEmpty = false;
-        await parent.save();
       }
       const dbFile = new File({
         name: file.name,
@@ -123,6 +124,8 @@ class FileController {
         user: user._id,
       });
 
+      parent.childFiles.push(dbFile._id);
+      await parent.save();
       await dbFile.save();
       await user.save();
 
@@ -150,8 +153,13 @@ class FileController {
   async deleteFile(req, res) {
     try {
       const userId = req.user.id;
-      const fileId = req.query.id;
-      const file = await File.findOne({ _id: fileId, user: userId });
+      const { fileId, type } = req.query;
+      let file;
+      if (type === 'dir') {
+        file = await Dir.findOne({ _id: fileId, user: userId });
+      } else {
+        file = await File.findOne({ _id: fileId, user: userId });
+      }
       const parent = file.parent;
 
       if (!file) {
@@ -162,16 +170,18 @@ class FileController {
       await file.remove();
 
       if (parent) {
-        const parentFile = await File.findOne({ _id: parent, user: userId });
+        const parentDir = await Dir.findOne({ _id: parent, user: userId });
 
-        const parentChilds = parentFile.childs.filter(c => c != fileId);
-        parentFile.childs = parentChilds;
+        const parentDirs = parentDir.childDirs.filter(c => c != fileId);
+        parentDir.childDirs = parentDirs;
+        const parentFiles = parentDir.childFiles.filter(c => c != fileId);
+        parentDir.childFiles = parentFiles;
 
-        if (parentFile.childs.length === 0) {
-          parentFile.isEmpty = true;
+        if (parentDir.childDirs.length === 0 && parentDir.childFiles.length === 0) {
+          parentDir.isEmpty = true;
         }
 
-        await parentFile.save();
+        await parentDir.save();
       }
 
       return res.json('File was deleted');
@@ -184,11 +194,17 @@ class FileController {
   async searchFile(req, res) {
     try {
       const searchName = req.query.search.toLowerCase();
+
+      let dirs = await Dir.find({ user: req.user.id });
+      dirs = dirs.filter(dir => {
+        return dir.name.toLowerCase().includes(searchName);
+      });
+
       let files = await File.find({ user: req.user.id });
       files = files.filter(file => {
         return file.name.toLowerCase().includes(searchName);
       });
-      return res.json(files);
+      return res.json([...dirs, ...files]);
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: 'Search error' });
@@ -198,20 +214,27 @@ class FileController {
   async renameFile(req, res) {
     try {
       const userId = req.user.id;
-      const { id, name } = req.body;
-      const file = await File.findOne({ _id: id, user: userId });
+      const { id, name, type } = req.body;
+      if (type === 'dir') {
+        const dir = await Dir.findOne({ _id: id, user: userId });
+        dir.name = name;
+        await dir.save();
 
-      let newFilePath = file.path.split('\\');
-      newFilePath[newFilePath.length - 1] = name;
-      newFilePath = newFilePath.join('\\');
+        return res.json(dir);
+      } else {
+        const file = await File.findOne({ _id: id, user: userId });
+        let newFilePath = file.path.split('\\');
+        newFilePath[newFilePath.length - 1] = name;
+        newFilePath = newFilePath.join('\\');
 
-      fileService.renameFile(req, file, newFilePath);
+        fileService.renameFile(req, file, newFilePath);
 
-      file.name = name;
-      file.path = newFilePath;
-      await file.save();
+        file.name = name;
+        file.path = newFilePath;
+        await file.save();
 
-      return res.json(file);
+        return res.json(file);
+      }
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: 'Rename error' });

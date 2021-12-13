@@ -2,8 +2,8 @@ const fs = require('fs');
 const File = require('../models/File');
 
 class FileService {
-  createDir(req, file) {
-    const filePath = this.getPath(req, file);
+  createDir(req, dir) {
+    const filePath = this.getPath(req, dir);
     return new Promise((resolve, reject) => {
       try {
         if (!fs.existsSync(filePath)) {

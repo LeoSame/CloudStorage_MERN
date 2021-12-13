@@ -1,14 +1,18 @@
 const { model, Schema, ObjectId } = require('mongoose');
 
-const File = new Schema({
+const Dir = new Schema({
   name: { type: String, required: true },
-  type: { type: String, required: true },
+  type: { type: String, default: 'dir' },
   accessLink: { type: String },
+  isEmpty: { type: Boolean, default: true },
+  sizes: { type: Array, default: [] },
   size: { type: Number, default: 0 },
   path: { type: String, default: '' },
   date: { type: Date, default: Date.now() },
   user: { type: ObjectId, ref: 'User' },
   parent: { type: ObjectId, ref: 'Dir' },
+  childDirs: [{ type: ObjectId, ref: 'Dir' }],
+  childFiles: [{ type: ObjectId, ref: 'File' }],
 });
 
-module.exports = model('File', File);
+module.exports = model('Dir', Dir);

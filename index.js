@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const config = require('config');
 const userRouter = require('./routes/user.routes');
-const fileRouter = require('./routes/file.routes');
+const discRouter = require('./routes/disc.routes');
 const app = express();
 const PORT = process.env.PORT || config.get('serverPort');
 const corsMiddleware = require('./middleware/cors.middleware');
@@ -18,7 +18,7 @@ app.use(express.static('static'));
 app.use(express.static(path.resolve(__dirname, 'client', 'build')));
 
 app.use('/api/auth', userRouter);
-app.use('/api/files', fileRouter);
+app.use('/api/files', discRouter);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
