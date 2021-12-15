@@ -5,6 +5,7 @@ import styles from './Modal.module.scss';
 
 const Modal = ({ children, title, modalHandler, confirmBtn, cancelBtn, confirmAction, confirmDisabled }) => {
   const [opacityStyle, setOpacityStyle] = useState({});
+  const [mouseDownContant, setMouseDownContant] = useState(false);
 
   setTimeout(() => {
     setOpacityStyle({ visibility: 'visible', opacity: 1 });
@@ -22,8 +23,23 @@ const Modal = ({ children, title, modalHandler, confirmBtn, cancelBtn, confirmAc
   }
 
   return (
-    <div className={styles.modalFade} onClick={() => closeModal()} style={opacityStyle}>
-      <div className={styles.content} onClick={event => event.stopPropagation()}>
+    <div
+      className={styles.modalFade}
+      onClick={() => {
+        if (!mouseDownContant) {
+          closeModal();
+        } else {
+          setMouseDownContant(false);
+        }
+      }}
+      style={opacityStyle}
+    >
+      <div
+        className={styles.content}
+        onClick={event => event.stopPropagation()}
+        onMouseDown={() => setMouseDownContant(true)}
+        onMouseUp={() => setMouseDownContant(false)}
+      >
         <div className={styles.close}>{closeLogo(closeModal)}</div>
         <header>
           <h3 className={styles.title}>{title}</h3>
