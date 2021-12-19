@@ -50,6 +50,7 @@ class UserController {
           diskSpace: user.diskSpace,
           usedSpace: user.usedSpace,
           avatar: user.avatar,
+          gender: user.gender,
         },
       });
     } catch (e) {
@@ -70,6 +71,7 @@ class UserController {
           diskSpace: user.diskSpace,
           usedSpace: user.usedSpace,
           avatar: user.avatar,
+          gender: user.gender,
         },
       });
     } catch (e) {
