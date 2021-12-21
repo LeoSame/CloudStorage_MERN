@@ -5,7 +5,6 @@ const Dir = new Schema({
   type: { type: String, default: 'dir' },
   accessLink: { type: String },
   isEmpty: { type: Boolean, default: true },
-  sizes: { type: Array, default: [] },
   size: { type: Number, default: 0 },
   path: { type: String, default: '' },
   date: { type: Date, default: Date.now() },
