@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../../reducers/userReducer';
@@ -7,11 +7,14 @@ import { avatarDefault } from '../../../assets/img/avatarDefault.jsx';
 import { avatarWoman } from '../../../assets/img/avatarWoman.jsx';
 import { avatarMan } from '../../../assets/img/avatarMan.jsx';
 import styles from './UserTool.module.scss';
+import DropBar from '../../../elements/NavBar/DropBar';
 
 const UserTool = () => {
   const isAuth = useSelector(state => state.user.isAuth);
   const currentUser = useSelector(state => state.user.currentUser);
   const dispatch = useDispatch();
+  const [visibleDropBar, setVisibleDropBar] = useState(false);
+
   let avatarLogo = null;
 
   if (currentUser.gender === 'woman') {
@@ -31,13 +34,24 @@ const UserTool = () => {
           <div className={styles.link} onClick={() => dispatch(logout())}>
             Вихід
           </div>
-          <NavLink to='/profile'>
+          <div className={styles.dropBar}>
             {currentUser.avatar ? (
               <img className={styles.avatar} src={API_URL + currentUser.avatar} alt='Avatar' />
             ) : (
-              <div className={styles.avatarLogo}>{avatarLogo}</div>
+              <div
+                className={styles.avatarLogo}
+                onClick={e => {
+                  if (!visibleDropBar) {
+                    e.stopPropagation();
+                    setVisibleDropBar(true);
+                  }
+                }}
+              >
+                {avatarLogo}
+              </div>
             )}
-          </NavLink>
+            <DropBar visible={visibleDropBar} width={280} setVisibleDropBar={setVisibleDropBar} />
+          </div>
         </div>
       ) : (
         <div className={styles.user}>
@@ -47,9 +61,9 @@ const UserTool = () => {
           <NavLink className={styles.link} to='/login'>
             Вхід
           </NavLink>
-          <NavLink to='/profile'>
+          <div>
             <div className={styles.avatarLogo}>{avatarLogo}</div>
-          </NavLink>
+          </div>
         </div>
       )}
     </div>
