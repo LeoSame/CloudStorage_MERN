@@ -1,0 +1,51 @@
+@import '../../../utils/colors';
+@import '../../../utils/media.scss';
+
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  margin-right: 20px;
+  cursor: pointer;
+  color: $background-color-white;
+  font-size: 0.9rem;
+  @media (min-width: $mobMin) and (max-width: $mobMax) {
+    font-size: 0.8rem;
+  }
+}
+
+.dropBar {
+  position: relative;
+}
+
+.avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  @media (min-width: $tabMin) and (max-width: $tabMax) {
+    width: 35px;
+    height: 35px;
+  }
+  @media (max-width: $mobMax) {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.avatarLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    border-radius: 25px;
+    width: 45px;
+    height: 45px;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 65px - 40px);
+  min-height: calc(100vh - 60px - 40px - 80px - 20px - 20px);
 }
 
 .lds {

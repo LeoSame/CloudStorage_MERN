@@ -4,6 +4,7 @@ const Uuid = require('uuid');
 const User = require('../models/User');
 const File = require('../models/File');
 const Dir = require('../models/Dir');
+const { getPath } = require('../services/fileService');
 
 class DiscController {
   async createDir(req, res) {
@@ -71,10 +72,9 @@ class DiscController {
           files = await File.find({ user: req.user.id, parent: parentId });
           break;
       }
-
       return res.json([...dirs, ...files]);
     } catch (e) {
-      return res.status(500).json({ message: 'Can not get files' });
+      return res.status(500).json({ e, message: 'Can not get files' });
     }
   }
 
@@ -87,7 +87,7 @@ class DiscController {
         parentId = undefined;
       }
 
-      const parent = await Dir.findOne({ user: req.user.id, _id: parentId });
+      let parent = await Dir.findOne({ user: req.user.id, _id: parentId });
       const user = await User.findOne({ _id: req.user.id });
 
       if (user.usedSpace + file.size > user.diskSpace) {
@@ -110,22 +110,24 @@ class DiscController {
 
       const type = file.name.split('.').pop();
 
-      let filePath = file.name;
-      if (parent) {
-        filePath = parent.path + '\\' + file.name;
-        parent.isEmpty = false;
-      }
       const dbFile = new File({
         name: file.name,
         type,
         size: file.size,
-        path: filePath,
         parent: parent ? parent._id : null,
         user: user._id,
       });
 
-      parent.childFiles.push(dbFile._id);
-      await parent.save();
+      if (parent) {
+        dbFile.path = parent.path + '\\' + file.name;
+
+        parent.isEmpty = false;
+        parent.childFiles.push(dbFile._id);
+        await parent.save();
+      } else {
+        dbFile.path = file.name;
+      }
+
       await dbFile.save();
       await user.save();
 
