@@ -14,13 +14,13 @@ class UserController {
       if (!errors.isEmpty()) {
         return res.status(400).json({ message: 'Uncorrect request', errors });
       }
-      const { email, password } = req.body;
+      const { email, password, fullName } = req.body;
       const candidate = await User.findOne({ email });
       if (candidate) {
         return res.status(400).json({ message: `User with email ${email} already exist` });
       }
       const hashPassword = await bcrypt.hash(password, 8);
-      const user = new User({ email, password: hashPassword });
+      const user = new User({ email, password: hashPassword, fullName });
       await user.save();
       await fileService.createDir(req, new File({ user: user.id, name: '' }));
       res.json({ message: 'User was created' });
@@ -47,6 +47,7 @@ class UserController {
         user: {
           id: user.id,
           email: user.email,
+          fullName: user.fullName,
           diskSpace: user.diskSpace,
           usedSpace: user.usedSpace,
           avatar: user.avatar,
@@ -68,6 +69,7 @@ class UserController {
         user: {
           id: user.id,
           email: user.email,
+          fullName: user.fullName,
           diskSpace: user.diskSpace,
           usedSpace: user.usedSpace,
           avatar: user.avatar,

@@ -7,7 +7,7 @@ import { avatarDefault } from '../../../assets/img/avatarDefault.jsx';
 import { avatarWoman } from '../../../assets/img/avatarWoman.jsx';
 import { avatarMan } from '../../../assets/img/avatarMan.jsx';
 import styles from './UserTool.module.scss';
-import DropBar from '../../../elements/NavBar/DropBar';
+import UserBar from './UserBar/UserBar';
 
 const UserTool = () => {
   const isAuth = useSelector(state => state.user.isAuth);
@@ -50,7 +50,7 @@ const UserTool = () => {
                 {avatarLogo}
               </div>
             )}
-            <DropBar visible={visibleDropBar} width={280} setVisibleDropBar={setVisibleDropBar} />
+            <UserBar visibleDropBar={visibleDropBar} setVisibleDropBar={setVisibleDropBar} avatarLogo={avatarLogo} />
           </div>
         </div>
       ) : (

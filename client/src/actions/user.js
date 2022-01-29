@@ -3,11 +3,12 @@ import { API_URL } from '../config';
 import { hideLoader, showLoader } from '../reducers/appReducer';
 import { setUser } from '../reducers/userReducer';
 
-export const registration = async (email, password) => {
+export const registration = async (email, password, fullName) => {
   try {
     const response = await axios.post(`${API_URL}api/auth/registration`, {
       email,
       password,
+      fullName,
     });
     console.log(response.data.message);
   } catch (e) {

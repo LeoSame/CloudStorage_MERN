@@ -12,13 +12,6 @@ const DropBar = ({ children, width, visible, setVisibleDropBar }) => {
     <div className={`${styles.bar} ${visible && styles.active}`} onClick={e => e.stopPropagation()}>
       <div className={styles.arrow}></div>
       <nav style={{ width: width }} className={styles.menu}>
-        <ul>
-          <li>Личные данные</li>
-          <li>Заказы</li>
-          <li>Список желаний</li>
-          <li>Админ панель</li>
-          <li>Выйти</li>
-        </ul>
         {children}
       </nav>
     </div>
