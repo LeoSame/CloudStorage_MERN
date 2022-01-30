@@ -36,15 +36,24 @@
   border-radius: 4px;
   right: -40%;
 
-  & li {
+  & a,
+  li > span {
+    text-decoration: none;
     color: $font-color-thirty;
     font-size: 14px;
     padding: 8px 16px;
     cursor: pointer;
+    height: 40px;
+    display: flex;
+    align-items: center;
     transition: background-color 0.3s, color 0.3s;
+
     &:hover {
       background-color: $background-color-thirty;
       color: $background-color-primary;
+      & * {
+        stroke: $background-color-primary;
+      }
     }
   }
 }
