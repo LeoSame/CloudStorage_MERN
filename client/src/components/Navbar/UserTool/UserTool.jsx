@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../../reducers/userReducer';
+import { useSelector } from 'react-redux';
 import { API_URL } from '../../../config';
 import { avatarDefault } from '../../../assets/img/avatarDefault.jsx';
 import { avatarWoman } from '../../../assets/img/avatarWoman.jsx';
@@ -12,7 +11,6 @@ import UserBar from './UserBar/UserBar';
 const UserTool = () => {
   const isAuth = useSelector(state => state.user.isAuth);
   const currentUser = useSelector(state => state.user.currentUser);
-  const dispatch = useDispatch();
   const [visibleDropBar, setVisibleDropBar] = useState(false);
 
   let avatarLogo = null;
@@ -31,9 +29,6 @@ const UserTool = () => {
     <div>
       {isAuth ? (
         <div className={styles.user}>
-          <div className={styles.link} onClick={() => dispatch(logout())}>
-            Вихід
-          </div>
           <div className={styles.dropBar}>
             {currentUser.avatar ? (
               <img className={styles.avatar} src={API_URL + currentUser.avatar} alt='Avatar' />
@@ -41,9 +36,12 @@ const UserTool = () => {
               <div
                 className={styles.avatarLogo}
                 onClick={e => {
+                  document.onclick();
                   if (!visibleDropBar) {
                     e.stopPropagation();
                     setVisibleDropBar(true);
+                  } else {
+                    setVisibleDropBar(false);
                   }
                 }}
               >

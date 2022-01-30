@@ -1,14 +1,23 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import DropBar from '../../../../elements/NavBar/DropBar';
 import sizeFormat from '../../../../utils/sizeFormat';
+import { dir } from '../../../../assets/img/userBar/dir';
+import { score } from '../../../../assets/img/userBar/score';
+import { tarif } from '../../../../assets/img/userBar/tarif';
+import { settings } from '../../../../assets/img/userBar/settings';
+import { lang } from '../../../../assets/img/userBar/lang';
+import { goOut } from '../../../../assets/img/userBar/goOut';
+import { logout } from '../../../../reducers/userReducer';
 import styles from './UserBar.module.scss';
 
 const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
+  const dispatch = useDispatch();
   const currentUser = useSelector(state => state.user.currentUser);
   return (
     <DropBar visible={visibleDropBar} width={280} setVisibleDropBar={setVisibleDropBar}>
-      <ul className={styles.menu}>
+      <ul>
         <li className={styles.userInfo}>
           <section>
             <div className={styles.flexContainer}>
@@ -20,12 +29,48 @@ const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
             </p>
           </section>
         </li>
-        <li>Мої файли</li>
-        <li>Поповнити рахунок</li>
-        <li>Тарифи</li>
-        <li>Налаштування</li>
-        <li>Мова</li>
-        <li>Вийти</li>
+        <li>
+          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
+            {dir()}
+            <span className={styles.menuText}>Мої файли</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
+            {score()}
+            <span className={styles.menuText}>Поповнити рахунок</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
+            {tarif()}
+            <span className={styles.menuText}>Тарифи</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={styles.menuLink} to='/account' onClick={() => setVisibleDropBar(false)}>
+            {settings()}
+            <span className={styles.menuText}>Налаштування</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
+            {lang()}
+            <span className={styles.menuText}>Мова</span>
+          </NavLink>
+        </li>
+        <li className={styles.goOut}>
+          <span
+            className={styles.menuLink}
+            onClick={() => {
+              dispatch(logout());
+              setVisibleDropBar(false);
+            }}
+          >
+            {goOut()}
+            <span className={styles.menuText}>Вийти</span>
+          </span>
+        </li>
       </ul>
     </DropBar>
   );
