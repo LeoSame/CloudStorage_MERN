@@ -36,9 +36,12 @@ const UserTool = () => {
               <div
                 className={styles.avatarLogo}
                 onClick={e => {
+                  document.onclick();
                   if (!visibleDropBar) {
                     e.stopPropagation();
                     setVisibleDropBar(true);
+                  } else {
+                    setVisibleDropBar(false);
                   }
                 }}
               >

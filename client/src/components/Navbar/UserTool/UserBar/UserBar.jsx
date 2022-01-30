@@ -9,15 +9,15 @@ import { tarif } from '../../../../assets/img/userBar/tarif';
 import { settings } from '../../../../assets/img/userBar/settings';
 import { lang } from '../../../../assets/img/userBar/lang';
 import { goOut } from '../../../../assets/img/userBar/goOut';
-import styles from './UserBar.module.scss';
 import { logout } from '../../../../reducers/userReducer';
+import styles from './UserBar.module.scss';
 
 const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.user.currentUser);
   return (
     <DropBar visible={visibleDropBar} width={280} setVisibleDropBar={setVisibleDropBar}>
-      <ul className={styles.menu}>
+      <ul>
         <li className={styles.userInfo}>
           <section>
             <div className={styles.flexContainer}>
@@ -30,39 +30,45 @@ const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
           </section>
         </li>
         <li>
-          <NavLink className={styles.logoLink} to='/'>
+          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
             {dir()}
-            <span className={styles.itemText}>Мої файли</span>
+            <span className={styles.menuText}>Мої файли</span>
           </NavLink>
         </li>
         <li>
-          <NavLink className={styles.logoLink} to='/'>
+          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
             {score()}
-            <span className={styles.itemText}>Поповнити рахунок</span>
+            <span className={styles.menuText}>Поповнити рахунок</span>
           </NavLink>
         </li>
         <li>
-          <NavLink className={styles.logoLink} to='/'>
+          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
             {tarif()}
-            <span className={styles.itemText}>Тарифи</span>
+            <span className={styles.menuText}>Тарифи</span>
           </NavLink>
         </li>
         <li>
-          <NavLink className={styles.logoLink} to='/'>
+          <NavLink className={styles.menuLink} to='/account' onClick={() => setVisibleDropBar(false)}>
             {settings()}
-            <span className={styles.itemText}>Налаштування</span>
+            <span className={styles.menuText}>Налаштування</span>
           </NavLink>
         </li>
         <li>
-          <NavLink className={styles.logoLink} to='/'>
+          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
             {lang()}
-            <span className={styles.itemText}>Мова</span>
+            <span className={styles.menuText}>Мова</span>
           </NavLink>
         </li>
         <li className={styles.goOut}>
-          <span className={styles.logoLink} onClick={() => dispatch(logout())}>
+          <span
+            className={styles.menuLink}
+            onClick={() => {
+              dispatch(logout());
+              setVisibleDropBar(false);
+            }}
+          >
             {goOut()}
-            <span className={styles.itemText}>Вийти</span>
+            <span className={styles.menuText}>Вийти</span>
           </span>
         </li>
       </ul>
