@@ -10,7 +10,6 @@ import Container from '../../../elements/Container/Container.jsx';
 import Input from '../../../elements/Input/Input.jsx';
 import Modal from '../../../elements/Modal/Modal.jsx';
 import { setModalCreateDirOpen, setModalRenameOpen } from '../../../reducers/appReducer.js';
-import FileSearch from '../FileSearch/FileSearch.jsx';
 import styles from './DirMenu.module.scss';
 
 const DirMenu = () => {
@@ -19,7 +18,6 @@ const DirMenu = () => {
   const modalRenameOpen = useSelector(state => state.app.modalRenameOpen);
   const [createDirName, setCreateDirName] = useState('');
   const [renameDirName, setRenameDirName] = useState(currentDir.name);
-  const isAuth = useSelector(state => state.user.isAuth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -66,7 +64,6 @@ const DirMenu = () => {
                 )}
               </h2>
             </div>
-            {isAuth && <FileSearch />}
           </div>
           <div className={styles.controls}>
             <Button className={styles.btn} variant='outline' onClick={() => modalCreateHandler()}>

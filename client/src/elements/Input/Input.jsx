@@ -4,6 +4,7 @@ import './Input.module.scss';
 const Input = props => {
   return (
     <input
+      className='input'
       onChange={event => props.setValue(event.target.value)}
       value={props.value}
       type={props.type}

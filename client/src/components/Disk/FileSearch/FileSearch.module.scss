@@ -1,8 +1,13 @@
 @import '../../../utils/media.scss';
 
+.container {
+  position: relative;
+}
+
 .fileSearch {
   width: 300px;
   margin-left: 30px;
+  height: 30px;
 
   @media (min-width: $deskMin) and (max-width: $deskMax) {
     width: 250px;
@@ -12,4 +17,10 @@
     width: 150px;
     margin-left: 10px;
   }
+}
+
+.button {
+  position: absolute;
+  right: 0;
+  top: calc(50% - 12px);
 }
