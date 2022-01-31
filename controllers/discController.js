@@ -42,6 +42,7 @@ class DiscController {
   async getFiles(req, res) {
     try {
       const sort = req.query.sort;
+      const sortBy = req.query.sortby;
       let parentId = req.query.parent;
 
       if (parentId === 'root') {
@@ -52,20 +53,20 @@ class DiscController {
       let files;
       switch (sort) {
         case 'name':
-          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ name: 1 });
-          files = await File.find({ user: req.user.id, parent: parentId }).sort({ name: 1 });
+          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ name: sortBy });
+          files = await File.find({ user: req.user.id, parent: parentId }).sort({ name: sortBy });
           break;
         case 'type':
-          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ name: 1 });
-          files = await File.find({ user: req.user.id, parent: parentId }).sort({ type: 1 });
+          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ type: sortBy });
+          files = await File.find({ user: req.user.id, parent: parentId }).sort({ type: sortBy });
           break;
         case 'date':
-          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ date: 1 });
-          files = await File.find({ user: req.user.id, parent: parentId }).sort({ date: 1 });
+          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ date: sortBy });
+          files = await File.find({ user: req.user.id, parent: parentId }).sort({ date: sortBy });
           break;
         case 'size':
-          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ size: 1 });
-          files = await File.find({ user: req.user.id, parent: parentId }).sort({ size: 1 });
+          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ size: sortBy });
+          files = await File.find({ user: req.user.id, parent: parentId }).sort({ size: sortBy });
           break;
         default:
           dirs = await Dir.find({ user: req.user.id, parent: parentId });

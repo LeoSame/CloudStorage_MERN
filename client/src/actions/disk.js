@@ -4,7 +4,7 @@ import { hideLoader, showLoader } from '../reducers/appReducer';
 import { addFile, deleteFileAction, setFiles, setCurrentDir, addDir, replaceStack } from '../reducers/fileReducer';
 import { addUploadFile, changeUploadFile, showUploader } from '../reducers/uploadReducer';
 
-export const getFiles = (dirId, sort) => {
+export const getFiles = (dirId, sort, sortBy) => {
   return async dispatch => {
     try {
       dispatch(showLoader());
@@ -15,6 +15,11 @@ export const getFiles = (dirId, sort) => {
       }
       if (sort) {
         url.searchParams.append('sort', sort);
+        if (sortBy) {
+          url.searchParams.append('sortby', sortBy);
+        } else {
+          url.searchParams.append('sortby', 1);
+        }
       }
 
       const response = await axios.get(url.toString(), {

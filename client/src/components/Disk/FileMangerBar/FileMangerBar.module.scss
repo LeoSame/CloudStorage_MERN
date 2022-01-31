@@ -1,0 +1,52 @@
+@import '../../../utils/colors';
+
+.fileManagerBar {
+  padding: 12px 0;
+  height: 30px;
+  border-bottom: 1px solid $line-color;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controlFiles {
+  display: flex;
+  align-items: center;
+}
+
+.select {
+  width: 200px;
+  padding: 4px 8px;
+  font-weight: 400;
+  border: $font-color-thirty solid 1px;
+  border-radius: 3px;
+  color: $font-color-primary;
+  font-weight: 400;
+  &:focus {
+    outline: none;
+    border-color: $button-background;
+  }
+}
+
+.button {
+  border: none;
+  background: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+  margin: 0 5px;
+  width: 24px;
+  & path {
+    transition: all 0.3s ease-out;
+  }
+  &:hover path[fill],
+  :hover g[fill-rule='nonzero'] {
+    fill: $font-color-primary;
+  }
+
+  &:hover path[stroke] {
+    stroke: $font-color-primary;
+  }
+}
