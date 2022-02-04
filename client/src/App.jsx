@@ -8,6 +8,7 @@ import { auth } from './actions/user';
 import Disk from './components/Disk/Disk';
 import Account from './components/Account/Account';
 import './App.scss';
+import Home from './components/Home/Home';
 
 function App() {
   const isAuth = useSelector(state => state.user.isAuth);
@@ -20,19 +21,22 @@ function App() {
     <BrowserRouter>
       <div className='app'>
         <Navbar />
-        {!isAuth ? (
-          <Switch>
-            <Route path='/registration' component={Registration} />
-            <Route path='/login' component={Login} />
-            <Redirect to='/login' />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route exact path='/files' component={Disk} />
-            <Route exact path='/account' component={Account} />
-            <Redirect to='/files' />
-          </Switch>
-        )}
+        <Switch>
+          <Route exact path='/' component={Home} />
+          {!isAuth ? (
+            <Switch>
+              <Route path='/registration' component={Registration} />
+              <Route path='/login' component={Login} />
+            </Switch>
+          ) : (
+            <Switch>
+              <Route exact path='/files' component={Disk} />
+              <Route exact path='/files/:folderId' component={Disk} />
+              <Route exact path='/account' component={Account} />
+            </Switch>
+          )}
+          <Redirect to='/' />
+        </Switch>
       </div>
     </BrowserRouter>
   );

@@ -30,7 +30,7 @@ const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
           </section>
         </li>
         <li>
-          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
+          <NavLink className={styles.menuLink} to='/files' onClick={() => setVisibleDropBar(false)}>
             {dir()}
             <span className={styles.menuText}>Мої файли</span>
           </NavLink>
