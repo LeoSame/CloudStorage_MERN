@@ -6,9 +6,9 @@ import FileList from './FileList/FileList';
 import Uploader from './Uploader/Uploader';
 import BreadCrumbs from './BreadCrumbs/BreadCrumbs';
 import Container from '../../elements/Container/Container';
-import styles from './Disk.module.scss';
 import DirMenu from './DirMenu/DirMenu';
 import FileMangerBar from './FileMangerBar/FileMangerBar';
+import styles from './Disk.module.scss';
 
 const Disk = () => {
   const dispatch = useDispatch();
