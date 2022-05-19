@@ -4,9 +4,28 @@ const Uuid = require('uuid');
 const User = require('../models/User');
 const File = require('../models/File');
 const Dir = require('../models/Dir');
+const FilesCount = require('../models/FilesCount');
 const { getPath } = require('../services/fileService');
 
 class DiscController {
+  async getFilesCount(req, res) {
+    try {
+      let filesCount = await FilesCount.findOne();
+      if (!filesCount) {
+        filesCount = new FilesCount({ filesCount: 1234567891 });
+      } else {
+        const random = Math.floor(Math.random() * (15 - 1) + 1);
+        filesCount.filesCount += random;
+      }
+
+      await filesCount.save();
+      return res.json(filesCount);
+    } catch (e) {
+      console.log(e);
+      return res.status(400).json(e);
+    }
+  }
+
   async createDir(req, res) {
     try {
       const { name } = req.body;

@@ -1,8 +1,27 @@
 import axios from 'axios';
 import { API_URL } from '../config';
 import { hideLoader, showLoader } from '../reducers/appReducer';
-import { addFile, deleteFileAction, setFiles, setCurrentDir, addDir, replaceStack } from '../reducers/fileReducer';
+import {
+  addFile,
+  deleteFileAction,
+  setFiles,
+  setCurrentDir,
+  addDir,
+  replaceStack,
+  setFilesCount,
+} from '../reducers/fileReducer';
 import { addUploadFile, changeUploadFile, showUploader } from '../reducers/uploadReducer';
+
+export const getFilesCount = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`${API_URL}api/files/files-count`);
+      dispatch(setFilesCount(response.data.filesCount));
+    } catch (e) {
+      console.log(e.response.data.message);
+    }
+  };
+};
 
 export const getFiles = (dirId, sort, sortBy) => {
   return async dispatch => {

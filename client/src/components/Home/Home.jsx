@@ -1,6 +1,7 @@
 import React from 'react';
 import { videoAbout } from '../../assets/img/videoAbout';
 import Container from '../../elements/Container/Container';
+import Counter from './Counter/Counter';
 import styles from './Home.module.scss';
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
             <div className={styles.video__content}>Про проект</div>
           </div>
           <h1 className={styles.title}>Сервіс збереження та передачі файлів</h1>
+          <Counter />
         </div>
       </Container>
     </section>
