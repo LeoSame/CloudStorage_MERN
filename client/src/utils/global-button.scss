@@ -1,7 +1,7 @@
-@import '../../utils/colors.scss';
-@import '../../utils/media.scss';
+@import './colors.scss';
+@import './media.scss';
 
-.button {
+.global-button {
   cursor: pointer;
   padding: 0 16px;
   height: 40px;
@@ -12,7 +12,7 @@
   color: $button-color;
   background: $button-background;
 
-  &:hover {
+  &:not([disabled]):hover {
     background-color: $button-background-hover;
   }
 
@@ -23,10 +23,6 @@
   &:disabled {
     opacity: 0.5;
     cursor: initial;
-
-    &:hover {
-      background: $button-background;
-    }
   }
 
   @media (min-width: $deskMin) and (max-width: $deskMax) {
@@ -41,11 +37,20 @@
   }
 }
 
-.outline {
+.global-btn-black {
+  background-color: $background-color-secondary;
+  color: white;
+
+  &:not([disabled]):hover {
+    background-color: $font-color-primary;
+  }
+}
+
+.global-btn-outline {
   color: $button-outline-color;
   background: $button-outline-background;
 
-  &:hover {
+  &:not([disabled]):hover {
     background-color: $button-outline-background-hover;
   }
 
@@ -55,15 +60,14 @@
 
   &:disabled:hover {
     opacity: 0.5;
-    background: $button-background;
   }
 }
 
-.drop {
+.global-btn-drop {
   color: $button-color;
   background-color: $error-color;
 
-  &:hover {
+  &:not([disabled]):hover {
     opacity: 0.8;
     background-color: $error-color;
   }
@@ -74,6 +78,5 @@
 
   &:disabled:hover {
     opacity: 0.5;
-    background: $error-color;
   }
 }

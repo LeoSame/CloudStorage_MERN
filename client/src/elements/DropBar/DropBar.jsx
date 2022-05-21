@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 import styles from './DropBar.module.scss';
 
 const DropBar = ({ children, width, visible, setVisibleDropBar }) => {
@@ -24,5 +25,14 @@ const DropBar = ({ children, width, visible, setVisibleDropBar }) => {
     </div>
   );
 };
+
+DropBar.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
+  visible: PropTypes.bool.isRequired,
+  setVisibleDropBar: PropTypes.func.isRequired,
+  width: PropTypes.number,
+};
+
+DropBar.defaultProps = { width: 200 };
 
 export default DropBar;

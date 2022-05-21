@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import DropBar from '../../../../elements/NavBar/DropBar';
+import DropBar from '../../../../elements/DropBar/DropBar';
 import sizeFormat from '../../../../utils/sizeFormat';
 import { dir } from '../../../../assets/img/userBar/dir';
 import { score } from '../../../../assets/img/userBar/score';
@@ -74,6 +75,12 @@ const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
       </ul>
     </DropBar>
   );
+};
+
+UserBar.propTypes = {
+  visibleDropBar: PropTypes.bool.isRequired,
+  setVisibleDropBar: PropTypes.func.isRequired,
+  avatarLogo: PropTypes.object.isRequired,
 };
 
 export default UserBar;

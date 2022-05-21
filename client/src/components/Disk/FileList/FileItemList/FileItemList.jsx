@@ -12,7 +12,7 @@ import { share } from '../../../../assets/img/fileMenu/share.jsx';
 import { copy } from '../../../../assets/img/fileMenu/copy.jsx';
 import { dots } from '../../../../assets/img/fileMenu/dots.jsx';
 import { deleteFileIco } from '../../../../assets/img/fileMenu/deleteFile.jsx';
-import DropBar from '../../../../elements/NavBar/DropBar.jsx';
+import DropBar from '../../../../elements/DropBar/DropBar.jsx';
 import { move } from '../../../../assets/img/fileMenu/move.jsx';
 import { rename } from '../../../../assets/img/fileMenu/rename.jsx';
 

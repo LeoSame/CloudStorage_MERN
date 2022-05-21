@@ -65,7 +65,7 @@ const Disk = () => {
             onDragLeave={dragLeaveHandler}
             onDragOver={dragEnterHandler}
           >
-            Перетащите файлы сюда
+            Перетягніть файли сюди
           </div>
         )}
         <Uploader />

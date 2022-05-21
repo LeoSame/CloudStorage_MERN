@@ -3,6 +3,7 @@ import Input from '../../elements/Input/Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../actions/user';
 import Loader from '../../elements/Loader/Loader';
+import Button from '../../elements/Button/Button';
 import styles from './Authorization.module.scss';
 
 const Login = () => {
@@ -20,6 +21,9 @@ const Login = () => {
       <div className={styles.header}>Авторизація</div>
       <Input value={email} setValue={setEmail} type='text' placeholder='Введіть email...' />
       <Input value={password} setValue={setPassword} type='password' placeholder='Введіть пароль...' />
+      <Button variant='black' className={styles.btn} onClick={() => dispatch(login(email, password))}>
+        Увійти
+      </Button>
       <button className={styles.btn} onClick={() => dispatch(login(email, password))}>
         Увійти
       </button>

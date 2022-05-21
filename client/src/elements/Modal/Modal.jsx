@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { closeLogo } from '../../assets/img/closeLogo';
 import Button from '../Button/Button';
 import styles from './Modal.module.scss';
@@ -7,12 +8,9 @@ const Modal = ({ children, title, modalHandler, confirmBtn, cancelBtn, confirmAc
   const [opacityStyle, setOpacityStyle] = useState({});
   const [mouseDownContant, setMouseDownContant] = useState(false);
 
-  setTimeout(() => {
-    setOpacityStyle({ visibility: 'visible', opacity: 1 });
-  }, 10);
-
   useEffect(() => {
     document.body.classList.add('lock');
+    setOpacityStyle({ visibility: 'visible', opacity: 1 });
     return function cleanup() {
       document.body.classList.remove('lock');
     };
@@ -61,5 +59,17 @@ const Modal = ({ children, title, modalHandler, confirmBtn, cancelBtn, confirmAc
     </div>
   );
 };
+
+Modal.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
+  title: PropTypes.string.isRequired,
+  modalHandler: PropTypes.func.isRequired,
+  confirmAction: PropTypes.func,
+  confirmBtn: PropTypes.string,
+  cancelBtn: PropTypes.string,
+  confirmDisabled: PropTypes.bool,
+};
+
+Modal.defaultProps = { confirmAction: e => e, confirmBtn: undefined, cancelBtn: undefined, confirmDisabled: false };
 
 export default Modal;
