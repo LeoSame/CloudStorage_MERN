@@ -11,9 +11,9 @@ const Registration = () => {
   return (
     <div className={styles.authorization}>
       <div className={styles.header}>Реєстрація</div>
-      <Input value={fullName} setValue={setFullName} type='text' placeholder="Введіть Ваше ім'я..." />
       <Input value={email} setValue={setEmail} type='text' placeholder='Введіть email...' />
       <Input value={password} setValue={setPassword} type='password' placeholder='Введіть пароль...' />
+      <Input value={fullName} setValue={setFullName} type='text' placeholder="Введіть Ваше ім'я..." />
       <button className={styles.btn} onClick={() => registration(email, password, fullName)}>
         Зареєструватись
       </button>

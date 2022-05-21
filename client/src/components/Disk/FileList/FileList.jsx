@@ -1,17 +1,15 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-import File from './File/File';
 import { TransitionGroup } from 'react-transition-group';
 import styles from './FileList.module.scss';
 import Loader from '../../../elements/Loader/Loader';
 import FileItemList from './FileItemList/FileItemList';
+import FileItemPlate from './File/FileItemPlate';
 
 const FileList = () => {
   const files = useSelector(state => state.files.files);
   const fileView = useSelector(state => state.files.view);
   const isLoader = useSelector(state => state.app.loader);
-
-  useEffect(() => {}, [files]);
 
   if (files.length === 0) {
     return <div className={styles.fileNotFound}>Файли не знайдені</div>;
@@ -21,10 +19,10 @@ const FileList = () => {
     return <Loader />;
   }
 
-  // if (fileView === 'plate') {
-  //   const fileList = files.map(file => <File key={file._id} file={file} />);
-  //   return <div className={styles.fileplate}>{fileList}</div>;
-  // }
+  if (fileView === 'plate') {
+    const fileList = files.map(file => <FileItemPlate key={file._id} file={file} />);
+    return <div className={styles.fileplate}>{fileList}</div>;
+  }
 
   // if (fileView === 'list') {
   const fileList = files.map(file => <FileItemList key={file._id} file={file} />);

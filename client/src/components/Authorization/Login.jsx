@@ -21,7 +21,7 @@ const Login = () => {
       <Input value={email} setValue={setEmail} type='text' placeholder='Введіть email...' />
       <Input value={password} setValue={setPassword} type='password' placeholder='Введіть пароль...' />
       <button className={styles.btn} onClick={() => dispatch(login(email, password))}>
-        Войти
+        Увійти
       </button>
     </div>
   );
