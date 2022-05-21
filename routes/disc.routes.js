@@ -10,6 +10,7 @@ router.post('/avatar', authMiddleware, discController.uploadAvatar);
 router.get('', authMiddleware, discController.getFiles);
 router.get('/download', authMiddleware, discController.downloadFile);
 router.get('/search', authMiddleware, discController.searchFile);
+router.get('/files-count', discController.getFilesCount);
 router.delete('/', authMiddleware, discController.deleteFile);
 router.delete('/avatar', authMiddleware, discController.deleteAvatar);
 

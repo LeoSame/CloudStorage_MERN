@@ -3,7 +3,7 @@ import { dirLogo } from '../../../../assets/img/dirLogo.jsx';
 import { fileLogo } from '../../../../assets/img/fileLogo.jsx';
 import { useDispatch } from 'react-redux';
 import { pushToStack, setCurrentDir } from '../../../../reducers/fileReducer';
-import { downloadFile } from '../../../../actions/disk';
+import { deleteFile, downloadFile } from '../../../../actions/disk';
 import sizeFormat from '../../../../utils/sizeFormat';
 import { favorites } from '../../../../assets/img/fileMenu/favorites';
 import styles from './FileItemList.module.scss';
@@ -11,7 +11,7 @@ import { download } from '../../../../assets/img/fileMenu/download.jsx';
 import { share } from '../../../../assets/img/fileMenu/share.jsx';
 import { copy } from '../../../../assets/img/fileMenu/copy.jsx';
 import { dots } from '../../../../assets/img/fileMenu/dots.jsx';
-import { deleteFile } from '../../../../assets/img/fileMenu/deleteFile.jsx';
+import { deleteFileIco } from '../../../../assets/img/fileMenu/deleteFile.jsx';
 import DropBar from '../../../../elements/NavBar/DropBar.jsx';
 import { move } from '../../../../assets/img/fileMenu/move.jsx';
 import { rename } from '../../../../assets/img/fileMenu/rename.jsx';
@@ -37,6 +37,7 @@ const FileItemList = ({ file }) => {
   function deleteClickHandler(e) {
     e.stopPropagation();
     setVisibleDropBar(false);
+    console.log(file);
     dispatch(deleteFile(file));
   }
 
@@ -102,7 +103,7 @@ const FileItemList = ({ file }) => {
                         deleteClickHandler(e);
                       }}
                     >
-                      {deleteFile()}
+                      {deleteFileIco()}
                       <span className={styles.menuText}>Видалити</span>
                     </span>
                   </li>

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
+// import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFiles, uploadFile } from '../../actions/disk';
 import FileList from './FileList/FileList';
 import Uploader from './Uploader/Uploader';
 import BreadCrumbs from './BreadCrumbs/BreadCrumbs';
 import Container from '../../elements/Container/Container';
-import styles from './Disk.module.scss';
 import DirMenu from './DirMenu/DirMenu';
 import FileMangerBar from './FileMangerBar/FileMangerBar';
+import styles from './Disk.module.scss';
 
 const Disk = () => {
   const dispatch = useDispatch();
+  // const params = useParams();
   const currentDir = useSelector(state => state.files.currentDir);
   const [dragEnter, setDragEnter] = useState(false);
   const [sort, setSort] = useState('date');

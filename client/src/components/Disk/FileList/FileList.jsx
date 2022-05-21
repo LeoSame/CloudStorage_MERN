@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import File from './File/File';
 import { TransitionGroup } from 'react-transition-group';
 import styles from './FileList.module.scss';
 import Loader from '../../../elements/Loader/Loader';
 import FileItemList from './FileItemList/FileItemList';
+import FileItemPlate from './File/FileItemPlate';
 
 const FileList = () => {
   const files = useSelector(state => state.files.files);
@@ -20,19 +20,19 @@ const FileList = () => {
   }
 
   if (fileView === 'plate') {
-    const fileList = files.map(file => <File key={file._id} file={file} />);
+    const fileList = files.map(file => <FileItemPlate key={file._id} file={file} />);
     return <div className={styles.fileplate}>{fileList}</div>;
   }
 
-  if (fileView === 'list') {
-    const fileList = files.map(file => <FileItemList key={file._id} file={file} />);
+  // if (fileView === 'list') {
+  const fileList = files.map(file => <FileItemList key={file._id} file={file} />);
 
-    return (
-      <div className={styles.filelist}>
-        <TransitionGroup>{fileList}</TransitionGroup>
-      </div>
-    );
-  }
+  return (
+    <div className={styles.filelist}>
+      <TransitionGroup>{fileList}</TransitionGroup>
+    </div>
+  );
+  // }
 };
 
 export default FileList;
