@@ -24,60 +24,62 @@ const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
   };
   return (
     <DropBar visible={visibleDropBar} width={280} setVisibleDropBar={setVisibleDropBar}>
-      <ul>
-        <li className={styles.userInfo}>
-          <section>
-            <div className={styles.flexContainer}>
-              <div className={styles.avatarLogo}>{avatarLogo}</div>
-              <h4 className={styles.userName}>{currentUser.fullName}</h4>
-            </div>
-            <p className={styles.spaceInfo}>
-              На диску залишилось: <span className={styles.space}>{sizeFormat(currentUser.diskSpace)}</span>
-            </p>
-          </section>
-        </li>
-        <li>
-          <NavLink className={styles.menuLink} to='/files' onClick={() => setVisibleDropBar(false)}>
-            {dir()}
-            <span className={styles.menuText}>Мої файли</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
-            {score()}
-            <span className={styles.menuText}>Поповнити рахунок</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
-            {tarif()}
-            <span className={styles.menuText}>Тарифи</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className={styles.menuLink} to='/account' onClick={() => setVisibleDropBar(false)}>
-            {settings()}
-            <span className={styles.menuText}>Налаштування</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
-            {lang()}
-            <span className={styles.menuText}>Мова</span>
-          </NavLink>
-        </li>
-        <li className={styles.goOut}>
-          <span
-            className={styles.menuLink}
-            onClick={() => {
-              exitOut();
-            }}
-          >
-            {goOut()}
-            <span className={styles.menuText}>Вийти</span>
-          </span>
-        </li>
-      </ul>
+      <nav>
+        <ul>
+          <li className={styles.userInfo}>
+            <section>
+              <div className={styles.flexContainer}>
+                <div className={styles.avatarLogo}>{avatarLogo}</div>
+                <h4 className={styles.userName}>{currentUser.fullName}</h4>
+              </div>
+              <p className={styles.spaceInfo}>
+                На диску залишилось: <span className={styles.space}>{sizeFormat(currentUser.diskSpace)}</span>
+              </p>
+            </section>
+          </li>
+          <li>
+            <NavLink className={styles.menuLink} to='/files' onClick={() => setVisibleDropBar(false)}>
+              {dir()}
+              <span className={styles.menuText}>Мої файли</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
+              {score()}
+              <span className={styles.menuText}>Поповнити рахунок</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
+              {tarif()}
+              <span className={styles.menuText}>Тарифи</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className={styles.menuLink} to='/account' onClick={() => setVisibleDropBar(false)}>
+              {settings()}
+              <span className={styles.menuText}>Налаштування</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
+              {lang()}
+              <span className={styles.menuText}>Мова</span>
+            </NavLink>
+          </li>
+          <li className={styles.goOut}>
+            <span
+              className={styles.menuLink}
+              onClick={() => {
+                exitOut();
+              }}
+            >
+              {goOut()}
+              <span className={styles.menuText}>Вийти</span>
+            </span>
+          </li>
+        </ul>
+      </nav>
     </DropBar>
   );
 };
