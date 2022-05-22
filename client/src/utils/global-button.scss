@@ -37,15 +37,6 @@
   }
 }
 
-.global-btn-black {
-  background-color: $background-color-secondary;
-  color: white;
-
-  &:not([disabled]):hover {
-    background-color: $font-color-primary;
-  }
-}
-
 .global-btn-outline {
   color: $button-outline-color;
   background: $button-outline-background;

@@ -3,7 +3,7 @@ import { API_URL } from '../config';
 import { hideLoader, showLoader } from '../reducers/appReducer';
 import { setUser } from '../reducers/userReducer';
 
-export const registration = async (email, password, fullName) => {
+export const registration = async (email, password, fullName, history) => {
   try {
     const response = await axios.post(`${API_URL}api/auth/registration`, {
       email,
@@ -11,12 +11,13 @@ export const registration = async (email, password, fullName) => {
       fullName,
     });
     console.log(response.data.message);
+    history.push('/login');
   } catch (e) {
     console.log(e.response.data.message);
   }
 };
 
-export const login = (email, password) => {
+export const login = (email, password, history) => {
   return async dispatch => {
     try {
       const response = await axios.post(`${API_URL}api/auth/login`, {
@@ -24,6 +25,7 @@ export const login = (email, password) => {
         password,
       });
       dispatch(setUser(response.data.user));
+      history.push('/files');
       localStorage.setItem('token', response.data.token);
     } catch (e) {
       console.log(e.response.data.message);

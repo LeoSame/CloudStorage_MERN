@@ -11,6 +11,8 @@
   cursor: pointer;
   color: $background-color-white;
   font-size: 0.9rem;
+  text-decoration: none;
+
   @media (min-width: $mobMin) and (max-width: $mobMax) {
     font-size: 0.8rem;
   }

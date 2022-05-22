@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import DropBar from '../../../../elements/DropBar/DropBar';
 import sizeFormat from '../../../../utils/sizeFormat';
 import { dir } from '../../../../assets/img/userBar/dir';
@@ -16,6 +16,12 @@ import styles from './UserBar.module.scss';
 const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.user.currentUser);
+  const history = useHistory();
+  const exitOut = () => {
+    dispatch(logout());
+    setVisibleDropBar(false);
+    history.push('/');
+  };
   return (
     <DropBar visible={visibleDropBar} width={280} setVisibleDropBar={setVisibleDropBar}>
       <ul>
@@ -64,8 +70,7 @@ const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
           <span
             className={styles.menuLink}
             onClick={() => {
-              dispatch(logout());
-              setVisibleDropBar(false);
+              exitOut();
             }}
           >
             {goOut()}
