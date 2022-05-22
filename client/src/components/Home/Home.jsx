@@ -1,5 +1,6 @@
 import React from 'react';
 import { videoAbout } from '../../assets/img/videoAbout';
+import Button from '../../elements/Button/Button';
 import Container from '../../elements/Container/Container';
 import Counter from './Counter/Counter';
 import styles from './Home.module.scss';
@@ -15,6 +16,10 @@ const Home = () => {
           </div>
           <h1 className={styles.title}>Сервіс збереження та передачі файлів</h1>
           <Counter />
+          <div className={styles.file__btns}>
+            <Button className={styles.file__btn}>Передати файли</Button>
+            <Button className={styles.file__btn}>Отримати файли</Button>
+          </div>
         </div>
       </Container>
     </section>
