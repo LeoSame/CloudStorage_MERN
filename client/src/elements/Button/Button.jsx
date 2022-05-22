@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 const Button = ({ variant, onClick, type, className, children, ...props }) => {
   let styleClass = '';
 
-  if (variant === 'black') {
-    styleClass = `global-button global-btn-black`;
-  } else if (variant === 'outline') {
+  if (variant === 'outline') {
     styleClass = `global-button global-btn-outline`;
   } else if (variant === 'drop') {
     styleClass = `global-button global-btn-drop`;

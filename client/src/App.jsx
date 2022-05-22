@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Registration from './components/Authorization/Registration';
-import Login from './components/Authorization/Login';
 import { useDispatch, useSelector } from 'react-redux';
 import { auth } from './actions/user';
 import Disk from './components/Disk/Disk';
 import Account from './components/Account/Account';
 import './App.scss';
 import Home from './components/Home/Home';
+import Authorization from './components/Authorization/Authorization';
 
 function App() {
   const isAuth = useSelector(state => state.user.isAuth);
@@ -24,8 +23,8 @@ function App() {
           <Route exact path='/' component={Home} />
           {!isAuth ? (
             <Switch>
-              <Route path='/registration' component={Registration} />
-              <Route path='/login' component={Login} />
+              <Route path='/registration' component={Authorization} />
+              <Route path='/login' component={Authorization} />
             </Switch>
           ) : (
             <Switch>
