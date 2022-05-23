@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Tooltip from 'react-simple-tooltip';
+import Tooltip from '../../../elements/Tooltip/Tooltip';
 import { API_URL } from '../../../config';
 import { avatarDefault } from '../../../assets/img/avatarDefault.jsx';
 import { avatarWoman } from '../../../assets/img/avatarWoman.jsx';
@@ -53,24 +53,24 @@ const UserTool = () => {
         </div>
       ) : (
         <div className={styles.user}>
+          <div>
+            <Tooltip
+              content='Анонімний користувач'
+              fadeDuration={300}
+              fadeEasing='linear'
+              placement='bottom'
+              radius={5}
+              toolMargin={14}
+            >
+              <div className={styles.avatarLogo}>{avatarLogo}</div>
+            </Tooltip>
+          </div>
           <NavLink className={styles.link} to='/registration'>
             Реєстрація
           </NavLink>
           <NavLink className={styles.link} to='/login'>
             Вхід
           </NavLink>
-          <div>
-            <Tooltip
-              content='Анонімний користувач'
-              fadeDuration={300}
-              fadeEasing='linear'
-              fixed={true}
-              placement='bottom'
-              radius={5}
-            >
-              <div className={styles.avatarLogo}>{avatarLogo}</div>
-            </Tooltip>
-          </div>
         </div>
       )}
     </div>
