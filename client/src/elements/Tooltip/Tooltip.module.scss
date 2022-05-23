@@ -1,0 +1,106 @@
+@import '../../utils/colors.scss';
+
+.tooltip {
+  position: relative;
+}
+
+.baseTool {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.bubble {
+  color: $font-color-secondary;
+  text-align: center;
+  font-size: 12px;
+  background-color: $background-color-secondary;
+  border: 1px solid $background-color-secondary;
+  border-radius: 8px;
+}
+
+.baseArrow {
+  position: absolute;
+  background-color: $background-color-secondary;
+}
+
+.top {
+  .baseTool {
+    bottom: 100%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+  .baseArrow {
+    -webkit-transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
+    transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
+    top: 100%;
+    left: 50%;
+    border-right: 1px solid $background-color-secondary;
+    border-bottom: 1px solid $background-color-secondary;
+  }
+}
+
+.right {
+  .baseTool {
+    left: 100%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  .baseArrow {
+    -webkit-transform: translateX(50%) translateY(-50%) rotateZ(45deg);
+    -ms-transform: translateX(50%) translateY(-50%) rotateZ(45deg);
+    transform: translateX(50%) translateY(-50%) rotateZ(45deg);
+    right: 100%;
+    top: 50%;
+    border-left: 1px solid $background-color-secondary;
+    border-bottom: 1px solid $background-color-secondary;
+  }
+}
+
+.bottom {
+  .baseTool {
+    top: 100%;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+  }
+  .baseArrow {
+    -webkit-transform: translateX(-50%) translateY(50%) rotateZ(45deg);
+    -ms-transform: translateX(-50%) translateY(50%) rotateZ(45deg);
+    transform: translateX(-50%) translateY(50%) rotateZ(45deg);
+    bottom: 100%;
+    left: 50%;
+    border-left: 1px solid $background-color-secondary;
+    border-top: 1px solid $background-color-secondary;
+  }
+}
+
+.left {
+  .baseTool {
+    right: 100%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  .baseArrow {
+    -webkit-transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
+    -ms-transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
+    transform: translateX(-50%) translateY(-50%) rotateZ(45deg);
+    left: 100%;
+    top: 50%;
+    border-right: 1px solid $background-color-secondary;
+    border-top: 1px solid $background-color-secondary;
+  }
+}

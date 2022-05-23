@@ -83,35 +83,37 @@ const FileItemList = ({ file }) => {
             <button className={styles.button}>{dots()}</button>
             {visibleDropBar && (
               <DropBar visible={visibleDropBar} width={200} setVisibleDropBar={setVisibleDropBar}>
-                <ul className={styles.menu}>
-                  <li>
-                    <span className={styles.menuLink}>
-                      {move()}
-                      <span className={styles.menuText}>Перемістити</span>
-                    </span>
-                  </li>
-                  <li>
-                    <span className={styles.menuLink}>
-                      {rename()}
-                      <span className={styles.menuText}>Перейменувати</span>
-                    </span>
-                  </li>
-                  <li>
-                    <span
-                      className={styles.menuLink}
-                      onClick={e => {
-                        deleteClickHandler(e);
-                      }}
-                    >
-                      {deleteFileIco()}
-                      <span className={styles.menuText}>Видалити</span>
-                    </span>
-                  </li>
-                  <li className={styles.fileInfo}>
-                    <div className={styles.dateInfo}>Створено</div>
-                    <div className={styles.date}>{fileDate.toLocaleString()}</div>
-                  </li>
-                </ul>
+                <nav>
+                  <ul className={styles.menu}>
+                    <li>
+                      <span className={styles.menuLink}>
+                        {move()}
+                        <span className={styles.menuText}>Перемістити</span>
+                      </span>
+                    </li>
+                    <li>
+                      <span className={styles.menuLink}>
+                        {rename()}
+                        <span className={styles.menuText}>Перейменувати</span>
+                      </span>
+                    </li>
+                    <li>
+                      <span
+                        className={styles.menuLink}
+                        onClick={e => {
+                          deleteClickHandler(e);
+                        }}
+                      >
+                        {deleteFileIco()}
+                        <span className={styles.menuText}>Видалити</span>
+                      </span>
+                    </li>
+                    <li className={styles.fileInfo}>
+                      <div className={styles.dateInfo}>Створено</div>
+                      <div className={styles.date}>{fileDate.toLocaleString()}</div>
+                    </li>
+                  </ul>
+                </nav>
               </DropBar>
             )}
           </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Tooltip from '../../../elements/Tooltip/Tooltip';
 import { API_URL } from '../../../config';
 import { avatarDefault } from '../../../assets/img/avatarDefault.jsx';
 import { avatarWoman } from '../../../assets/img/avatarWoman.jsx';
@@ -25,6 +26,16 @@ const UserTool = () => {
     avatarLogo = avatarDefault('#afafaf');
   }
 
+  const avatarHandler = e => {
+    document.onclick();
+    if (!visibleDropBar) {
+      e.stopPropagation();
+      setVisibleDropBar(true);
+    } else {
+      setVisibleDropBar(false);
+    }
+  };
+
   return (
     <div>
       {isAuth ? (
@@ -33,18 +44,7 @@ const UserTool = () => {
             {currentUser.avatar ? (
               <img className={styles.avatar} src={API_URL + currentUser.avatar} alt='Avatar' />
             ) : (
-              <div
-                className={styles.avatarLogo}
-                onClick={e => {
-                  document.onclick();
-                  if (!visibleDropBar) {
-                    e.stopPropagation();
-                    setVisibleDropBar(true);
-                  } else {
-                    setVisibleDropBar(false);
-                  }
-                }}
-              >
+              <div onClick={e => avatarHandler(e)} className={styles.avatarLogo}>
                 {avatarLogo}
               </div>
             )}
@@ -53,15 +53,24 @@ const UserTool = () => {
         </div>
       ) : (
         <div className={styles.user}>
+          <div>
+            <Tooltip
+              content='Анонімний користувач'
+              fadeDuration={300}
+              fadeEasing='linear'
+              placement='bottom'
+              radius={5}
+              toolMargin={14}
+            >
+              <div className={styles.avatarLogo}>{avatarLogo}</div>
+            </Tooltip>
+          </div>
           <NavLink className={styles.link} to='/registration'>
             Реєстрація
           </NavLink>
           <NavLink className={styles.link} to='/login'>
             Вхід
           </NavLink>
-          <div>
-            <div className={styles.avatarLogo}>{avatarLogo}</div>
-          </div>
         </div>
       )}
     </div>
