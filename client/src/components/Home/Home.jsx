@@ -21,8 +21,8 @@ const Home = () => {
             <Button className={styles.file__btn}>Передати файли</Button>
             <Button className={styles.file__btn}>Отримати файли</Button>
           </div>
-          <Possibility />
         </div>
+        <Possibility />
       </Container>
     </section>
   );

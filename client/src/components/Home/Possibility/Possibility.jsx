@@ -29,10 +29,20 @@ const Possibility = () => {
     { sequnce: 6, title: 'Оплата через термінали', link: '/files', hint: '' },
   ];
 
+  const width = `calc((100% / ${possibilitys.length}) - 10px)`;
+
   const possibList = possibilitys.map(p => {
     const content = <div className={styles.content}>{p.title}</div>;
     let linkItem = p.hint ? (
-      <Tooltip content={p.hint} fadeDuration={300} placement='top' background='white' border='white' color='black'>
+      <Tooltip
+        minWidth={200}
+        content={p.hint}
+        fadeDuration={300}
+        placement='top'
+        background='white'
+        border='white'
+        color='black'
+      >
         {content}
       </Tooltip>
     ) : (
@@ -46,13 +56,17 @@ const Possibility = () => {
       );
     }
     return (
-      <div key={p.sequnce} className={styles.item}>
+      <li key={p.sequnce} className={styles.item} style={{ width }}>
         {linkItem}
-      </div>
+      </li>
     );
   });
 
-  return <nav className={styles.container}>{possibList}</nav>;
+  return (
+    <nav className={styles.container}>
+      <ul className={styles.list}>{possibList}</ul>
+    </nav>
+  );
 };
 
 export default Possibility;
