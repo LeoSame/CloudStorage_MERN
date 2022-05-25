@@ -20,6 +20,7 @@ const Tooltip = ({
   radius,
   zIndex,
   toolMargin,
+  minWidth,
 }) => {
   const [visible, setVisible] = useState(false);
 
@@ -33,6 +34,7 @@ const Tooltip = ({
     padding: padding + 'px',
     borderColor: border,
     borderRadius: radius + 'px',
+    minWidth,
   };
   const baseArrowStyle = { width: arrow + 'px', height: arrow + 'px', background, borderColor: background };
 
@@ -86,6 +88,7 @@ Tooltip.propTypes = {
   radius: PropTypes.number,
   zIndex: PropTypes.number,
   toolMargin: PropTypes.number,
+  minWidth: PropTypes.number,
 };
 
 Tooltip.defaultProps = {
@@ -104,6 +107,7 @@ Tooltip.defaultProps = {
   radius: 5,
   zIndex: 1,
   toolMargin: undefined,
+  minWidth: 200,
 };
 
 export default Tooltip;

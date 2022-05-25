@@ -4,6 +4,7 @@ import Button from '../../elements/Button/Button';
 import Container from '../../elements/Container/Container';
 import Counter from './Counter/Counter';
 import styles from './Home.module.scss';
+import Possibility from './Possibility/Possibility';
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
             <Button className={styles.file__btn}>Передати файли</Button>
             <Button className={styles.file__btn}>Отримати файли</Button>
           </div>
+          <Possibility />
         </div>
       </Container>
     </section>
