@@ -20,10 +20,12 @@ const Tooltip = ({
   radius,
   zIndex,
   toolMargin,
+  minWidth,
+  cursor,
 }) => {
   const [visible, setVisible] = useState(false);
 
-  const baseToolStyle = { transition: `all ${fadeDuration}ms ${fadeEasing}` };
+  const baseToolStyle = { transition: `all ${fadeDuration}ms ${fadeEasing}`, minWidth };
   const bubbleStyle = {
     background,
     color,
@@ -33,6 +35,7 @@ const Tooltip = ({
     padding: padding + 'px',
     borderColor: border,
     borderRadius: radius + 'px',
+    cursor,
   };
   const baseArrowStyle = { width: arrow + 'px', height: arrow + 'px', background, borderColor: background };
 
@@ -86,6 +89,8 @@ Tooltip.propTypes = {
   radius: PropTypes.number,
   zIndex: PropTypes.number,
   toolMargin: PropTypes.number,
+  minWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  cursor: PropTypes.string,
 };
 
 Tooltip.defaultProps = {
@@ -104,6 +109,8 @@ Tooltip.defaultProps = {
   radius: 5,
   zIndex: 1,
   toolMargin: undefined,
+  minWidth: '100%',
+  cursor: 'default',
 };
 
 export default Tooltip;

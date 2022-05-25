@@ -65,9 +65,6 @@ const UserTool = () => {
               <div className={styles.avatarLogo}>{avatarLogo}</div>
             </Tooltip>
           </div>
-          <NavLink className={styles.link} to='/registration'>
-            Реєстрація
-          </NavLink>
           <NavLink className={styles.link} to='/login'>
             Вхід
           </NavLink>
