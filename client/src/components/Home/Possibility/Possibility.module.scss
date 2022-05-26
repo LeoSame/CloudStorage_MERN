@@ -1,10 +1,9 @@
 @import '../../../utils/colors.scss';
 
 .container {
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 8em;
   color: $font-color-secondary;
-  font-size: 13px;
+  font-size: 0.928rem;
   width: 100%;
 }
 
@@ -22,11 +21,11 @@
     content: '';
     left: 0;
     top: 0;
-    width: 18px;
+    width: 1.5em;
     height: calc(100% - 4px);
     display: block;
-    border: 2px solid #fff;
-    border-radius: 10px 0 0 10px;
+    border: 0.2em solid #fff;
+    border-radius: 0.8em 0 0 0.8em;
     border-right: none;
   }
   &::after {
@@ -34,11 +33,11 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 18px;
+    width: 1.5em;
     height: calc(100% - 4px);
     display: block;
-    border: 2px solid #fff;
-    border-radius: 0 10px 10px 0;
+    border: 0.2em solid #fff;
+    border-radius: 0 0.8em 0.8em 0;
     border-left: none;
   }
 }
@@ -55,12 +54,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 55px;
-  padding: 0 1vw;
+  height: 4.3em;
+  padding: 0 1em;
 }
 :global {
   .possibility__hint-link {
-    margin-top: 15px;
+    margin-top: 1em;
     color: $font-color-thirty;
   }
 }

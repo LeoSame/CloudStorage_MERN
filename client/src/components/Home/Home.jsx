@@ -5,6 +5,7 @@ import Container from '../../elements/Container/Container';
 import Counter from './Counter/Counter';
 import styles from './Home.module.scss';
 import Possibility from './Possibility/Possibility';
+import banerAnonim from '../../assets/baner-user-anonim.jpg';
 
 const Home = () => {
   return (
@@ -23,6 +24,10 @@ const Home = () => {
           </div>
         </div>
         <Possibility />
+        <div className={styles.userAnonim}>
+          <div className={styles.userAnonim__content}></div>
+          <img src={banerAnonim} alt='User anonim baner' className={styles.userAnonim__image} />
+        </div>
       </Container>
     </section>
   );

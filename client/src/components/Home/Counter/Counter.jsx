@@ -34,11 +34,7 @@ const Counter = () => {
       );
     }
     return (
-      <div
-        key={'numbersColumn' + i}
-        style={{ bottom: `calc(${+number} * (2.6rem + 2px))` }}
-        className={styles.numbersColumn}
-      >
+      <div key={'numbersColumn' + i} style={{ bottom: `calc(${+number} * 1.7em)` }} className={styles.numbersColumn}>
         {cell}
       </div>
     );
