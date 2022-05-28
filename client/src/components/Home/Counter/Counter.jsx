@@ -10,7 +10,7 @@ const Counter = () => {
 
   setTimeout(() => {
     setOut(out + 1);
-  }, 4000);
+  }, 6000);
 
   useEffect(() => {
     dispatch(getFilesCount());

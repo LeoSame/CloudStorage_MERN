@@ -1,5 +1,9 @@
 @import '../../utils/colors.scss';
 
+main {
+  width: 100%;
+}
+
 .about__project {
   width: 100%;
   background: url(https://fex.net/client/desktop/static/media/anonim-page-bg.d086f5ee.jpg) top no-repeat;
@@ -70,23 +74,58 @@
 }
 
 .userAnonim {
-  font-size: 1.3rem;
-  margin-top: 2.75em;
+  font-size: 1.2rem;
+  margin-top: 3em;
   padding: 1em;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   background-color: $background-color-secondary;
   border-radius: 1em;
+  height: 29em;
+
   &__content {
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-around;
+    flex: auto;
+    padding-right: 1.3em;
+    color: $font-color-secondary;
   }
 
+  &__title {
+    font-size: 2.2rem;
+    margin-top: 0.7em;
+  }
+  &__subTitle {
+    font-size: 0.75rem;
+    margin-top: 1em;
+    text-align: center;
+  }
+
+  &__list {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+    margin-top: 2.2em;
+    li {
+      line-height: 1.3em;
+      padding: 0.8em 0;
+    }
+  }
+  &__itemIco {
+    margin-right: 1em;
+  }
+  &__btn {
+    margin-top: 2.2em;
+    height: 3em;
+    width: 12em;
+  }
   &__image {
     width: 20.4em;
-    height: 24.4em;
+    height: 100%;
     border-radius: 1em;
   }
 }

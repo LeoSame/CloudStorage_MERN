@@ -1,13 +1,13 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import imgLogo from '../../../assets/img/navbar-logo.svg';
+import { navbarLogo } from '../../../assets/img/navbarLogo';
 import styles from './Logo.module.scss';
 
 const Logo = () => {
   const location = useLocation();
   const logo = (
     <div className={styles.logoContainer}>
-      <img src={imgLogo} alt='site logo' className={styles.logo} width='40' height='40' />
+      {navbarLogo(styles.logo, 40, 40)}
       <div className={styles.header}>MERN CLOUD</div>
     </div>
   );
