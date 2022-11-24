@@ -1,4 +1,4 @@
-@import '../../../utils/colors';
+@import '../../../utils/colors.scss';
 @import '../../../utils/media.scss';
 
 .user {
@@ -9,10 +9,16 @@
 .link {
   margin-left: 20px;
   cursor: pointer;
-  color: $background-color-white;
-  font-size: 0.9rem;
+  color: $font-color-secondary;
+  font-size: 1rem;
   text-decoration: none;
+  opacity: 0.8;
+  transition: all 0.2s;
+  will-change: transform;
 
+  &:hover {
+    opacity: 1;
+  }
   @media (min-width: $mobMin) and (max-width: $mobMax) {
     font-size: 0.8rem;
   }
@@ -45,7 +51,7 @@
     width: 45px;
     height: 45px;
     opacity: 0.8;
-    transition: opacity 0.3s;
+    transition: opacity 0.2s;
     &:hover {
       opacity: 1;
     }

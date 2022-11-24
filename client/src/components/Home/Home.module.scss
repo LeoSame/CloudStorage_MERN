@@ -1,10 +1,14 @@
 @import '../../utils/colors.scss';
 
+main {
+  width: 100%;
+}
+
 .about__project {
   width: 100%;
   background: url(https://fex.net/client/desktop/static/media/anonim-page-bg.d086f5ee.jpg) top no-repeat;
   background-size: cover;
-  padding-top: 50px;
+  padding-top: 3.6em;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,39 +36,96 @@
 }
 
 .about__ico {
-  margin-right: 10px;
+  margin-right: 0.8em;
 }
 
 .video__content {
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 .title {
-  font-size: 48px;
+  font-size: 3.4rem;
   font-weight: 400;
-  margin: 0.67em 0;
+  margin: 0.6em 0;
   color: $font-color-secondary;
   text-align: center;
 }
 
 .file__btns {
-  margin-top: 32px;
+  margin-top: 2.3em;
   display: flex;
   align-items: center;
 }
 
 .file__btn {
-  margin: 0 20px;
+  font-size: 1.285rem;
+  margin: 0 1em;
   background-color: transparent;
   border: 1px solid $font-color-secondary;
   color: $font-color-secondary;
-  font-size: 18px;
-  width: 250px;
-  height: 46px;
-
+  width: 14em;
+  height: 2.6em;
   transition: all 0.3s;
+
   &:not([disabled]):hover {
     background-color: $font-color-secondary;
     color: $font-color-primary;
+  }
+}
+
+.userAnonim {
+  font-size: 1.2rem;
+  margin-top: 3em;
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: $background-color-secondary;
+  border-radius: 1em;
+  height: 29em;
+
+  &__content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    flex: auto;
+    padding-right: 1.3em;
+    color: $font-color-secondary;
+  }
+
+  &__title {
+    font-size: 2.2rem;
+    margin-top: 0.7em;
+  }
+  &__subTitle {
+    font-size: 0.75rem;
+    margin-top: 1em;
+    text-align: center;
+  }
+
+  &__list {
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+    margin-top: 2.2em;
+    li {
+      line-height: 1.3em;
+      padding: 0.8em 0;
+    }
+  }
+  &__itemIco {
+    margin-right: 1em;
+  }
+  &__btn {
+    margin-top: 2.2em;
+    height: 3em;
+    width: 12em;
+  }
+  &__image {
+    width: 20.4em;
+    height: 100%;
+    border-radius: 1em;
   }
 }

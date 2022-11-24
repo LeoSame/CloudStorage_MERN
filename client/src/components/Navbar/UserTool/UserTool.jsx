@@ -6,8 +6,8 @@ import { API_URL } from '../../../config';
 import { avatarDefault } from '../../../assets/img/avatarDefault.jsx';
 import { avatarWoman } from '../../../assets/img/avatarWoman.jsx';
 import { avatarMan } from '../../../assets/img/avatarMan.jsx';
-import styles from './UserTool.module.scss';
 import UserBar from './UserBar/UserBar';
+import styles from './UserTool.module.scss';
 
 const UserTool = () => {
   const isAuth = useSelector(state => state.user.isAuth);
@@ -37,7 +37,7 @@ const UserTool = () => {
   };
 
   return (
-    <div>
+    <>
       {isAuth ? (
         <div className={styles.user}>
           <div className={styles.dropBar}>
@@ -53,24 +53,22 @@ const UserTool = () => {
         </div>
       ) : (
         <div className={styles.user}>
-          <div>
-            <Tooltip
-              content='Анонімний користувач'
-              fadeDuration={300}
-              fadeEasing='linear'
-              placement='bottom'
-              radius={5}
-              toolMargin={14}
-            >
-              <div className={styles.avatarLogo}>{avatarLogo}</div>
-            </Tooltip>
-          </div>
+          <Tooltip
+            content='Анонімний користувач'
+            fadeDuration={300}
+            fadeEasing='linear'
+            placement='bottom'
+            radius={5}
+            toolMargin={14}
+          >
+            <div className={styles.avatarLogo}>{avatarLogo}</div>
+          </Tooltip>
           <NavLink className={styles.link} to='/login'>
             Вхід
           </NavLink>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
