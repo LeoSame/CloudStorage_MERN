@@ -8,12 +8,14 @@ const Counter = () => {
   const filesCount = useSelector(state => state.files.filesCount);
   const [out, setOut] = useState(0);
 
-  setTimeout(() => {
-    setOut(out + 1);
-  }, 6000);
-
   useEffect(() => {
     dispatch(getFilesCount());
+    const timeout = setTimeout(() => {
+      setOut(out + 1);
+    }, 6000);
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [dispatch, out]);
 
   let countArr = () => {
