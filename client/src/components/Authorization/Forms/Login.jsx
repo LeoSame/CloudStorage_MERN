@@ -21,13 +21,14 @@ const Login = () => {
   return (
     <div className={styles.formContainer}>
       <form className={styles.form}>
-        <Input value={email} setValue={setEmail} type='text' placeholder='Введіть email...' />
+        <Input value={email} setValue={setEmail} type='text' placeholder='Введіть email...' fillColor='dark' />
         <Input
           value={password}
           setValue={setPassword}
           type='password'
           autoComplete='on'
           placeholder='Введіть пароль...'
+          fillColor='dark'
         />
         <Button className={styles.btn} onClick={() => dispatch(login(email, password, history))}>
           Вхід

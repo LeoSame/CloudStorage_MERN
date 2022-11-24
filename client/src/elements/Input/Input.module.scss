@@ -9,8 +9,11 @@
     font-weight: 400;
     border: $font-color-thirty solid 1px;
     border-radius: 3px;
-    box-shadow: inset 0 0 0 50px #232528;
     -webkit-text-fill-color: $font-color-thirty;
+
+    &__dark {
+      box-shadow: inset 0 0 0 50px $background-color-black-second;
+    }
 
     &:focus {
       outline: none;

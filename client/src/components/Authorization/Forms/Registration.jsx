@@ -14,15 +14,22 @@ const Registration = () => {
   return (
     <div className={styles.formContainer}>
       <form className={styles.form}>
-        <Input value={email} setValue={setEmail} type='text' placeholder='Введіть email...' />
+        <Input value={email} setValue={setEmail} type='text' placeholder='Введіть email...' fillColor='dark' />
         <Input
           value={password}
           setValue={setPassword}
           type='password'
           autoComplete='on'
           placeholder='Введіть пароль...'
+          fillColor='dark'
         />
-        <Input value={fullName} setValue={setFullName} type='text' placeholder="Введіть Ваше ім'я..." />
+        <Input
+          value={fullName}
+          setValue={setFullName}
+          type='text'
+          placeholder="Введіть Ваше ім'я..."
+          fillColor='dark'
+        />
         <Button className={styles.btn} onClick={() => registration(email, password, fullName, history)}>
           Зареєструватись
         </Button>

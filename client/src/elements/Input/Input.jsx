@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Input.module.scss';
 
-const Input = ({ setValue, value, type, placeholder, ...props }) => {
+const Input = ({ setValue, value, type, placeholder, fillColor, ...props }) => {
   return (
     <input
       {...props}
-      className='input'
+      className={'input input__' + fillColor}
       onChange={event => setValue(event.target.value)}
       value={value}
       type={type}
