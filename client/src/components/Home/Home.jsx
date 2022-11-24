@@ -44,11 +44,11 @@ const Home = () => {
               <h3 className={styles.userAnonim__title}>Зберігайте до 50 GB безкоштовно</h3>
               <p className={styles.userAnonim__subTitle}>Більше 20 000 000 користувачів довірили нам свої файли</p>
               <ul className={styles.userAnonim__list}>
-                {userAnonimList.map(i => {
+                {userAnonimList.map((item, index) => {
                   return (
-                    <li>
+                    <li key={index}>
                       {listItemIco(styles.userAnonim__itemIco)}
-                      {i}
+                      {item}
                     </li>
                   );
                 })}
