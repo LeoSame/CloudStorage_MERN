@@ -38,6 +38,10 @@ const Home = () => {
             </div>
           </div>
           <Possibility />
+        </Container>
+      </section>
+      <section>
+        <Container>
           <div className={styles.userAnonim}>
             <div className={styles.userAnonim__content}>
               {navbarLogo('', '3.3em', '3.3em')}

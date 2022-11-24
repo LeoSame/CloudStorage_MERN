@@ -2,6 +2,7 @@
 
 main {
   width: 100%;
+  background-color: $background-color-black;
 }
 
 .about__project {
@@ -75,8 +76,8 @@ main {
 
 .userAnonim {
   font-size: 1.2rem;
-  margin-top: 3em;
   padding: 1em;
+  margin-top: 3em;
   display: flex;
   align-items: center;
   justify-content: flex-end;
