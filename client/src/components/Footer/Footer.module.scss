@@ -1,0 +1,59 @@
+@import '../../utils/colors.scss';
+
+.footer {
+  background-color: $background-color-secondary;
+  color: $line-color;
+  width: 100%;
+  & a {
+    color: $line-color;
+    text-decoration: none;
+    font-size: 1.16rem;
+    line-height: 1;
+    &:hover {
+      color: $background-color-white;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+
+  padding-top: 3.5em;
+  padding-bottom: 3.5em;
+}
+
+.title {
+  color: $background-color-white;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  font-weight: 500;
+  margin-bottom: 1em;
+}
+
+.site li {
+  margin-bottom: 0.5em;
+}
+
+.siteTitle {
+  text-transform: uppercase;
+}
+
+.apps {
+  display: flex;
+  & a {
+    margin-right: 0.5em;
+  }
+}
+
+.company li {
+  margin-bottom: 0.5em;
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.socialList {
+  display: flex;
+  justify-content: space-around;
+}

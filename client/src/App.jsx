@@ -8,6 +8,7 @@ import Account from './components/Account/Account';
 import './App.scss';
 import Home from './components/Home/Home';
 import Authorization from './components/Authorization/Authorization';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const isAuth = useSelector(state => state.user.isAuth);
@@ -35,6 +36,7 @@ function App() {
           )}
           <Redirect to='/' />
         </Switch>
+        <Footer />
       </div>
     </BrowserRouter>
   );

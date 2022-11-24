@@ -20,6 +20,7 @@ Input.propTypes = {
   value: PropTypes.string,
   type: PropTypes.string,
   placeholder: PropTypes.string,
+  fillColor: PropTypes.string,
   props: PropTypes.object,
 };
 
@@ -27,6 +28,7 @@ Input.defaultProps = {
   value: '',
   type: 'text',
   placeholder: '',
+  PropTypes: '',
   props: {},
 };
 
