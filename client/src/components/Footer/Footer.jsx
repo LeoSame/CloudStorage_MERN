@@ -1,14 +1,9 @@
 import React from 'react';
 import Container from '../../elements/Container/Container';
-import { android } from '../../assets/img/footer/android';
-import qr from '../../assets/qr.gif';
-
-import styles from './Footer.module.scss';
-import { apple } from '../../assets/img/footer/apple';
 import Tooltip from '../../elements/Tooltip/Tooltip';
-import { facebook } from '../../assets/img/footer/social/facebook';
-import { instagram } from '../../assets/img/footer/social/instagram';
-import { telegram } from '../../assets/img/footer/social/telegram';
+import { android, apple, facebook, instagram, telegram } from '../../assets/img/footer';
+import qr from '../../assets/qr.gif';
+import styles from './Footer.module.scss';
 
 const Footer = () => {
   return (
