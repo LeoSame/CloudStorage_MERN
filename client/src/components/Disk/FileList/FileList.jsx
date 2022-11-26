@@ -4,7 +4,7 @@ import { TransitionGroup } from 'react-transition-group';
 import styles from './FileList.module.scss';
 import Loader from '../../../elements/Loader/Loader';
 import FileListItem from './FileListItem/FileListItem';
-import FileItemPlate from './File/FileItemPlate';
+import FileItemPlate from './FileItemPlate/FileItemPlate';
 
 const FileList = () => {
   const files = useSelector(state => state.files.files);
