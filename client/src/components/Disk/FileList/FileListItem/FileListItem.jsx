@@ -5,16 +5,9 @@ import { useDispatch } from 'react-redux';
 import { pushToStack, setCurrentDir } from '../../../../reducers/fileReducer';
 import { deleteFile, downloadFile } from '../../../../actions/disk';
 import sizeFormat from '../../../../utils/sizeFormat';
-import { favorites } from '../../../../assets/img/fileMenu/favorites';
-import styles from './FileItemList.module.scss';
-import { download } from '../../../../assets/img/fileMenu/download.jsx';
-import { share } from '../../../../assets/img/fileMenu/share.jsx';
-import { copy } from '../../../../assets/img/fileMenu/copy.jsx';
-import { dots } from '../../../../assets/img/fileMenu/dots.jsx';
-import { deleteFileIco } from '../../../../assets/img/fileMenu/deleteFile.jsx';
 import DropBar from '../../../../elements/DropBar/DropBar.jsx';
-import { move } from '../../../../assets/img/fileMenu/move.jsx';
-import { rename } from '../../../../assets/img/fileMenu/rename.jsx';
+import { favorites, download, share, copy, dots, deleteFileIco, move, rename } from '../../../../assets/img/fileMenu';
+import styles from './FileListItem.module.scss';
 
 const FileItemList = ({ file }) => {
   const dispatch = useDispatch();
