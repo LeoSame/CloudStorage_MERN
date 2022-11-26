@@ -9,6 +9,7 @@ import {
   addDir,
   replaceStack,
   setFilesCount,
+  changeFileNameAction,
 } from '../reducers/fileReducer';
 import { addUploadFile, changeUploadFile, showUploader } from '../reducers/uploadReducer';
 
@@ -169,7 +170,7 @@ export const searchFiles = search => {
   };
 };
 
-export const renameFiles = (id, name, type) => {
+export const renameFiles = (id, name, type, isCurrentDir) => {
   return async dispatch => {
     try {
       const response = await axios.post(
@@ -182,8 +183,12 @@ export const renameFiles = (id, name, type) => {
         }
       );
       const file = { id: response.data._id, name: response.data.name };
-      dispatch(setCurrentDir(file));
-      dispatch(replaceStack(file));
+      if (isCurrentDir) {
+        dispatch(setCurrentDir(file));
+        dispatch(replaceStack(file));
+      } else {
+        dispatch(changeFileNameAction(response.data));
+      }
     } catch (e) {
       alert(e?.response?.data?.message);
     }

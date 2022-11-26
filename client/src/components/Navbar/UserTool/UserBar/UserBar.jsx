@@ -40,9 +40,9 @@ const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
               </p>
             </section>
           </li>
-          {menuLinks.map(menuLink => {
+          {menuLinks.map((menuLink, index) => {
             return (
-              <li>
+              <li key={index}>
                 <NavLink className={styles.menuLink} to={menuLink.link} onClick={() => setVisibleDropBar(false)}>
                   {menuLink.ico()}
                   <span className={styles.menuText}>{menuLink.title}</span>

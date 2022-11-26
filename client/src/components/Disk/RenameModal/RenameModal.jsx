@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { renameFiles } from '../../../actions/disk.js';
 import styles from './RenameModal.module.scss';
 
 import Modal from '../../../elements/Modal/Modal';
 import Input from '../../../elements/Input/Input.jsx';
 
-const RenameModal = ({ modalRenameHandler }) => {
-  const currentDir = useSelector(state => state.files.currentDir);
-  const [renameDirName, setRenameDirName] = useState(currentDir.name);
+const RenameModal = ({ modalRenameHandler, renameFile, currentDir }) => {
+  const renameObject = currentDir || renameFile;
+
+  const [renameFileName, setRenameFileName] = useState(renameObject.name);
   const dispatch = useDispatch();
 
   function renameHandler() {
-    dispatch(renameFiles(currentDir.id, renameDirName, 'dir'));
+    currentDir
+      ? dispatch(renameFiles(renameObject.id, renameFileName, 'dir', true))
+      : dispatch(renameFiles(renameObject._id, renameFileName, renameObject.type));
     modalRenameHandler();
   }
 
@@ -23,10 +26,10 @@ const RenameModal = ({ modalRenameHandler }) => {
       cancelBtn='Скасувати'
       confirmBtn='Зберегти'
       confirmAction={renameHandler}
-      confirmDisabled={renameDirName.length <= 0 || renameDirName === currentDir.name}
+      confirmDisabled={renameFileName.length <= 0 || renameFileName === renameObject.name}
     >
       <div className={styles.modalContent}>
-        <Input type='text' placeholder='Введіть назву папки...' value={renameDirName} setValue={setRenameDirName} />
+        <Input type='text' placeholder='Введіть назву папки...' value={renameFileName} setValue={setRenameFileName} />
       </div>
     </Modal>
   );

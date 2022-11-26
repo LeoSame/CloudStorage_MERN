@@ -10,7 +10,7 @@ const Modal = ({ children, title, modalHandler, confirmBtn, cancelBtn, confirmAc
 
   useEffect(() => {
     document.body.classList.add('lock');
-    setOpacityStyle({ visibility: 'visible', opacity: 1 });
+    setOpacityStyle({ visibility: 'visible', opacity: 1, marginTop: window.scrollY + 'px' });
     return function cleanup() {
       document.body.classList.remove('lock');
     };
@@ -19,7 +19,6 @@ const Modal = ({ children, title, modalHandler, confirmBtn, cancelBtn, confirmAc
   function closeModal() {
     modalHandler();
   }
-
   return (
     <div
       className={styles.modalFade}

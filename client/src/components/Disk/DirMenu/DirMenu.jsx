@@ -95,7 +95,7 @@ const DirMenu = () => {
         </Modal>
       )}
 
-      {modalRenameOpen && <RenameModal modalRenameHandler={modalRenameHandler} />}
+      {modalRenameOpen && <RenameModal modalRenameHandler={modalRenameHandler} currentDir={currentDir} />}
     </div>
   );
 };
