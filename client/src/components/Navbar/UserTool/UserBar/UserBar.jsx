@@ -4,14 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import DropBar from '../../../../elements/DropBar/DropBar';
 import sizeFormat from '../../../../utils/sizeFormat';
-import { dir } from '../../../../assets/img/userBar/dir';
-import { score } from '../../../../assets/img/userBar/score';
-import { tarif } from '../../../../assets/img/userBar/tarif';
-import { settings } from '../../../../assets/img/userBar/settings';
-import { lang } from '../../../../assets/img/userBar/lang';
-import { goOut } from '../../../../assets/img/userBar/goOut';
+import { dir, score, tarif, settings, lang, goOut } from '../../../../assets/img/userBar';
 import { logout } from '../../../../reducers/userReducer';
 import styles from './UserBar.module.scss';
+
+const menuLinks = [
+  { title: 'Мої файли', ico: dir, link: '/files' },
+  { title: 'Поповнити рахунок', ico: score, link: '/' },
+  { title: 'Тарифи', ico: tarif, link: '/' },
+  { title: 'Налаштування', ico: settings, link: '/account' },
+  { title: 'Мова', ico: lang, link: '/' },
+];
 
 const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
   const dispatch = useDispatch();
@@ -37,36 +40,16 @@ const UserBar = ({ visibleDropBar, setVisibleDropBar, avatarLogo }) => {
               </p>
             </section>
           </li>
-          <li>
-            <NavLink className={styles.menuLink} to='/files' onClick={() => setVisibleDropBar(false)}>
-              {dir()}
-              <span className={styles.menuText}>Мої файли</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
-              {score()}
-              <span className={styles.menuText}>Поповнити рахунок</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
-              {tarif()}
-              <span className={styles.menuText}>Тарифи</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className={styles.menuLink} to='/account' onClick={() => setVisibleDropBar(false)}>
-              {settings()}
-              <span className={styles.menuText}>Налаштування</span>
-            </NavLink>
-          </li>
-          <li>
-            <NavLink className={styles.menuLink} to='/' onClick={() => setVisibleDropBar(false)}>
-              {lang()}
-              <span className={styles.menuText}>Мова</span>
-            </NavLink>
-          </li>
+          {menuLinks.map((menuLink, index) => {
+            return (
+              <li key={index}>
+                <NavLink className={styles.menuLink} to={menuLink.link} onClick={() => setVisibleDropBar(false)}>
+                  {menuLink.ico()}
+                  <span className={styles.menuText}>{menuLink.title}</span>
+                </NavLink>
+              </li>
+            );
+          })}
           <li className={styles.goOut}>
             <span
               className={styles.menuLink}

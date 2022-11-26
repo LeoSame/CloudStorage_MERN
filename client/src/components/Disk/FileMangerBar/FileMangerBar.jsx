@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFileView } from '../../../reducers/fileReducer';
 import Container from '../../../elements/Container/Container';
-import { sortByTop } from '../../../assets/img/fileMangerBar/sortByTop';
-import { sortByBottom } from '../../../assets/img/fileMangerBar/sortByBottom';
-import { plate } from '../../../assets/img/fileMangerBar/plate';
-import { list } from '../../../assets/img/fileMangerBar/list';
-import { search } from '../../../assets/img/fileMangerBar/search';
+import { sortByTop, sortByBottom, plate, list, search } from '../../../assets/img/fileMangerBar';
 import FileSearch from '../FileSearch/FileSearch';
 import styles from './FileMangerBar.module.scss';
 

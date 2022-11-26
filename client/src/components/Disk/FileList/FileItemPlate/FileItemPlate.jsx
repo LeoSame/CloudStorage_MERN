@@ -1,6 +1,5 @@
 import React from 'react';
-import { dirLogo } from '../../../../assets/img/dirLogo.jsx';
-import { fileLogo } from '../../../../assets/img/fileLogo.jsx';
+import { dirLogo, fileLogo } from '../../../../assets/img/disc';
 import { useDispatch } from 'react-redux';
 import { pushToStack, setCurrentDir } from '../../../../reducers/fileReducer';
 import { deleteFile, downloadFile } from '../../../../actions/disk';

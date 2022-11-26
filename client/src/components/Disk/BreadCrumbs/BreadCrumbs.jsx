@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { breadCrumbDir } from '../../../assets/img/breadCrumbDir.jsx';
-import { rightArrow } from '../../../assets/img/rightArrow.jsx';
+import { breadCrumbDir, rightArrow } from '../../../assets/img/disc';
 import Container from '../../../elements/Container/Container.jsx';
 import { setCurrentDir } from '../../../reducers/fileReducer.js';
 import styles from './BreadCrumbs.module.scss';

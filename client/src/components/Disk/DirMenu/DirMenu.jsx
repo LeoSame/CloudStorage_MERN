@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createDir, renameFiles, uploadFile } from '../../../actions/disk.js';
-import { createFolderLogo } from '../../../assets/img/createFolderLogo.jsx';
-import { dropLogo } from '../../../assets/img/dropLogo.jsx';
-import { uploadFileLogo } from '../../../assets/img/uploadFileLogo.jsx';
+import { createDir, uploadFile } from '../../../actions/disk.js';
+import { createFolderLogo, dropLogo, uploadFileLogo } from '../../../assets/img/disc';
 import Button from '../../../elements/Button/Button.jsx';
 import Container from '../../../elements/Container/Container.jsx';
 import Input from '../../../elements/Input/Input.jsx';
 import Modal from '../../../elements/Modal/Modal.jsx';
 import { setModalCreateDirOpen, setModalRenameOpen } from '../../../reducers/appReducer.js';
+import RenameModal from '../RenameModal/RenameModal.jsx';
 import styles from './DirMenu.module.scss';
 
 const DirMenu = () => {
@@ -17,12 +15,7 @@ const DirMenu = () => {
   const modalCreateDirOpen = useSelector(state => state.app.modalCreateDirOpen);
   const modalRenameOpen = useSelector(state => state.app.modalRenameOpen);
   const [createDirName, setCreateDirName] = useState('');
-  const [renameDirName, setRenameDirName] = useState(currentDir.name);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setRenameDirName(currentDir.name);
-  }, [currentDir, modalRenameOpen]);
 
   function modalCreateHandler() {
     dispatch(setModalCreateDirOpen(!modalCreateDirOpen));
@@ -36,11 +29,6 @@ const DirMenu = () => {
 
   function modalRenameHandler() {
     dispatch(setModalRenameOpen(!modalRenameOpen));
-  }
-
-  function renameHandler() {
-    dispatch(renameFiles(currentDir.id, renameDirName, 'dir'));
-    modalRenameHandler();
   }
 
   function fileUploadHandler(event) {
@@ -107,20 +95,7 @@ const DirMenu = () => {
         </Modal>
       )}
 
-      {modalRenameOpen && (
-        <Modal
-          title='Введіть назву папки'
-          modalHandler={modalRenameHandler}
-          cancelBtn='Скасувати'
-          confirmBtn='Зберегти'
-          confirmAction={renameHandler}
-          confirmDisabled={renameDirName.length <= 0 || renameDirName === currentDir.name}
-        >
-          <div className={styles.modalContent}>
-            <Input type='text' placeholder='Введіть назву папки...' value={renameDirName} setValue={setRenameDirName} />
-          </div>
-        </Modal>
-      )}
+      {modalRenameOpen && <RenameModal modalRenameHandler={modalRenameHandler} currentDir={currentDir} />}
     </div>
   );
 };
