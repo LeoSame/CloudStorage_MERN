@@ -3,9 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Tooltip from '../../../elements/Tooltip/Tooltip';
 import { API_URL } from '../../../config';
-import { avatarDefault } from '../../../assets/img/avatarDefault.jsx';
-import { avatarWoman } from '../../../assets/img/avatarWoman.jsx';
-import { avatarMan } from '../../../assets/img/avatarMan.jsx';
+import { avatarDefault, avatarWoman, avatarMan } from '../../../assets/img/userBar';
 import UserBar from './UserBar/UserBar';
 import styles from './UserTool.module.scss';
 

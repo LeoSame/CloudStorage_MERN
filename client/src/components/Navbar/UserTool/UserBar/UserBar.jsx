@@ -4,12 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
 import DropBar from '../../../../elements/DropBar/DropBar';
 import sizeFormat from '../../../../utils/sizeFormat';
-import { dir } from '../../../../assets/img/userBar/dir';
-import { score } from '../../../../assets/img/userBar/score';
-import { tarif } from '../../../../assets/img/userBar/tarif';
-import { settings } from '../../../../assets/img/userBar/settings';
-import { lang } from '../../../../assets/img/userBar/lang';
-import { goOut } from '../../../../assets/img/userBar/goOut';
+import { dir, score, tarif, settings, lang, goOut } from '../../../../assets/img/userBar';
 import { logout } from '../../../../reducers/userReducer';
 import styles from './UserBar.module.scss';
 
