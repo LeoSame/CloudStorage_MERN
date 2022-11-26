@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { dirLogo } from '../../../../assets/img/dirLogo.jsx';
-import { fileLogo } from '../../../../assets/img/fileLogo.jsx';
 import { useDispatch } from 'react-redux';
 import { pushToStack, setCurrentDir } from '../../../../reducers/fileReducer';
 import { deleteFile, downloadFile } from '../../../../actions/disk';
 import sizeFormat from '../../../../utils/sizeFormat';
 import DropBar from '../../../../elements/DropBar/DropBar.jsx';
+import { dirLogo, fileLogo } from '../../../../assets/img/disc';
 import { favorites, download, share, copy, dots, deleteFileIco, move, rename } from '../../../../assets/img/fileMenu';
 import styles from './FileListItem.module.scss';
 

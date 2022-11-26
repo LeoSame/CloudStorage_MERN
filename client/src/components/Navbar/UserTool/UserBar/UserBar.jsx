@@ -11,7 +11,7 @@ import styles from './UserBar.module.scss';
 const menuLinks = [
   { title: 'Мої файли', ico: dir, link: '/files' },
   { title: 'Поповнити рахунок', ico: score, link: '/' },
-  { title: 'Тарифи', ico: score, link: '/' },
+  { title: 'Тарифи', ico: tarif, link: '/' },
   { title: 'Налаштування', ico: settings, link: '/account' },
   { title: 'Мова', ico: lang, link: '/' },
 ];
