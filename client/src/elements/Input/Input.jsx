@@ -28,7 +28,7 @@ Input.defaultProps = {
   value: '',
   type: 'text',
   placeholder: '',
-  PropTypes: '',
+  fillColor: '',
   props: {},
 };
 
