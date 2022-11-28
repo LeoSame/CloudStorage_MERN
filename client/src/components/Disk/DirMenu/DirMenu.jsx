@@ -6,14 +6,14 @@ import Button from '../../../elements/Button/Button.jsx';
 import Container from '../../../elements/Container/Container.jsx';
 import Input from '../../../elements/Input/Input.jsx';
 import Modal from '../../../elements/Modal/Modal.jsx';
-import { setModalCreateDirOpen, setModalRenameOpen } from '../../../reducers/appReducer.js';
+import { setModalCreateDirOpen } from '../../../reducers/appReducer.js';
 import RenameModal from '../RenameModal/RenameModal.jsx';
 import styles from './DirMenu.module.scss';
 
 const DirMenu = () => {
   const currentDir = useSelector(state => state.files.currentDir);
   const modalCreateDirOpen = useSelector(state => state.app.modalCreateDirOpen);
-  const modalRenameOpen = useSelector(state => state.app.modalRenameOpen);
+  const [modalRenameOpen, setModalRenameOpen] = useState(false);
   const [createDirName, setCreateDirName] = useState('');
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const DirMenu = () => {
   }
 
   function modalRenameHandler() {
-    dispatch(setModalRenameOpen(!modalRenameOpen));
+    setModalRenameOpen(!modalRenameOpen);
   }
 
   function fileUploadHandler(event) {
