@@ -12,7 +12,7 @@
     "start-front": "npm start --prefix client",
     "server-dev": "nodemon index.js",
     "build": "npm i --prefix client && npm run build --prefix client && npm i",
-    "netlify": "npm run build && npm start"
+    "netlify": "npm i && node index.js && npm i --prefix client && npm run build --prefix client "
   },
   "author": "",
   "license": "ISC",
