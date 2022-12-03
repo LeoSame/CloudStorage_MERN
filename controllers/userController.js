@@ -52,6 +52,8 @@ class UserController {
           usedSpace: user.usedSpace,
           avatar: user.avatar,
           gender: user.gender,
+          favorites: user.favorites,
+          files: user.files,
         },
       });
     } catch (e) {
@@ -74,6 +76,8 @@ class UserController {
           usedSpace: user.usedSpace,
           avatar: user.avatar,
           gender: user.gender,
+          favorites: user.favorites,
+          files: user.files,
         },
       });
     } catch (e) {

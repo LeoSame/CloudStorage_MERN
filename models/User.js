@@ -8,6 +8,7 @@ const User = new Schema({
   usedSpace: { type: Number, default: 0 },
   avatar: { type: String },
   gender: { type: String },
+  favorites: [{ type: ObjectId, ref: ['File', 'Dir'], default: [] }],
   files: [{ type: ObjectId, ref: 'File' }],
 });
 

@@ -19,7 +19,7 @@ export const getFilesCount = () => {
       const response = await axios.get(`${API_URL}api/files/files-count`);
       dispatch(setFilesCount(response.data.filesCount));
     } catch (e) {
-      console.log(e.response.data.message);
+      console.log(e?.response?.data?.message);
     }
   };
 };
@@ -189,6 +189,44 @@ export const renameFiles = (id, name, type, isCurrentDir) => {
       } else {
         dispatch(changeFileNameAction(response.data));
       }
+    } catch (e) {
+      alert(e?.response?.data?.message);
+    }
+  };
+};
+
+export const addFavoriteAction = (id, type) => {
+  return async dispatch => {
+    try {
+      const response = await axios.post(
+        `${API_URL}api/files/favorite`,
+        { id, type },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      const favorite = response.data;
+      console.log(favorite);
+    } catch (e) {
+      alert(e?.response?.data?.message);
+    }
+  };
+};
+
+export const deleteFavoriteAction = (id, type) => {
+  return async dispatch => {
+    try {
+      const response = await axios.delete(`${API_URL}api/files/favorite`, {
+        data: { id, type },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+
+      const favorite = response.data;
+      console.log(favorite);
     } catch (e) {
       alert(e?.response?.data?.message);
     }

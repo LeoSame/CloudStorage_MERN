@@ -276,6 +276,83 @@ class DiscController {
     }
   }
 
+  async addFavorite(req, res) {
+    try {
+      const favoriteId = req.body.id;
+      const type = req.body.type;
+
+      const userId = req.user.id;
+
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(400).json({ message: 'User not found' });
+      }
+
+      let favorite;
+      if (type === 'dir') {
+        favorite = await Dir.findOne({ _id: favoriteId, user: userId });
+      } else {
+        favorite = await File.findOne({ _id: favoriteId, user: userId });
+      }
+
+      if (!favorite) {
+        return res.status(400).json({ message: 'File or Dir not found' });
+      }
+
+      if (user.favorites) {
+        user.favorites.push(favoriteId);
+      } else {
+        user.favorites = [favoriteId];
+      }
+
+      favorite.isFavorite = true;
+
+      await user.save();
+      await favorite.save();
+
+      return res.json(favorite);
+    } catch (e) {
+      console.log(e);
+      return res.status(400).json({ message: 'Get Favorites error' });
+    }
+  }
+
+  async deleteFavorite(req, res) {
+    try {
+      const favoriteId = req.body.id;
+      const type = req.body.type;
+      const userId = req.user.id;
+
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(400).json({ message: 'User not found' });
+      }
+
+      let favorite;
+      if (type === 'dir') {
+        favorite = await Dir.findOne({ _id: favoriteId, user: userId });
+      } else {
+        favorite = await File.findOne({ _id: favoriteId, user: userId });
+      }
+
+      if (!favorite) {
+        return res.status(400).json({ message: 'File or Dir not found' });
+      }
+
+      user.favorites = user.favorites.filter(f => f._id !== favoriteId);
+
+      favorite.isFavorite = false;
+
+      await user.save();
+      await favorite.save();
+
+      return res.json(favorite);
+    } catch (e) {
+      console.log(e);
+      return res.status(400).json({ message: 'Get Favorites error' });
+    }
+  }
+
   async uploadAvatar(req, res) {
     try {
       const file = req.files.file;
