@@ -22,7 +22,6 @@ class UserController {
       const hashPassword = await bcrypt.hash(password, 8);
       const user = new User({ email, password: hashPassword, fullName });
       await user.save();
-      console.log(2);
       await fileService.createDir(req, new File({ user: user.id, name: '' }));
       res.json({ message: 'User was created' });
     } catch (e) {
@@ -53,6 +52,8 @@ class UserController {
           usedSpace: user.usedSpace,
           avatar: user.avatar,
           gender: user.gender,
+          favorites: user.favorites,
+          files: user.files,
         },
       });
     } catch (e) {
@@ -75,6 +76,8 @@ class UserController {
           usedSpace: user.usedSpace,
           avatar: user.avatar,
           gender: user.gender,
+          favorites: user.favorites,
+          files: user.files,
         },
       });
     } catch (e) {

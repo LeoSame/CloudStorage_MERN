@@ -8,6 +8,7 @@ const REPLACE_STACK = 'REPLACE_STACK';
 const DELETE_FILE = 'DELETE_FILE';
 const CHANGE_FILE_NAME = 'CHANGE_FILE_NAME';
 const SET_VIEW = 'SET_VIEW';
+const SET_FAVORITES = 'SET_FAVORITES';
 
 const defaultState = {
   filesCount: 0,
@@ -47,6 +48,18 @@ export default function fileReducer(state = defaultState, action) {
           }),
         ],
       };
+    case SET_FAVORITES:
+      return {
+        ...state,
+        files: [
+          ...state.files.map(file => {
+            if (file._id === action.payload._id) {
+              file.isFavorite = action.payload.isFavorite;
+            }
+            return file;
+          }),
+        ],
+      };
     case SET_VIEW:
       return { ...state, view: action.payload };
     default:
@@ -64,3 +77,4 @@ export const replaceStack = dir => ({ type: REPLACE_STACK, payload: dir });
 export const deleteFileAction = dirId => ({ type: DELETE_FILE, payload: dirId });
 export const changeFileNameAction = file => ({ type: CHANGE_FILE_NAME, payload: file });
 export const setFileView = payload => ({ type: SET_VIEW, payload });
+export const setFavorites = file => ({ type: SET_FAVORITES, payload: file });

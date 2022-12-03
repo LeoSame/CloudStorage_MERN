@@ -28,7 +28,6 @@ const FileDropMenu = ({ file }) => {
   function deleteClickHandler(e) {
     e.stopPropagation();
     setVisibleDropBar(false);
-    console.log(file);
     dispatch(deleteFile(file));
   }
 
