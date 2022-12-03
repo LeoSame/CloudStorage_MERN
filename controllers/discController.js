@@ -63,6 +63,7 @@ class DiscController {
       const sort = req.query.sort;
       const sortBy = req.query.sortby;
       let parentId = req.query.parent;
+      const userId = req.user.id;
 
       if (parentId === 'root') {
         parentId = undefined;
@@ -72,27 +73,30 @@ class DiscController {
       let files;
       switch (sort) {
         case 'name':
-          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ name: sortBy });
-          files = await File.find({ user: req.user.id, parent: parentId }).sort({ name: sortBy });
+          dirs = await Dir.find({ user: userId, parent: parentId }).sort({ name: sortBy });
+          files = await File.find({ user: userId, parent: parentId }).sort({ name: sortBy });
           break;
         case 'type':
-          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ type: sortBy });
-          files = await File.find({ user: req.user.id, parent: parentId }).sort({ type: sortBy });
+          dirs = await Dir.find({ user: userId, parent: parentId }).sort({ type: sortBy });
+          files = await File.find({ user: userId, parent: parentId }).sort({ type: sortBy });
           break;
         case 'date':
-          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ date: sortBy });
-          files = await File.find({ user: req.user.id, parent: parentId }).sort({ date: sortBy });
+          dirs = await Dir.find({ user: userId, parent: parentId }).sort({ date: sortBy });
+          files = await File.find({ user: userId, parent: parentId }).sort({ date: sortBy });
           break;
         case 'size':
-          dirs = await Dir.find({ user: req.user.id, parent: parentId }).sort({ size: sortBy });
-          files = await File.find({ user: req.user.id, parent: parentId }).sort({ size: sortBy });
+          dirs = await Dir.find({ user: userId, parent: parentId }).sort({ size: sortBy });
+          files = await File.find({ user: userId, parent: parentId }).sort({ size: sortBy });
           break;
         default:
-          dirs = await Dir.find({ user: req.user.id, parent: parentId });
-          files = await File.find({ user: req.user.id, parent: parentId });
+          dirs = await Dir.find({ user: userId, parent: parentId });
+          files = await File.find({ user: userId, parent: parentId });
           break;
       }
-      return res.json([...dirs, ...files]);
+
+      const responseObj = sortBy > 0 ? [...dirs, ...files] : [...files, ...dirs];
+
+      return res.json(responseObj);
     } catch (e) {
       return res.status(500).json({ e, message: 'Can not get files' });
     }
@@ -102,19 +106,20 @@ class DiscController {
     try {
       const file = req.files.file;
       let parentId = req.body.parent;
+      const userId = req.user.id;
 
       if (parentId === 'root') {
         parentId = undefined;
       }
 
-      let parent = await Dir.findOne({ user: req.user.id, _id: parentId });
-      const user = await User.findOne({ _id: req.user.id });
+      let parent = await Dir.findOne({ user: userId, _id: parentId });
+      const user = await User.findOne({ _id: userId });
 
       if (user.usedSpace + file.size > user.diskSpace) {
         return res.status(400).json({ message: 'There no space on the disk' });
       }
 
-      user.usedSpace = user.usedSpace + file.size;
+      user.usedSpace += file.size;
 
       let path;
       if (parent) {
@@ -132,7 +137,7 @@ class DiscController {
 
       const dbFile = new File({
         name: file.name,
-        type,
+        type: type,
         size: file.size,
         parent: parent ? parent._id : null,
         user: user._id,
@@ -160,7 +165,10 @@ class DiscController {
 
   async downloadFile(req, res) {
     try {
-      const file = await File.findOne({ _id: req.query.id, user: req.user.id });
+      const fileId = req.query.id;
+      const userId = req.user.id;
+
+      const file = await File.findOne({ _id: fileId, user: userId });
       const path = fileService.getPath(req, file);
       if (fs.existsSync(path)) {
         return res.download(path, file.name);
@@ -182,9 +190,14 @@ class DiscController {
       } else {
         file = await File.findOne({ _id: fileId, user: userId });
       }
-      const parent = file.parent;
 
       if (!file) {
+        return res.status(400).json({ message: 'file not found' });
+      }
+
+      const parent = file.parent;
+
+      if (!fs.existsSync(fileService.getPath(req, file))) {
         return res.status(400).json({ message: 'file not found' });
       }
 
