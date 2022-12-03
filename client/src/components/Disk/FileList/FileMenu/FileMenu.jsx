@@ -31,24 +31,24 @@ const FileMenu = ({ file }) => {
     <div className={styles.container}>
       {file.isFavorite ? (
         <button onClick={e => deleteFavorite(e)} className={styles.button}>
-          {favorites()}1
+          {favorites(styles.ico, true)}
         </button>
       ) : (
         <button onClick={e => addFavorite(e)} className={styles.button}>
-          {favorites()}
+          {favorites(styles.ico, false)}
         </button>
       )}
 
       {file.type !== 'dir' && (
         <button onClick={e => downloadClickHandler(e)} className={styles.button}>
-          {download()}
+          {download(styles.ico)}
         </button>
       )}
       <button onClick={e => defaultFunc(e)} className={styles.button}>
-        {share()}
+        {share(styles.ico)}
       </button>
       <button onClick={e => defaultFunc(e)} className={styles.button}>
-        {copy()}
+        {copy(styles.ico)}
       </button>
     </div>
   );

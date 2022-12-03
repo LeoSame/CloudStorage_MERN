@@ -10,6 +10,7 @@ import {
   replaceStack,
   setFilesCount,
   changeFileNameAction,
+  setFavorites,
 } from '../reducers/fileReducer';
 import { addUploadFile, changeUploadFile, showUploader } from '../reducers/uploadReducer';
 
@@ -208,7 +209,7 @@ export const addFavoriteAction = (id, type) => {
         }
       );
       const favorite = response.data;
-      console.log(favorite);
+      dispatch(setFavorites(favorite));
     } catch (e) {
       alert(e?.response?.data?.message);
     }
@@ -226,7 +227,7 @@ export const deleteFavoriteAction = (id, type) => {
       });
 
       const favorite = response.data;
-      console.log(favorite);
+      dispatch(setFavorites(favorite));
     } catch (e) {
       alert(e?.response?.data?.message);
     }

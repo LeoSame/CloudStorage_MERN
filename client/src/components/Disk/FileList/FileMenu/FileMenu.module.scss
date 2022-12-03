@@ -16,10 +16,10 @@
   cursor: pointer;
   margin-right: 10px;
   width: 24px;
-  & path {
+  & .ico {
     transition: all 0.3s ease-out;
   }
-  &:hover path {
+  &:hover .ico {
     fill: $font-color-primary;
   }
 }

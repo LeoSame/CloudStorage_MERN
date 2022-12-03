@@ -310,7 +310,7 @@ class DiscController {
       await user.save();
       await favorite.save();
 
-      return res.json(favorite);
+      return res.json({ _id: favorite._id, isFavorite: true });
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: 'Get Favorites error' });
@@ -339,14 +339,14 @@ class DiscController {
         return res.status(400).json({ message: 'File or Dir not found' });
       }
 
-      user.favorites = user.favorites.filter(f => f._id !== favoriteId);
+      user.favorites = user.favorites.filter(f => f.toString() !== favoriteId);
 
       favorite.isFavorite = false;
 
       await user.save();
       await favorite.save();
 
-      return res.json(favorite);
+      return res.json({ _id: favorite._id, isFavorite: false });
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: 'Get Favorites error' });
