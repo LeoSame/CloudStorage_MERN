@@ -9,7 +9,6 @@ import FileDropMenu from '../FileDropMenu/FileDropMenu';
 
 const FileItemList = ({ file }) => {
   const dispatch = useDispatch();
-
   function openDirHandler(file) {
     if (file.type === 'dir') {
       const currentDir = { id: file._id, name: file.name };
