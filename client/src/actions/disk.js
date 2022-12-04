@@ -233,3 +233,31 @@ export const deleteFavoriteAction = (id, type) => {
     }
   };
 };
+
+export const getFavorites = (sort, sortBy) => {
+  return async dispatch => {
+    try {
+      dispatch(showLoader());
+      let url = new URL(`${API_URL}api/files/favorite`);
+
+      if (sort) {
+        url.searchParams.append('sort', sort);
+        if (sortBy) {
+          url.searchParams.append('sortby', sortBy);
+        } else {
+          url.searchParams.append('sortby', 1);
+        }
+      }
+
+      const response = await axios.get(url.toString(), {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
+
+      dispatch(setFiles(response.data));
+    } catch (e) {
+      console.log(e.response.data.message);
+    } finally {
+      dispatch(hideLoader());
+    }
+  };
+};

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFileView } from '../../../reducers/fileReducer';
+import { setFileView, setIsAllFiles } from '../../../reducers/fileReducer';
 import Container from '../../../elements/Container/Container';
 import { sortByTop, sortByBottom, plate, list, search } from '../../../assets/img/fileMangerBar';
 import FileSearch from '../FileSearch/FileSearch';
@@ -10,19 +10,21 @@ import { allFiles } from '../../../assets/img/fileMenu/allFiles';
 
 const FileMangerBar = ({ sort, setSort, sortBy, setSortBy }) => {
   const fileView = useSelector(state => state.files.view);
+  const isAllFiles = useSelector(state => state.files.isAllFiles);
   const [isSearch, setIsSearch] = useState(false);
-  const [isAllFiles, setIsAllFiles] = useState(true);
 
   const dispatch = useDispatch();
 
   function loadAllFiles(e) {
     e.stopPropagation();
-    setIsAllFiles(true);
+
+    dispatch(setIsAllFiles(true));
   }
 
   function loadFavorites(e) {
     e.stopPropagation();
-    setIsAllFiles(false);
+
+    dispatch(setIsAllFiles(false));
   }
 
   const activeFilterClassName = styles.filterMenu__item + ' ' + styles.filterActive;

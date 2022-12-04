@@ -9,6 +9,7 @@ const DELETE_FILE = 'DELETE_FILE';
 const CHANGE_FILE_NAME = 'CHANGE_FILE_NAME';
 const SET_VIEW = 'SET_VIEW';
 const SET_FAVORITES = 'SET_FAVORITES';
+const SET_IS_ALL_FILES = 'SET_IS_ALL_FILES';
 
 const defaultState = {
   filesCount: 0,
@@ -16,6 +17,7 @@ const defaultState = {
   currentDir: { id: 'root', name: 'Моє сховище' },
   dirStack: [{ id: 'root', name: 'Моє сховище' }],
   view: 'list',
+  isAllFiles: true,
 };
 
 export default function fileReducer(state = defaultState, action) {
@@ -25,7 +27,7 @@ export default function fileReducer(state = defaultState, action) {
     case SET_FILES:
       return { ...state, files: action.payload };
     case SET_CURRENT_DIR:
-      return { ...state, currentDir: action.payload };
+      return { ...state, isAllFiles: true, currentDir: action.payload };
     case ADD_FILE:
       return { ...state, files: [...state.files, action.payload] };
     case ADD_DIR:
@@ -33,6 +35,9 @@ export default function fileReducer(state = defaultState, action) {
       const files = state.files.filter(file => file.type !== 'dir');
       return { ...state, files: [...dirs, action.payload, ...files] };
     case PUSH_TO_STACK:
+      if (!state.isAllFiles) {
+        return { ...state, dirStack: [state.dirStack[0], action.payload] };
+      }
       return { ...state, dirStack: [...state.dirStack, action.payload] };
     case REPLACE_STACK:
       state.dirStack[state.dirStack.length - 1] = action.payload;
@@ -63,6 +68,8 @@ export default function fileReducer(state = defaultState, action) {
       };
     case SET_VIEW:
       return { ...state, view: action.payload };
+    case SET_IS_ALL_FILES:
+      return { ...state, isAllFiles: action.payload };
     default:
       return state;
   }
@@ -79,3 +86,4 @@ export const deleteFileAction = file => ({ type: DELETE_FILE, payload: file });
 export const changeFileNameAction = file => ({ type: CHANGE_FILE_NAME, payload: file });
 export const setFileView = payload => ({ type: SET_VIEW, payload });
 export const setFavorites = file => ({ type: SET_FAVORITES, payload: file });
+export const setIsAllFiles = bool => ({ type: SET_IS_ALL_FILES, payload: bool });
