@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink, Route, Switch, useLocation } from 'react-router-dom';
-import styles from './Authorization.module.scss';
 import Login from './Forms/Login';
 import Registration from './Forms/Registration';
+import styles from './Authorization.module.scss';
 
 const Authorization = () => {
   const location = useLocation();

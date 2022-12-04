@@ -5,17 +5,46 @@ import Container from '../../../elements/Container/Container';
 import { sortByTop, sortByBottom, plate, list, search } from '../../../assets/img/fileMangerBar';
 import FileSearch from '../FileSearch/FileSearch';
 import styles from './FileMangerBar.module.scss';
+import { favorites } from '../../../assets/img/fileMenu';
+import { allFiles } from '../../../assets/img/fileMenu/allFiles';
 
 const FileMangerBar = ({ sort, setSort, sortBy, setSortBy }) => {
   const fileView = useSelector(state => state.files.view);
   const [isSearch, setIsSearch] = useState(false);
+  const [isAllFiles, setIsAllFiles] = useState(true);
 
   const dispatch = useDispatch();
+
+  function loadAllFiles(e) {
+    e.stopPropagation();
+    setIsAllFiles(true);
+  }
+
+  function loadFavorites(e) {
+    e.stopPropagation();
+    setIsAllFiles(false);
+  }
+
+  const activeFilterClassName = styles.filterMenu__item + ' ' + styles.filterActive;
 
   return (
     <Container>
       <div className={styles.fileManagerBar}>
-        <div></div>
+        <div className={styles.filterMenu__wrapper}>
+          <ul className={styles.filterMenu__list}>
+            <li className={isAllFiles ? activeFilterClassName : styles.filterMenu__item} onClick={e => loadAllFiles(e)}>
+              {allFiles(styles.filterIco)}
+              <span>Всі файли</span>
+            </li>
+            <li
+              className={isAllFiles ? styles.filterMenu__item : activeFilterClassName}
+              onClick={e => loadFavorites(e)}
+            >
+              {favorites(styles.filterIco, false)}
+              <span>Обране</span>
+            </li>
+          </ul>
+        </div>
         <div className={styles.controlFiles}>
           {isSearch ? (
             <FileSearch setIsSearch={setIsSearch} buttonClass={styles.button} />

@@ -1,17 +1,67 @@
 @import '../../../utils/colors';
 
 .fileManagerBar {
-  padding: 25px 0;
+  padding-top: 1.4em;
   margin-bottom: 10px;
-  height: 30px;
   border-bottom: 1px solid $line-color;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+.filterMenu__wrapper {
+  padding-left: 1.4em;
+}
+
+.filterMenu__list {
+  display: flex;
+  // align-items: center;
+}
+
+.filterMenu__item {
+  padding-bottom: 1em;
+  padding-right: 0.2em;
+  padding-left: 0.2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1.8em;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.5s ease;
+  color: $font-color-thirty;
+  border-bottom: 4px solid transparent;
+
+  & .filterIco {
+    color: $font-color-thirty;
+    transition: all 0.5s ease;
+  }
+
+  & span {
+    margin-left: 0.5em;
+  }
+
+  &.filterActive {
+    color: $font-color-primary;
+    border-bottom: 4px solid $button-background;
+    & .filterIco {
+      fill: $font-color-primary;
+    }
+  }
+
+  &:hover {
+    color: $font-color-primary;
+    border-bottom: 4px solid $button-background;
+
+    & .filterIco {
+      fill: $font-color-primary;
+    }
+  }
+}
+
 .controlFiles {
   display: flex;
+  justify-content: center;
   align-items: center;
 }
 
