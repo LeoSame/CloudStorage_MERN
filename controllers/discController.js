@@ -283,11 +283,6 @@ class DiscController {
 
       const userId = req.user.id;
 
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(400).json({ message: 'User not found' });
-      }
-
       let favorite;
       if (type === 'dir') {
         favorite = await Dir.findOne({ _id: favoriteId, user: userId });
@@ -299,15 +294,8 @@ class DiscController {
         return res.status(400).json({ message: 'File or Dir not found' });
       }
 
-      if (user.favorites) {
-        user.favorites.push(favoriteId);
-      } else {
-        user.favorites = [favoriteId];
-      }
-
       favorite.isFavorite = true;
 
-      await user.save();
       await favorite.save();
 
       return res.json({ _id: favorite._id, isFavorite: true });
@@ -323,11 +311,6 @@ class DiscController {
       const type = req.body.type;
       const userId = req.user.id;
 
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(400).json({ message: 'User not found' });
-      }
-
       let favorite;
       if (type === 'dir') {
         favorite = await Dir.findOne({ _id: favoriteId, user: userId });
@@ -339,17 +322,53 @@ class DiscController {
         return res.status(400).json({ message: 'File or Dir not found' });
       }
 
-      user.favorites = user.favorites.filter(f => f.toString() !== favoriteId);
-
       favorite.isFavorite = false;
 
-      await user.save();
       await favorite.save();
 
       return res.json({ _id: favorite._id, isFavorite: false });
     } catch (e) {
       console.log(e);
       return res.status(400).json({ message: 'Get Favorites error' });
+    }
+  }
+
+  async getFavorites(req, res) {
+    try {
+      const sort = req.query.sort;
+      const sortBy = req.query.sortby;
+      const userId = req.user.id;
+
+      let dirs;
+      let files;
+      switch (sort) {
+        case 'name':
+          dirs = await Dir.find({ user: userId, isFavorite: true }).sort({ name: sortBy });
+          files = await File.find({ user: userId, isFavorite: true }).sort({ name: sortBy });
+          break;
+        case 'type':
+          dirs = await Dir.find({ user: userId, isFavorite: true }).sort({ type: sortBy });
+          files = await File.find({ user: userId, isFavorite: true }).sort({ type: sortBy });
+          break;
+        case 'date':
+          dirs = await Dir.find({ user: userId, isFavorite: true }).sort({ date: sortBy });
+          files = await File.find({ user: userId, isFavorite: true }).sort({ date: sortBy });
+          break;
+        case 'size':
+          dirs = await Dir.find({ user: userId, isFavorite: true }).sort({ size: sortBy });
+          files = await File.find({ user: userId, isFavorite: true }).sort({ size: sortBy });
+          break;
+        default:
+          dirs = await Dir.find({ user: userId, isFavorite: true });
+          files = await File.find({ user: userId, isFavorite: true });
+          break;
+      }
+
+      const responseObj = sortBy > 0 ? [...dirs, ...files] : [...files, ...dirs];
+
+      return res.json(responseObj);
+    } catch (e) {
+      return res.status(500).json({ e, message: 'Can not get files' });
     }
   }
 

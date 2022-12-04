@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFiles, uploadFile } from '../../actions/disk';
+import { getFiles, uploadFile, getFavorites } from '../../actions/disk';
 import FileList from './FileList/FileList';
 import Uploader from './Uploader/Uploader';
 import BreadCrumbs from './BreadCrumbs/BreadCrumbs';
@@ -14,13 +14,18 @@ const Disk = () => {
   const dispatch = useDispatch();
   // const params = useParams();
   const currentDir = useSelector(state => state.files.currentDir);
+  const isAllFiles = useSelector(state => state.files.isAllFiles);
   const [dragEnter, setDragEnter] = useState(false);
   const [sort, setSort] = useState('date');
   const [sortBy, setSortBy] = useState(1);
 
   useEffect(() => {
-    dispatch(getFiles(currentDir.id, sort, sortBy));
-  }, [currentDir, sort, sortBy, dispatch]);
+    if (isAllFiles) {
+      dispatch(getFiles(currentDir.id, sort, sortBy));
+    } else {
+      dispatch(getFavorites(sort, sortBy));
+    }
+  }, [currentDir, sort, sortBy, isAllFiles, dispatch]);
 
   function dragEnterHandler(event) {
     event.preventDefault();

@@ -7,6 +7,7 @@ router.get('', authMiddleware, discController.getFiles);
 router.get('/download', authMiddleware, discController.downloadFile);
 router.get('/search', authMiddleware, discController.searchFile);
 router.get('/files-count', discController.getFilesCount);
+router.get('/favorite', authMiddleware, discController.getFavorites);
 router.post('', authMiddleware, discController.createDir);
 router.post('/upload', authMiddleware, discController.uploadFile);
 router.post('/rename', authMiddleware, discController.renameFile);

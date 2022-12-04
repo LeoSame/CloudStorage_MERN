@@ -1,21 +1,52 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFileView } from '../../../reducers/fileReducer';
+import { setFileView, setIsAllFiles } from '../../../reducers/fileReducer';
 import Container from '../../../elements/Container/Container';
 import { sortByTop, sortByBottom, plate, list, search } from '../../../assets/img/fileMangerBar';
 import FileSearch from '../FileSearch/FileSearch';
 import styles from './FileMangerBar.module.scss';
+import { favorites } from '../../../assets/img/fileMenu';
+import { allFiles } from '../../../assets/img/fileMenu/allFiles';
 
 const FileMangerBar = ({ sort, setSort, sortBy, setSortBy }) => {
   const fileView = useSelector(state => state.files.view);
+  const isAllFiles = useSelector(state => state.files.isAllFiles);
   const [isSearch, setIsSearch] = useState(false);
 
   const dispatch = useDispatch();
 
+  function loadAllFiles(e) {
+    e.stopPropagation();
+
+    dispatch(setIsAllFiles(true));
+  }
+
+  function loadFavorites(e) {
+    e.stopPropagation();
+
+    dispatch(setIsAllFiles(false));
+  }
+
+  const activeFilterClassName = styles.filterMenu__item + ' ' + styles.filterActive;
+
   return (
     <Container>
       <div className={styles.fileManagerBar}>
-        <div></div>
+        <div className={styles.filterMenu__wrapper}>
+          <ul className={styles.filterMenu__list}>
+            <li className={isAllFiles ? activeFilterClassName : styles.filterMenu__item} onClick={e => loadAllFiles(e)}>
+              {allFiles(styles.filterIco)}
+              <span>Всі файли</span>
+            </li>
+            <li
+              className={isAllFiles ? styles.filterMenu__item : activeFilterClassName}
+              onClick={e => loadFavorites(e)}
+            >
+              {favorites(styles.filterIco, false)}
+              <span>Обране</span>
+            </li>
+          </ul>
+        </div>
         <div className={styles.controlFiles}>
           {isSearch ? (
             <FileSearch setIsSearch={setIsSearch} buttonClass={styles.button} />
