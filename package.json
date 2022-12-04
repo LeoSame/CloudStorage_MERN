@@ -11,7 +11,8 @@
     "dev": "run-p  server-dev start-front",
     "start-front": "npm start --prefix client",
     "server-dev": "nodemon index.js",
-    "build": "npm i --prefix client && npm run build --prefix client && npm i"
+    "build": "npm i --prefix client && npm run build --prefix client && npm i",
+    "vercel": "npm run build && npm start"
   },
   "author": "",
   "license": "ISC",
