@@ -10,10 +10,10 @@ export const registration = async (email, password, fullName, history) => {
       password,
       fullName,
     });
-    console.log(response.data.message);
+    console.log(response?.data?.message);
     history.push('/login');
   } catch (e) {
-    console.log(e.response.data.message);
+    console.log(e.response?.data?.message);
   }
 };
 
@@ -28,7 +28,7 @@ export const login = (email, password, history) => {
       history.push('/files');
       localStorage.setItem('token', response.data.token);
     } catch (e) {
-      console.log(e.response.data.message);
+      console.log(e.response?.data?.message);
     }
   };
 };
@@ -44,7 +44,7 @@ export const auth = () => {
       dispatch(setUser(response.data.user));
       localStorage.setItem('token', response.data.token);
     } catch (e) {
-      console.log(e.response.data.message);
+      console.log(e.response?.data?.message);
       localStorage.removeItem('token');
     } finally {
       dispatch(hideLoader());

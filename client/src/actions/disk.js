@@ -48,7 +48,7 @@ export const getFiles = (dirId, sort, sortBy) => {
       });
       dispatch(setFiles(response.data));
     } catch (e) {
-      console.log(e.response.data.message);
+      console.log(e.response?.data?.message);
     } finally {
       dispatch(hideLoader());
     }
@@ -67,7 +67,7 @@ export const createDir = (dirId, name) => {
       );
       dispatch(addDir(response.data));
     } catch (e) {
-      console.log(e.response.data.message);
+      console.log(e.response?.data?.message);
     }
   };
 };
@@ -126,7 +126,7 @@ export const downloadFile = async file => {
       link.remove();
     }
   } catch (e) {
-    console.log(e.response.data.message);
+    console.log(e.response?.data?.message);
   }
 };
 
@@ -255,7 +255,7 @@ export const getFavorites = (sort, sortBy) => {
 
       dispatch(setFiles(response.data));
     } catch (e) {
-      console.log(e.response.data.message);
+      console.log(e.response?.data?.message);
     } finally {
       dispatch(hideLoader());
     }
